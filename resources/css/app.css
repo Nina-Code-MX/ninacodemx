@@ -10,8 +10,12 @@
  * Roboto Weight: 100, 300, 400, 700
  */
 :root {
-  --color-primary: #4cb5ff;
-  --color-secondary: #000000;
+  /* --color-primary: #2776bd;*/
+  --color-opacity: 1;
+  --color-primary: 38 118 189;
+  --color-secondary: 239 60 62;
+  --color-tertiary: 238 123 44;
+  --color-fourth: 110 152 50;
 }
 
 html {
@@ -19,7 +23,7 @@ html {
 }
 
 body {
-  background-color: #eaeaea; /*#f3faff;*/
+  background-color: #e5e5e5;
   color: #222222; /*#4cb5ff;*/
   display: flex;
   flex-direction: column;
@@ -41,27 +45,104 @@ footer ul li:before {
 }
 
 h1 {
-  color: var(--color-primary);
+  color: rgb(var(--color-primary) / var(--color-opacity));
   font-size: 2.5rem;
   font-weight: 700;
 }
 
 h2 {
-  color: var(--color-secondary);
+  color: rgb(var(--color-secondary) / var(--color-opacity));
   font-size: 2rem;
   font-weight: 700;
 }
 
 h3 {
-  color: var(--color-primary);
+  color: rgb(var(--color-primary) / var(--color-opacity));
   font-size: 1.5rem;
   font-weight: 700;
 }
 
 h4 {
-  color: var(--color-secondary);
+  color: rgb(var(--color-secondary) / var(--color-opacity));
   font-size: 1rem;
   font-weight: 700;
+}
+
+.bg-primary {
+  background-color: rgb(var(--color-primary) / var(--color-opacity));
+}
+
+.hover\:bg-primary:hover {
+  --color-opacity: 0.8;
+  background-color: rgb(var(--color-primary) / var(--color-opacity));
+}
+
+.bg-secondary {
+  background-color: rgb(var(--color-secondary) / var(--color-opacity));
+}
+
+.hover\:bg-secondary:hover {
+  --color-opacity: 0.8;
+  background-color: rgb(var(--color-secondary) / var(--color-opacity));
+}
+
+.bg-tertiary {
+  background-color: rgb(var(--color-tertiary) / var(--color-opacity));
+}
+
+.hover\:bg-tertiary:hover {
+  --color-opacity: 0.8;
+  background-color: rgb(var(--color-tertiary) / var(--color-opacity));
+}
+
+.bg-fourth {
+  background-color: rgb(var(--color-fourth) / var(--color-opacity));
+}
+
+.hover\:bg-fourth:hover {
+  --color-opacity: 0.8;
+  background-color: rgb(var(--color-fourth) / var(--color-opacity));
+}
+
+.border-primary {
+  border-color: rgb(var(--color-primary) / var(--color-opacity));
+}
+
+.border-secondary {
+  border-color: rgb(var(--color-secondary) / var(--color-opacity));
+}
+
+.border-tertiary {
+  border-color: rgb(var(--color-tertiary) / var(--color-opacity));
+}
+
+.border-fourth {
+  border-color: rgb(var(--color-fourth) / var(--color-opacity));
+}
+
+.text-primary {
+  color: rgb(var(--color-primary) / var(--color-opacity));
+}
+
+.text-secondary {
+  color: rgb(var(--color-secondary) / var(--color-opacity));
+}
+
+.text-tertiary {
+  color: rgb(var(--color-tertiary) / var(--color-opacity));
+}
+
+.text-fourth {
+  color: rgb(var(--color-fourth) / var(--color-opacity));
+}
+
+.button-primary {
+  background-color: rgb(var(--color-primary) / var(--color-opacity));
+}
+
+.button-primary:hover {
+  --color-opacity: 0.8;
+  background-color: rgb(var(--color-primary) / var(--color-opacity));
 }
 
 @media (min-width: 640px) {
