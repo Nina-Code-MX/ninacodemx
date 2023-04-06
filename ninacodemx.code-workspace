@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "ninacodemx",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.blade.php": "blade"
+		}
+	}
+}
