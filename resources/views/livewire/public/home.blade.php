@@ -192,5 +192,68 @@
         <h3 class="mb-4">Vea el siguiente video para aprender más sobre lo que Nina Code puede ofrecer.</h3>
 
         <iframe class="mx-auto" width="560" height="315" src="https://www.youtube.com/embed/7QrDGjDf8q0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+        <hr class="my-4" />
+
+        <div class="bg-primary p-8 rounded text-neutral-100">
+            <div class="flex flex-col  gap-6 items-center justify-between lg:flex-row">
+                <div class="lg:w-1/2 text-center w-full">
+                    <h4 class="text-neutral-100">Registrate a nuestro newsletter</h3>
+                    <p>Pere recibir información importante sobre las nuevas tecnologías y como pueden ayudarte a impulsar tu marca.</p>
+                </div>
+
+                <div class="lg:w-1/2 w-full">
+                    <form action="" method="post" onsubmit="return registerNewsletter();">
+                        <div class="flex flex-row">
+                            <div class="w-full"><input class="border px-2 py-1 text-gray-800 w-full" id="newsltter-email" placeholder="Correo electrónico *" type="email" /></div>
+                            <div class="w-auto"><button class="bg-fourth border hover:bg-fourth px-2 py-1 w-auto" id="newsltter-submit" type="submit">Subscribirse</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-neutral-100 px-4 py-10">
+        <div class="container mx-auto">
+        </div>
     </div>
 </div>
+
+@push('scripts')
+<script type="text/javascript">
+    function registerNewsletter() {
+        const email = document.getElementById('newsltter-email').value;
+
+        if (!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+            alert('El correo electrónico es inválido.');
+            return false;
+        }
+
+        grecaptcha.enterprise.ready(function() {
+            grecaptcha.enterprise.execute('{{ env('GOOGLE_RECAPTCHA_KEY', '') }}', {action: 'subscribe'}).then(async function(token) {
+                const abstractaUrl = 'https://ipgeolocation.abstractapi.com/v1/?api_key={{ env('ABSTRACTAIP_API_KEY', '') }}';
+                const userIp = await fetch(abstractaUrl)
+                    .then(res => res.json());
+
+                const response = await fetch('/api/v1/mailchimp/newsltetter', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({reCaptcha: token, userIp: userIp?.ip_address, email: email, _token: '{{ csrf_token() }}'}),
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+
+        return false;
+    }
+</script>
+@endpush 

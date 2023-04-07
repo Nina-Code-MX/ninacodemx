@@ -16,6 +16,7 @@
   --color-secondary: 239 60 62;
   --color-tertiary: 238 123 44;
   --color-fourth: 110 152 50;
+  --text-color-primary: 31 41 55;
 }
 
 html {
@@ -24,7 +25,7 @@ html {
 
 body {
   background-color: #e5e5e5;
-  color: #222222; /*#4cb5ff;*/
+  color: rgb(var(--text-color-primary));
   display: flex;
   flex-direction: column;
   font-family: 'Inter', sans-serif;
