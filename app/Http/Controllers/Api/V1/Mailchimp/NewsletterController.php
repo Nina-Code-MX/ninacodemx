@@ -24,15 +24,20 @@ class NewsletterController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $response = ['status' => 200, 'message' => 'Gracias! Se ha registrado a nuestra lista de distribución.'];
+        $response = ['icon' => 'error', 'status' => 400, 'text' => 'Hubo un error al procesar la petición.', 'title' => '¡Error!'];
 
         $reCaptcha = $request->get('reCaptcha') ?? null;
         $email = $request->get('email') ?? null;
         $userIp = $request->get('userIp') ?? null;
 
-        if (!$reCaptcha || !$email) {
-            $response['status'] = 400;
-            $response['message'] = 'Petición inválida.';
+        if (!$email) {
+            $response['text'] = 'El campo del correo electrónico es obligatorio.';
+
+            return response()->json($response, $response['status']);
+        }
+
+        if (!$reCaptcha) {
+            $response['text'] = 'reCaptcha inválido.';
 
             return response()->json($response, $response['status']);
         }
@@ -40,7 +45,9 @@ class NewsletterController extends Controller
         $reCaptchaResponse = $this->reCaptchaV3($reCaptcha, $userIp);
 
         if ($reCaptchaResponse == false) {
-            $response = ['status' => 400, 'message' => 'reCaptcha inválido.'];
+            $response['text'] = 'reCaptcha inválido.';
+
+            return response()->json($response, $response['status']);
         }
 
         try {
@@ -56,25 +63,37 @@ class NewsletterController extends Controller
                 'tags' => ['newsletter']
             ]);
 
-            if (!isset($member->status) || $member->status != 'subscribed') {
-                $response['status'] = 400;
-                $response['message'] = 'No se pudo registrar a la lista de distribución.';
+            if (isset($member->status) && $member->status != 'subscribed') {
+                $response['icon'] = 'success';
+                $response['status'] = 200;
+                $response['text'] = 'Se ha registrado a la lista de distribución.';
+                $response['title'] = '¡Éxito!';
+            } else {
+                $response['text'] = 'No se pudo registrar a la lista de distribución.';
             }
         } catch (ApiException $e) {
             \Log::error(__CLASS__ . '\\' . __FUNCTION__ . ':' . __LINE__, ['context' => $e->getResponseBody()]);
-
-            $response['status'] = 400;
-            $response['message'] = 'No se pudo registrar a la lista de distribución.';
         } catch (ClientException $e) {
-            \Log::error(__CLASS__ . '\\' . __FUNCTION__ . ':' . __LINE__, ['context' => $e->getResponse()->getBody()->getContents() ?? []]);
+            $context = json_decode($e->getResponse()->getBody()->getContents() ?? ['title' => $response['title'], 'detail' => $response['text']], true);
 
-            $response['status'] = 400;
-            $response['message'] = 'No se pudo registrar a la lista de distribución.';
+            $response['title'] = $context['title'] ?? $response['title'];
+            $response['text'] = $context['detail'] ?? $response['text'];
+
+            if ($response['title'] == 'Member Exists') {
+                $response['icon']  = 'warning';
+                $response['text']  = 'El correo electrónico ya se encuentra registrado en la lista de distribución.';
+                $response['title'] = 'Usuario ya registrado';
+            }
+
+            if ($response['title'] == 'Invalid Resource') {
+                $response['icon']  = 'warning';
+                $response['text']  = 'El correo electrónico <' . $email . '> es inválido.';
+                $response['title'] = 'Correo electrónico inválido';
+            }
+
+            \Log::error(__CLASS__ . '\\' . __FUNCTION__ . ':' . __LINE__, ['context' => $context]);
         } catch (\Exception $e) {
             \Log::error(__CLASS__ . '\\' . __FUNCTION__ . ':' . __LINE__, ['context' => $e->getMessage()]);
-
-            $response['status'] = 400;
-            $response['message'] = 'No se pudo registrar a la lista de distribución.';
         }
 
         return response()->json($response, $response['status']);
