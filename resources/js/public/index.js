@@ -1,7 +1,16 @@
 function initMap() {
+	let windowSize = window.outerWidth;
+	let zoom = 10;
+
+	if (windowSize < 768) {
+		zoom = 8;
+	} else if (windowSize < 1400) {
+		zoom = 9;
+	}
+
 	// For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
 	let mapOptions = {
-		zoom: 10,
+		zoom: zoom,
 		center: new google.maps.LatLng(20.671282, -104.375625),
 		styles: [
 			{ "featureType": "all", "elementType": "geometry.fill", "stylers": [{"weight": "2.00"}] },

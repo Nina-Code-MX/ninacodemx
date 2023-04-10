@@ -69,6 +69,15 @@ h4 {
   font-weight: 700;
 }
 
+.bg-navbar {
+  background-color: rgb(var(--color-primary) / var(--color-opacity));
+}
+
+.bg-navbar-off {
+  --color-opacity: 0.3;
+  background-color: rgb(var(--color-primary) / var(--color-opacity));
+}
+
 .bg-primary {
   background-color: rgb(var(--color-primary) / var(--color-opacity));
 }

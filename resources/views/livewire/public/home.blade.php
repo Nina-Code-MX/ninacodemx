@@ -14,49 +14,49 @@
 
     <div class="px-4 py-10">
         <div class="container gap-6 grid grid-cols-1 mx-auto sm:grid-cols-2">
-            <div class="bg-tertiary border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
-                <div class="border border-secondary h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded">
+            <div class="bg-neutral-100 border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
+                <div class="border border-neutral-300 h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded shadow">
                     <img alt="Infraestructura en la Nube" class="object-none h-full rounded w-full" src="{{ asset('images/ninacode-infraestructura-en-la-nube.jpg') }}" />
                 </div>
 
-                <div class="lg:w-2/3 text-neutral-100">
-                    <h3 class="mb-2 text-neutral-100">Infraestructura en la Nube</h3>
+                <div class="lg:w-2/3">
+                    <h3 class="mb-2">Infraestructura en la Nube</h3>
                     <p class="mb-2">Cambia toda tu infraestructura a la nube, nosotros te ayudamos.</p>
                     <p class="mb-2">Trabajamos con las tecnologías en la nube mas populares como lo son; Amazon Web Services, Microsoft Azure y Google Cloud. También trabajamos con los hosting mas populares como: GoDaddy, Bluehost, Hostgator, enter otros.</p>
                 </div>
             </div>
 
-            <div class="bg-tertiary border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
-                <div class="border border-secondary h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded">
+            <div class="bg-neutral-100 border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
+                <div class="border border-neutral-300 h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded shadow">
                     <img alt="Diseño" class="object-none h-full rounded w-full" src="{{ asset('images/ninacode-diseno.jpg') }}" />
                 </div>
 
-                <div class="lg:w-2/3 text-neutral-100">
-                    <h3 class="mb-2 text-neutral-100">Diseño</h3>
+                <div class="lg:w-2/3">
+                    <h3 class="mb-2">Diseño</h3>
                     <p class="mb-2">No solo basta con que se vea bonito, también debe ser funcional.</p>
                     <p class="mb-2">Nuestro equipo te ayudará a ti, tu marca y tu entidad, a llegar a tu público de una manera natural y sutil, de tal forma que puedas distinguirte entre tus competidores.</p>
                 </div>
             </div>
 
-            <div class="bg-tertiary border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
-                <div class="border border-secondary h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded">
+            <div class="bg-neutral-100 border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
+                <div class="border border-neutral-300 h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded shadow">
                     <img alt="Desarrollo" class="object-none h-full rounded w-full" src="{{ asset('images/ninacode-desarrollo.png') }}" />
                 </div>
 
-                <div class="lg:w-2/3 text-neutral-100">
-                    <h3 class="mb-2 text-neutral-100">Desarrollo</h3>
+                <div class="lg:w-2/3">
+                    <h3 class="mb-2">Desarrollo</h3>
                     <p class="mb-2">Nosotros nos preocupamos por el ¿cómo? ¿tú?... de la visión de tu marca.</p>
                     <p class="mb-2">Dominamos diferentes lenguajes de programación, y conoces una gran cantidad de "Framworks" con los que podemos impulsar tu plataforma dependiendo las necesidades.</p>
                 </div>
             </div>
 
-            <div class="bg-tertiary border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
-                <div class="border border-secondary h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded">
+            <div class="bg-neutral-100 border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
+                <div class="border border-neutral-300 h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded shadow">
                     <img alt="Redes sociales" class="object-none h-full rounded w-full" src="{{ asset('images/ninacode-social-media.jpg') }}" />
                 </div>
 
-                <div class="lg:w-2/3 text-neutral-100">
-                    <h3 class="mb-2 text-neutral-100">Redes sociales</h3>
+                <div class="lg:w-2/3">
+                    <h3 class="mb-2">Redes sociales</h3>
                     <p class="mb-2">Deja que profesionales coloquen contenido de calidad.</p>
                     <p class="mb-2">No solo es poner un "meme", es saber poner "El Meme", no dejes que tu esfuerzo pase desapercibido, deja que profesionales crean, administren y respondan en tus redes sociales.</p>
                 </div>
@@ -70,12 +70,12 @@
             <h3 class="mb-4">En Nina Code no solo obtienes una "página web", obtienes una oficina virtual.</h3>
 
             <ol class="flex flex-wrap gap-6 items-center justify-between w-full">
-                <li class="bg-tertiary border hover:bg-tertiary px-4 py-1 rounded shadow text-neutral-100">Pagos mensuales</li>
-                <li class="bg-tertiary border hover:bg-tertiary px-4 py-1 rounded shadow text-neutral-100">Diseños responsivos</li>
-                <li class="bg-tertiary border hover:bg-tertiary px-4 py-1 rounded shadow text-neutral-100">Optimizado para SEO</li>
-                <li class="bg-tertiary border hover:bg-tertiary px-4 py-1 rounded shadow text-neutral-100">IP dedicada</li>
-                <li class="bg-tertiary border hover:bg-tertiary px-4 py-1 rounded shadow text-neutral-100">Certificados SSL 256-bits</li>
-                <li class="bg-tertiary border hover:bg-tertiary px-4 py-1 rounded shadow text-neutral-100">Analiticas de Google</li>
+                <li class="bg-fourth border cursor-pointer hover:bg-fourth px-4 py-1 rounded shadow text-neutral-100">Pagos mensuales</li>
+                <li class="bg-fourth border cursor-pointer hover:bg-fourth px-4 py-1 rounded shadow text-neutral-100">Diseños responsivos</li>
+                <li class="bg-fourth border cursor-pointer hover:bg-fourth px-4 py-1 rounded shadow text-neutral-100">Optimizado para SEO</li>
+                <li class="bg-fourth border cursor-pointer hover:bg-fourth px-4 py-1 rounded shadow text-neutral-100">IP dedicada</li>
+                <li class="bg-fourth border cursor-pointer hover:bg-fourth px-4 py-1 rounded shadow text-neutral-100">Certificados SSL 256-bits</li>
+                <li class="bg-fourth border cursor-pointer hover:bg-fourth px-4 py-1 rounded shadow text-neutral-100">Analíticas de Google</li>
             </ol>
         </div>
     </div>
@@ -196,7 +196,10 @@
             <h2>Aprenda más</h2>
             <h3 class="mb-4">Vea el siguiente video para aprender más sobre lo que Nina Code puede ofrecer.</h3>
 
-            <iframe class="mx-auto my-24" width="560" height="315" src="https://www.youtube.com/embed/7QrDGjDf8q0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="h-0 mb-4 overflow-hidden pb-[56.25%] pt-[30px] relative">
+                <!-- h-[315px] max-h-[315px] max-w-[560px] mx-auto my-24 w-[560px] -->
+                <iframe class="absolute h-full left-0 top-0 w-full" src="https://www.youtube.com/embed/7QrDGjDf8q0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
 
             <div class="bg-primary p-8 rounded text-neutral-100">
                 <div class="flex flex-col  gap-6 items-center justify-between lg:flex-row">
