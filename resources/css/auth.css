@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Color hex: #4cb5ff
+ * Color rgb: 76, 181, 255
+ * Roboto Weight: 100, 300, 400, 700
+ */
+:root {
+  /* --color-primary: #2776bd;*/
+  --color-opacity: 1;
+  --color-primary: 38 118 189;
+  --color-secondary: 238 123 44;
+  --color-tertiary: 239 60 62;
+  --color-fourth: 110 152 50;
+  --text-color-primary: 31 41 55;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #e5e5e5;
+  color: rgb(var(--text-color-primary));
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  min-height: 100vh;
+}

@@ -6,20 +6,20 @@ use App\Helpers\LocaleHelper;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
-class Home extends Component
+class AboutUs extends Component
 {
-    public $pageId = 'home';
-    public $pageTitle = 'Home';
+    public $pageId = 'aboutus';
+    public $pageTitle = 'About Us';
 
     public function mount(Request $request, $lang = null)
     {
         LocaleHelper::detectLocale($request, $this->pageId);
-        $this->pageTitle = env('APP_NAME');
+        $this->pageTitle = __('About Us');
     }
 
     public function render()
     {
-        return view('livewire.public.home')
+        return view('livewire.public.about-us')
             ->layout('layouts.app', [
                 'pageId' => $this->pageId,
                 'pageTitle' => $this->pageTitle

@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Http\Livewire\Public;
+namespace App\Http\Livewire\Auth;
 
 use App\Helpers\LocaleHelper;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
-class Home extends Component
+class Signout extends Component
 {
-    public $pageId = 'home';
-    public $pageTitle = 'Home';
+    public $pageId = 'signout';
+    public $pageTitle = 'Sign Out';
 
-    public function mount(Request $request, $lang = null)
+    public function mount(Request $request)
     {
         LocaleHelper::detectLocale($request, $this->pageId);
-        $this->pageTitle = env('APP_NAME');
+        $this->pageTitle = __('Sign In');
     }
 
     public function render()
     {
-        return view('livewire.public.home')
-            ->layout('layouts.app', [
+        return view('livewire.auth.signout')
+            ->layout('layouts.auth', [
                 'pageId' => $this->pageId,
                 'pageTitle' => $this->pageTitle
             ]);

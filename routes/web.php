@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,4 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', App\Http\Livewire\Public\Home::class)->name('home');
+/*Route::get('/', App\Http\Livewire\Public\Home::class)->name('home');
+Route::get('/en', App\Http\Livewire\Public\Home::class)->name('home');
+Route::get('/signin', App\Http\Livewire\Auth\Signin::class)->name('signin');
+Route::get('/en/signin', App\Http\Livewire\Auth\Signin::class)->name('signin');*/
+
+Route::prefix('{locale}')->where(['locale' => '[a-z]{2}'])->group(function () {
+	Route::get('/', App\Http\Livewire\Public\Home::class)->name('home');
+	Route::get('/signin', App\Http\Livewire\Auth\Signin::class)->name('signin');
+});
+
+Route::group(['as' => 'admin', 'middleware' => ['auth', 'verified'], 'prefix' => '/admin'], function () {});
