@@ -1,4 +1,71 @@
-function initMap() {
+
+/**
+ * Register for Newsletter
+ * 
+ * @returns boolean
+ */
+const registerNewsletter = () => {
+	const VITE_ABSTRACTAIP_API_KEY = import.meta.env.VITE_ABSTRACTAIP_API_KEY;
+	const VITE_GOOGLE_RECAPTCHA_KEY = import.meta.env.VITE_GOOGLE_RECAPTCHA_KEY;
+	const email = document.getElementById('newsltter-email').value;
+	const submit = document.getElementById('newsltter-submit');
+	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+	submit.disabled = true;
+
+	if (!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+		Swal.fire({
+			title: 'Correo electrónico inválido',
+			text: 'El correo electrónico <' + email + '> es inválido.',
+			icon: 'warning',
+			confirmButtonText: 'Aceptar',
+		});
+
+		submit.disabled = false;
+
+		return false;
+	}
+
+	grecaptcha.enterprise.ready(function() {
+		grecaptcha.enterprise.execute(VITE_GOOGLE_RECAPTCHA_KEY, {action: 'subscribe'}).then(async function(token) {
+			const abstractaUrl = 'https://ipgeolocation.abstractapi.com/v1/?api_key=' + VITE_ABSTRACTAIP_API_KEY;
+			const userIp = await fetch(abstractaUrl)
+				.then(res => res.json());
+
+			const response = await fetch('/api/v1/mailchimp/newsltetter', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({reCaptcha: token, userIp: userIp?.ip_address, email: email, _token: csrfToken}),
+			})
+			.then(res => res.json())
+			.then(data => {
+				Swal.fire({
+					title: data.title,
+					text: data.text,
+					icon: data.icon,
+					confirmButtonText: 'Aceptar',
+				});
+
+				submit.disabled = false;
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				submit.disabled = false;
+			});
+		});
+	});
+
+	return false;
+};
+
+/**
+ * Init Google Maps
+ * 
+ * @returns void
+ */
+const initMap = () => {
 	let windowSize = window.outerWidth;
 	let zoom = 10;
 
@@ -51,64 +118,8 @@ function initMap() {
 	});
 }
 
-/**
- * Register for Newsletter
- * 
- * @returns boolean
- */
-function registerNewsletter() {
-	const email = document.getElementById('newsltter-email').value;
-	const submit = document.getElementById('newsltter-submit');
-
-	submit.disabled = true;
-
-	if (!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
-		Swal.fire({
-			title: 'Correo electrónico inválido',
-			text: 'El correo electrónico <' + email + '> es inválido.',
-			icon: 'warning',
-			confirmButtonText: 'Aceptar',
-		});
-
-		submit.disabled = false;
-
-		return false;
-	}
-
-	grecaptcha.enterprise.ready(function() {
-		grecaptcha.enterprise.execute(VITE_GOOGLE_RECAPTCHA_KEY, {action: 'subscribe'}).then(async function(token) {
-			const abstractaUrl = 'https://ipgeolocation.abstractapi.com/v1/?api_key=' + VITE_ABSTRACTAIP_API_KEY;
-			const userIp = await fetch(abstractaUrl)
-				.then(res => res.json());
-
-			const response = await fetch('/api/v1/mailchimp/newsltetter', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({reCaptcha: token, userIp: userIp?.ip_address, email: email, _token: '{{ csrf_token() }}'}),
-			})
-			.then(res => res.json())
-			.then(data => {
-				Swal.fire({
-					title: data.title,
-					text: data.text,
-					icon: data.icon,
-					confirmButtonText: 'Aceptar',
-				});
-
-				submit.disabled = false;
-			})
-			.catch(error => {
-				console.error('Error:', error);
-				submit.disabled = false;
-			});
-		});
-	});
-
-	return false;
-}
-
 document.addEventListener('DOMContentLoaded', function() {
 	initMap();
 });
+
+window.registerNewsletter = registerNewsletter

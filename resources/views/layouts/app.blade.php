@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="csrf-token" content={{ csrf_token() }}>
         <title>{{ $pageTitle ?? env('APP_NAME', 'Laravel') }}</title>
 
         @vite('resources/css/app.css') 
@@ -25,14 +27,52 @@
                     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                 </button>
 
-                <div class="hidden lg:block lg:w-auto w-full" id="mainNavBar-toggle">
-                    <ul class="flex flex-col lg:flex-row lg:space-x-8">
-                        <li><a class="hover:text-neutral-50" href="#">Inicio</a></li>
-                        <li><a class="hover:text-neutral-50" href="#">Nosotros</a></li>
-                        <li><a class="hover:text-neutral-50" href="#">Portafolio</a></li>
-                        <li><a class="hover:text-neutral-50" href="#">Servicios</a></li>
-                        <li><a class="hover:text-neutral-50" href="#">Precios</a></li>
-                        <li><a class="hover:text-neutral-50" href="#">Contacto</a></li>
+                <div class="bg-primary hidden lg:bg-transparent lg:block lg:w-auto w-full" id="mainNavBar-toggle">
+                    @php $lang = \Cookie::get('lang') ?: config('app.locale'); @endphp 
+                    @php $lang_available = config('app.locale_available') ?? ['es' => 'Español']; @endphp 
+                    @php $lang_codes = config('app.locale_codes') ?? ['es' => 'mx']; @endphp 
+                    <ul class="bg-primary border-white divide-y flex flex-col gap-2 items-center lg:bg-transparent lg:divide-y-0 lg:flex-row lg:gap-0 lg:p-0 lg:space-x-8 p-4">
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('home', ['locale' => $lang]) }}">Inicio</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('aboutus', ['locale' => $lang]) }}">Nosotros</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="#">Portafolio</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="#">Servicios</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="#">Precios</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('contact', ['locale' => $lang]) }}">Contacto</a></li>
+                        <li class="lg:w-auto pt-2 w-full">
+                            <button class="hover:text-neutral-50 focus:outline-none focus:ring-0 gap-2 inline-flex items-center"
+                                data-dropdown-toggle="dropdownLangSwitcher"
+                                id="langSwitcher"
+                                type="button">
+                                <span>{{ $lang_available[$lang] ?? 'Español' }}</span>
+                                <span class="fi fi-{{ $lang_codes[$lang] ?? 'mx' }}"></span>
+                            </button>
+                            
+                            <!-- Dropdown menu -->
+                            <div class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700" id="dropdownLangSwitcher">
+                                <form action="/lang-switcher" id="lang_switcher_form" method="POST">
+                                    @csrf
+                                    <input id="lang_switcher_value" type="hidden" name="lang" value="{{ $lang }}" />
+
+                                    <ul aria-labelledby="dropdownLangSwitcher" class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                                        @forelse ($lang_available AS $code => $name)
+                                        <li>
+                                            <button class="flex items-center justify-between px-4 py-2 hover:bg-gray-100 w-full"
+                                                data-lang-switcher
+                                                data-lang-value="{{ $code }}"
+                                                type="button">{{ $name }} <span class="fi fi-{{ $lang_codes[$code] ?? 'mx' }}"></span></button>
+                                        </li>
+                                        @empty 
+                                        <li>
+                                            <button class="flex items-center justify-between px-4 py-2 hover:bg-gray-100 w-full"
+                                                data-lang-switcher
+                                                data-lang-value="es"
+                                                type="button">Español <span class="fi fi-mx"></span></button>
+                                        </li>
+                                        @endforelse 
+                                    </ul>
+                                </form>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -48,20 +88,22 @@
                 <div class="gap-6 flex flex-col items-center justify-center sm:flex-row sm:h-screen sm:items-left sm:max-h-[500px]">
                     <div class="flex flex-col items-left justify-left sm:h-screen sm:justify-center sm:max-h-[500px] sm:w-1/2">
                         <div class="bg-[#f5f5f5e0] border-l border-l-neutral-200 border-r border-r-neutral-200 border-t border-t-neutral-200 px-4 py-2 sm:px-6 sm:py-2">
-                            <h1>Diseño de páginas web</h1>
+                            <h1>{{ $heroData['h1'] ?? __('pages/home.hero.h1') }}</h1>
                         </div>
 
                         <div class="bg-[#f5f5f5e0] border-l border-l-neutral-200 border-r border-r-neutral-200 px-4 py-2 sm:px-6 sm:py-2">
-                            <h2>Infraestructura, Diseño de páginas web, SEO & SEM</h2>
+                            <h2>{{ $heroData['h2'] ?? __('pages/home.hero.h2') }}</h2>
                         </div>
 
                         <div class="bg-[#f5f5f5e0] border-l border-l-neutral-200 border-r border-r-neutral-200 px-4 py-2 sm:px-6 sm:py-2">
-                            <p>Te migramos a la Nube, alcanza mas clientes, te posicionamos donde debes estar. Deja que profesionales manejen el mundo digita del tu negocio.</p>
+                            <p>{{ $heroData['p'] ?? __('pages/home.hero.p') }}</p>
                         </div>
 
+                        @if (isset($heroData['action']) && $heroData['action']) 
                         <div class="bg-[#f5f5f5e0] border-b border-b-neutral-200 border-l border-l-neutral-200 border-r border-r-neutral-200 px-4 py-2 sm:px-6 sm:py-2">
-                            <a class="button-primary border font-bold inline-block mb-2 ml-auto mr-0 px-4 py-2 rounded text-slate-100" href="#">Contactanos</a>
+                            <a class="button-primary border font-bold inline-block mb-2 ml-auto mr-0 px-4 py-2 rounded text-slate-100" href="{!! $heroData['action']['route'] ?? route('home', ['locale' => app()->getLocale()]) !!}">{{ $heroData['action']['label'] ?? __('Contactenos') }}</a>
                         </div>
+                        @endif 
                     </div>
 
                     <div class="flex flex-col items-center justify-left sm:h-screen sm:justify-center sm:max-h-[500px] sm:w-1/2">

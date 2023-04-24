@@ -12,7 +12,8 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.12",
         "mailchimp/marketing": "^3.0",
-        "mailchimp/transactional": "^1.0"
+        "mailchimp/transactional": "^1.0",
+        "ramsey/uuid": "^4.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

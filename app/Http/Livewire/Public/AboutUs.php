@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Public;
 
 use App\Helpers\LocaleHelper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 
 class AboutUs extends Component
@@ -15,6 +16,8 @@ class AboutUs extends Component
     {
         LocaleHelper::detectLocale($request, $this->pageId);
         $this->pageTitle = __('About Us');
+
+        \Log::debug('AboutUs::mount', ['cookie' => Cookie::get('lang')]);
     }
 
     public function render()
