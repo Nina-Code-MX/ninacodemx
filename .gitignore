@@ -1,4 +1,5 @@
 /docker-compose/mysql/persistent
+/docker-compose/certs/ZscalerRootCertificate-2048-SHA256.crt
 /.phpunit.cache
 /node_modules
 /public/build

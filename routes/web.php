@@ -18,7 +18,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 */
 
 Route::get('/', function() {
-	\Log::debug('route::get(/)', ['cookie' => Cookie::all()]);
 	$lang = Cookie::get('lang') ?: config('app.locale');
 
 	return redirect()->route('home', ['locale' => $lang], 301);
@@ -47,8 +46,8 @@ Route::post('/lang-switcher', function(Request $request) {
 Route::prefix('{locale}')->where(['locale' => '[a-z]{2}'])->group(function ($router) {
 	Route::get('/', App\Http\Livewire\Public\Home::class)->name('home');
 	Route::get('/nosotros', App\Http\Livewire\Public\AboutUs::class)->name('aboutus');
+	Route::get('/portafolio', App\Http\Livewire\Public\Portfolio::class)->name('portfolio');
 	Route::get('/contacto', App\Http\Livewire\Public\Contact::class)->name('contact');
-
 	Route::get('/signin', App\Http\Livewire\Auth\Signin::class)->name('signin');
 });
 
@@ -57,6 +56,12 @@ Route::get('/nosotros', function() {
 
 	return redirect()->route('aboutus', ['locale' => $lang], 301);
 })->name('old.aboutus');
+
+Route::get('/portafolio', function() {
+	$lang = Cookie::get('lang') ?: config('app.locale');
+
+	return redirect()->route('portfolio', ['locale' => $lang], 301);
+})->name('old.portfolio');
 
 Route::get('/contacto', function() {
 	$lang = Cookie::get('lang') ?: config('app.locale');

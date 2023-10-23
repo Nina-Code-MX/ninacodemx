@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="csrf-token" content={{ csrf_token() }}>
-        <title>{{ $pageTitle ?? env('APP_NAME', 'Laravel') }}</title>
+        <title>{{ $pageTitle ?? __('Home') }} - {{ env('APP_NAME', 'Laravel') }}</title>
 
         @vite('resources/css/app.css') 
         @livewireStyles 
@@ -32,12 +32,12 @@
                     @php $lang_available = config('app.locale_available') ?? ['es' => 'Español']; @endphp 
                     @php $lang_codes = config('app.locale_codes') ?? ['es' => 'mx']; @endphp 
                     <ul class="bg-primary border-white divide-y flex flex-col gap-2 items-center lg:bg-transparent lg:divide-y-0 lg:flex-row lg:gap-0 lg:p-0 lg:space-x-8 p-4">
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('home', ['locale' => $lang]) }}">Inicio</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('aboutus', ['locale' => $lang]) }}">Nosotros</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="#">Portafolio</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="#">Servicios</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="#">Precios</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('contact', ['locale' => $lang]) }}">Contacto</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('home', ['locale' => $lang]) }}">{{ __('mainmenu.home') }}</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('aboutus', ['locale' => $lang]) }}">{{ __('mainmenu.aboutus') }}</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('portfolio', ['locale' => $lang]) }}">{{ __('mainmenu.portfolio') }}</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="#">{{ __('mainmenu.services') }}</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="#">{{ __('mainmenu.pricing') }}</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('contact', ['locale' => $lang]) }}">{{ __('mainmenu.contact') }}</a></li>
                         <li class="lg:w-auto pt-2 w-full">
                             <button class="hover:text-neutral-50 focus:outline-none focus:ring-0 gap-2 inline-flex items-center"
                                 data-dropdown-toggle="dropdownLangSwitcher"
@@ -46,7 +46,7 @@
                                 <span>{{ $lang_available[$lang] ?? 'Español' }}</span>
                                 <span class="fi fi-{{ $lang_codes[$lang] ?? 'mx' }}"></span>
                             </button>
-                            
+
                             <!-- Dropdown menu -->
                             <div class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700" id="dropdownLangSwitcher">
                                 <form action="/lang-switcher" id="lang_switcher_form" method="POST">
@@ -78,13 +78,13 @@
             </div>
         </nav>
 
+        @if(isset($heroData)) 
         <div class="h-screen max-h-[563px] relative sm:max-h-[563px]">
             <div class="absolute h-screen hero max-h-[563px] opacity-80 w-full -z-10">
             </div>
 
             <div class="container mx-auto z-10">
                 <div class="h-16 w-full"></div>
-
                 <div class="gap-6 flex flex-col items-center justify-center sm:flex-row sm:h-screen sm:items-left sm:max-h-[500px]">
                     <div class="flex flex-col items-left justify-left sm:h-screen sm:justify-center sm:max-h-[500px] sm:w-1/2">
                         <div class="bg-[#f5f5f5e0] border-l border-l-neutral-200 border-r border-r-neutral-200 border-t border-t-neutral-200 px-4 py-2 sm:px-6 sm:py-2">
@@ -114,6 +114,9 @@
                 </div>
             </div>
         </div>
+        @else 
+        <div class="h-16 w-full"></div>
+        @endif  
 
         <div id="bodyContainer">
             {{ $slot }} 

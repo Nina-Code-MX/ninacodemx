@@ -1,13 +1,14 @@
 {
 	"folders": [
 		{
-			"name": "ninacodemx",
+			"name": "Nina Code MX",
 			"path": "."
 		}
 	],
 	"settings": {
 		"files.associations": {
 			"*.blade.php": "blade"
-		}
+		},
+		"editor.wordWrap": "on"
 	}
 }

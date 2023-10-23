@@ -7,21 +7,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 
-class AboutUs extends Component
+class Portfolio extends Component
 {
     public $heroData = ['h1' => false, 'h2' => false, 'p' => false, 'action' => false];
-    public $pageId = 'aboutus';
-    public $pageTitle = 'Acerca de nosotros';
+    public $pageId = 'portfolio';
+    public $pageTitle = 'Portafolio';
 
     public function mount(Request $request, $lang = null)
     {
         LocaleHelper::detectLocale($request, $this->pageId);
-        $this->pageTitle = __('Acerca de nosotros');
+        $this->pageTitle = __('Portafolio');
     }
 
     public function render()
     {
-        return view('livewire.public.about-us')
+        return view('livewire.public.portfolio')
             ->layout('layouts.app', [
                 'pageId' => $this->pageId,
                 'pageTitle' => $this->pageTitle
