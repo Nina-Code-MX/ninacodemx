@@ -12,6 +12,7 @@
         @stack('styles') 
 
         <script src="https://www.google.com/recaptcha/enterprise.js?render={{ env('GOOGLE_RECAPTCHA_KEY', '') }}"></script>
+        <script src="https://kit.fontawesome.com/0a6562d8bd.js" crossorigin="anonymous"></script>
     </head>
 
     <body class="antialiased bg-neutral-200">

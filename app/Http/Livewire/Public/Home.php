@@ -25,7 +25,7 @@ class Home extends Component
 
     public function render()
     {
-        return view('livewire.public.home')
+        return view('livewire.public.home', ['teams' => \App\Models\Team::with(['teamSocials'])->orderBy('order')->get()->toArray()])
             ->layout('layouts.app', [
                 'heroData' => $this->heroData,
                 'pageId' => $this->pageId,

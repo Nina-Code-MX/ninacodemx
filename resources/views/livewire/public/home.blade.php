@@ -88,104 +88,57 @@
             <p class="mb-4">El equipo de Nina Code trabaja en lo que mas le gusta a cada integrante, ya sea tiempo completo o como freelance, todo el esfuerzo y dedicación del trabajo se refleja en los resultados finales de calidad.</p>
 
             <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 max-w-6xl mx-auto place-items-center">
+                @foreach ($teams as $team)
                 <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
-                    <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
-                        <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
+                    <div class="flex flex-col gap-2 h-[100%]">
+                        <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
+                            <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset($team['image'] ?? 'images/logo-ninacode-mx-1024.png') }}" />
+                        </div>
+                        <h4 class="text-center">{{ $team['full_name'] }}</h4>
+                        <p class="h-full place-self-stretch text-center text-sm">{{ $team['title'] }}</p>
+                        <ul class="flex flex-row gap-4 items-center justify-center">
+                            @foreach ($team['team_socials'] as $social) 
+                            <li class="h-8 w-8"><a  class="h-8 w-8" href="{{ $social['link'] ?? '#' }}" target="_{{ $social['type'] ?? 'dog' }}"><i class="{{ $social['logo'] ?? 'fa-solid fa-dog' }} fa-lg"></i></a></li>
+                            @endforeach 
+                        </ul>
                     </div>
+                </div>
+                @endforeach 
 
-                    <h4 class="mb-2 text-center">Ivette Gutiérrez</h4>
-
-                    <p class="text-center text-sm">Directora Ejecutiva.</p>
+                <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
+                    <div class="flex flex-col gap-2 h-[100%]">
+                        <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
+                            <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
+                        </div>
+                        <h4 class="text-center">Nina</h4>
+                        <p class="h-full place-self-stretch text-center text-sm">Directora de relaciones</p>
+                        <ul class="flex flex-row gap-4 items-center justify-center">
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
-                    <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
-                        <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
+                    <div class="flex flex-col gap-2 h-[100%]">
+                        <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
+                            <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
+                        </div>
+                        <h4 class="text-center">Olivia</h4>
+                        <p class="h-full place-self-stretch text-center text-sm">Directora en vigilancia</p>
+                        <ul class="flex flex-row gap-4 items-center justify-center">
+                        </ul>
                     </div>
-
-                    <h4 class="mb-2 text-center">Bianca González</h4>
-
-                    <p class="text-center text-sm">Directora de Proyectos.</p>
                 </div>
 
                 <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
-                    <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
-                        <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
+                    <div class="flex flex-col gap-2 h-[100%]">
+                        <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
+                            <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
+                        </div>
+                        <h4 class="text-center">Frank</h4>
+                        <p class="h-full place-self-stretch text-center text-sm">Director en alimentos</p>
+                        <ul class="flex flex-row gap-4 items-center justify-center">
+                        </ul>
                     </div>
-
-                    <h4 class="mb-2 text-center">Germán González</h4>
-
-                    <p class="text-center text-sm">Director de Tecnologías.</p>
-                </div>
-
-                <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
-                    <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
-                        <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
-                    </div>
-
-                    <h4 class="mb-2 text-center">David Martínez</h4>
-
-                    <p class="text-center text-sm">Desarrollador fullstack, especialista en e-Commerce.</p>
-                </div>
-
-                <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
-                    <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
-                        <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
-                    </div>
-
-                    <h4 class="mb-2 text-center">Maximiliano Mancera</h4>
-
-                    <p class="text-center text-sm">Desarrollador Interno.</p>
-                </div>
-
-                <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
-                    <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
-                        <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
-                    </div>
-
-                    <h4 class="mb-2 text-center">Héctor Gonzalez</h4>
-
-                    <p class="text-center text-sm">Desarrollador frontend, especialista aplicaciones híbridas.</p>
-                </div>
-
-                <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
-                    <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
-                        <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
-                    </div>
-
-                    <h4 class="mb-2 text-center">Jorge Sánchez</h4>
-
-                    <p class="text-center text-sm">Especialista en Redes Locales, Virtuales y en la Nube.</p>
-                </div>
-
-                <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
-                    <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
-                        <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
-                    </div>
-
-                    <h4 class="mb-2 text-center">Nina</h4>
-
-                    <p class="text-center text-sm">Directora de relaciones.</p>
-                </div>
-
-                <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
-                    <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
-                        <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
-                    </div>
-
-                    <h4 class="mb-2 text-center">Olivia</h4>
-
-                    <p class="text-center text-sm">Directora en vigilancia.</p>
-                </div>
-
-                <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
-                    <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
-                        <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
-                    </div>
-
-                    <h4 class="mb-2 text-center">Frank</h4>
-
-                    <p class="text-center text-sm">Director en alimentos.</p>
                 </div>
             </div>
         </div>
