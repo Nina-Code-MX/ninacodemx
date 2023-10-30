@@ -38,7 +38,7 @@ $pagesTranslates = [
 ];
 
 Route::get('/', function() use ($superLang) {
-	return redirect()->route($superLang . '.home', ['locale' => $superLang], 301);
+	return redirect()->route('home', ['locale' => $superLang], 301);
 })->name('home.default');
 
 Route::post('/lang-switcher', function(Request $request) {
