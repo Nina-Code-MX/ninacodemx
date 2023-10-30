@@ -19,7 +19,7 @@ class Home extends Component
         $this->heroData['h1'] = __('pages/home.hero.h1');
         $this->heroData['h2'] = __('pages/home.hero.h2');
         $this->heroData['p'] = __('pages/home.hero.p');
-        $this->heroData['action'] = ['lable' => __('Contactenos'), 'route' => route('contact', ['locale' => app()->getLocale()])];
+        $this->heroData['action'] = ['lable' => __('Contactenos'), 'route' => route(app()->getLocale() . '.contact', ['locale' => app()->getLocale()])];
         $this->pageTitle = env('APP_NAME');
     }
 

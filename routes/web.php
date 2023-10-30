@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +17,28 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 |
 */
 
-Route::get('/', function() {
-	$lang = Cookie::get('lang') ?: config('app.locale');
+$superLang = Cookie::get('lang') ?: config('app.locale') ?: 'es';
+$pagesTranslates = [
+	'en' => [
+		'aboutus' => 'about-us',
+		'portfolio' => 'portfolio',
+		'services' => 'services',
+		'pricing' => 'pricing',
+		'contact' => 'contact-us',
+		'signin' => 'signin',
+	],
+	'es' => [
+		'aboutus' => 'nosotros',
+		'portfolio' => 'portafolio',
+		'services' => 'servicios',
+		'pricing' => 'precios',
+		'contact' => 'contacto',
+		'signin' => 'iniciar-sesion',
+	],
+];
 
-	return redirect()->route('home', ['locale' => $lang], 301);
+Route::get('/', function() use ($superLang) {
+	return redirect()->route($superLang . '.home', ['locale' => $superLang], 301);
 })->name('home.default');
 
 Route::post('/lang-switcher', function(Request $request) {
@@ -36,37 +54,45 @@ Route::post('/lang-switcher', function(Request $request) {
 	try {
 		$previousRequest = app('request')->create(app('url')->previous());
 		$routeName = app('router')->getRoutes()->match($previousRequest)->getName();
+		$routeNameArr = explode('.', $routeName);
 
-		return redirect()->route($routeName, ['locale' => $lang], 302);
+		if (isset($routeNameArr[1]) && preg_match('/^[a-z]{2}$/', $routeNameArr[0])) {
+			return redirect()->route($lang . '.' . $routeNameArr[1], ['locale' => $lang], 302);
+		}
+
+		return redirect()->route('home', ['locale' => $lang], 302);
 	} catch (NotFoundHttpException $e) {
+		return redirect()->route('home', ['locale' => $lang], 302);
+	} catch (RouteNotFoundException $e) {
 		return redirect()->route('home', ['locale' => $lang], 302);
 	}
 });
 
 Route::prefix('{locale}')->where(['locale' => '[a-z]{2}'])->group(function ($router) {
 	Route::get('/', App\Http\Livewire\Public\Home::class)->name('home');
-	Route::get('/nosotros', App\Http\Livewire\Public\AboutUs::class)->name('aboutus');
-	Route::get('/portafolio', App\Http\Livewire\Public\Portfolio::class)->name('portfolio');
-	Route::get('/contacto', App\Http\Livewire\Public\Contact::class)->name('contact');
-	Route::get('/signin', App\Http\Livewire\Auth\Signin::class)->name('signin');
 });
 
-Route::get('/nosotros', function() {
-	$lang = Cookie::get('lang') ?: config('app.locale');
+foreach ($pagesTranslates AS $lang => $page) {
+	Route::prefix('{locale}')->where(['locale' => '[a-z]{2}'])->group(function ($router) use ($lang, $pagesTranslates) {
+		Route::get('/' . ($pagesTranslates[$lang]['aboutus']), App\Http\Livewire\Public\AboutUs::class)->name($lang . '.aboutus');
+		Route::get('/' . ($pagesTranslates[$lang]['portfolio']), App\Http\Livewire\Public\Portfolio::class)->name($lang . '.portfolio');
+		Route::get('/' . ($pagesTranslates[$lang]['services']), App\Http\Livewire\Public\Services::class)->name($lang . '.services');
+		Route::get('/' . ($pagesTranslates[$lang]['pricing']), App\Http\Livewire\Public\Pricing::class)->name($lang . '.pricing');
+		Route::get('/' . ($pagesTranslates[$lang]['contact']), App\Http\Livewire\Public\Contact::class)->name($lang . '.contact');
+		Route::get('/' . ($pagesTranslates[$lang]['signin']), App\Http\Livewire\Auth\Signin::class)->name($lang . '.signin');
+	});
+}
 
-	return redirect()->route('aboutus', ['locale' => $lang], 301);
+Route::get('/nosotros', function() use ($superLang) {
+	return redirect()->route($superLang . '.aboutus', ['locale' => $superLang], 301);
 })->name('old.aboutus');
 
-Route::get('/portafolio', function() {
-	$lang = Cookie::get('lang') ?: config('app.locale');
-
-	return redirect()->route('portfolio', ['locale' => $lang], 301);
+Route::get('/portafolio', function() use ($superLang) {
+	return redirect()->route($superLang . '.portfolio', ['locale' => $superLang], 301);
 })->name('old.portfolio');
 
-Route::get('/contacto', function() {
-	$lang = Cookie::get('lang') ?: config('app.locale');
-
-	return redirect()->route('contact', ['locale' => $lang], 301);
+Route::get('/contacto', function() use ($superLang) {
+	return redirect()->route($superLang . '.contact', ['locale' => $superLang], 301);
 })->name('old.contact');
 
 Route::group(['as' => 'admin', 'middleware' => ['auth', 'verified'], 'prefix' => '/admin'], function () {});

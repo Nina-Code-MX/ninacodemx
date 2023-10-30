@@ -34,11 +34,11 @@
                     @php $lang_codes = config('app.locale_codes') ?? ['es' => 'mx']; @endphp 
                     <ul class="bg-primary border-white divide-y flex flex-col gap-2 items-center lg:bg-transparent lg:divide-y-0 lg:flex-row lg:gap-0 lg:p-0 lg:space-x-8 p-4">
                         <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('home', ['locale' => $lang]) }}">{{ __('mainmenu.home') }}</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('aboutus', ['locale' => $lang]) }}">{{ __('mainmenu.aboutus') }}</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('portfolio', ['locale' => $lang]) }}">{{ __('mainmenu.portfolio') }}</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="#">{{ __('mainmenu.services') }}</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="#">{{ __('mainmenu.pricing') }}</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('contact', ['locale' => $lang]) }}">{{ __('mainmenu.contact') }}</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.aboutus', ['locale' => $lang]) }}">{{ __('mainmenu.aboutus') }}</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.portfolio', ['locale' => $lang]) }}">{{ __('mainmenu.portfolio') }}</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.services', ['locale' => $lang]) }}">{{ __('mainmenu.services') }}</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.pricing', ['locale' => $lang]) }}">{{ __('mainmenu.pricing') }}</a></li>
+                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.contact', ['locale' => $lang]) }}">{{ __('mainmenu.contact') }}</a></li>
                         <li class="lg:w-auto pt-2 w-full">
                             <button class="hover:text-neutral-50 focus:outline-none focus:ring-0 gap-2 inline-flex items-center"
                                 data-dropdown-toggle="dropdownLangSwitcher"
