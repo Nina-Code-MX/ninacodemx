@@ -156,6 +156,15 @@ h4 {
   background-color: rgb(var(--color-primary) / var(--color-opacity));
 }
 
+.button-secondary {
+  background-color: rgb(var(--color-secondary) / var(--color-opacity));
+}
+
+.button-secondary:hover {
+  --color-opacity: 0.8;
+  background-color: rgb(var(--color-secondary) / var(--color-opacity));
+}
+
 @media (min-width: 640px) {}
 @media (min-width: 768px) {}
 @media (min-width: 1024px) {

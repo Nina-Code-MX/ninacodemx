@@ -102,7 +102,8 @@
 
                         @if (isset($heroData['action']) && $heroData['action']) 
                         <div class="bg-[#f5f5f5e0] border-b border-b-neutral-200 border-l border-l-neutral-200 border-r border-r-neutral-200 px-4 py-2 sm:px-6 sm:py-2">
-                            <a class="button-primary border font-bold inline-block mb-2 ml-auto mr-0 px-4 py-2 rounded text-slate-100" href="{!! $heroData['action']['route'] ?? route('home', ['locale' => app()->getLocale()]) !!}">{{ $heroData['action']['label'] ?? __('Contactenos') }}</a>
+                            <a class="button-primary border font-bold inline-block mb-2 ml-auto mr-0 px-4 py-2 rounded text-slate-100"
+                                href="{!! $heroData['action']['route'] ?? route('home', ['locale' => app()->getLocale()]) !!}">{{ $heroData['action']['label'] ?? __('Contactenos') }}</a>
                         </div>
                         @endif 
                     </div>
@@ -123,10 +124,10 @@
             {{ $slot }} 
         </div>
 
-        <footer class="bg-neutral-100 border-t border-t-neutral-200 text-xs mt-auto p-2">
+        <footer class="bg-neutral-100 border-t border-t-neutral-300 text-xs mt-auto p-4">
             <div class="gap-4 grid grid-cols-2 sm:gap-6 sm:grid-cols-4">
                 <div>
-                    <h4 class="mb-4">Información de contacto</h4>
+                    <h4 class="mb-4">{{ __('Información de contacto') }}</h4>
 
                     <ul>
                         <li class="p-1">Castilla la Mancha 68</li>
@@ -137,34 +138,34 @@
                 </div>
 
                 <div>
-                    <h4 class="mb-4">Mapa del Sitio</h4>
+                    <h4 class="mb-4">{{ __('Mapa del Sitio') }}</h4>
 
                     <ul>
-                        <li class="p-1">Inicio</li>
-                        <li class="p-1">Nosotros</li>
-                        <li class="p-1">Portafolio</li>
-                        <li class="p-1">Servicios</li>
-                        <li class="p-1">Precios</li>
-                        <li class="p-1">Contacto</li>
+                        <li class="p-1"><a class="hover:font-semibold" href="{{ route('home', ['locale' => $lang]) }}">{{ __('mainmenu.home') }}</a></li>
+                        <li class="p-1"><a class="hover:font-semibold" href="{{ route($lang . '.aboutus', ['locale' => $lang]) }}">{{ __('mainmenu.aboutus') }}</a></li>
+                        <li class="p-1"><a class="hover:font-semibold" href="{{ route($lang . '.portfolio', ['locale' => $lang]) }}">{{ __('mainmenu.portfolio') }}</a></li>
+                        <li class="p-1"><a class="hover:font-semibold" href="{{ route($lang . '.services', ['locale' => $lang]) }}">{{ __('mainmenu.services') }}</a></li>
+                        <li class="p-1"><a class="hover:font-semibold" href="{{ route($lang . '.pricing', ['locale' => $lang]) }}">{{ __('mainmenu.pricing') }}</a></li>
+                        <li class="p-1"><a class="hover:font-semibold" href="{{ route($lang . '.contact', ['locale' => $lang]) }}">{{ __('mainmenu.contact') }}</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="mb-4">Enlaces de interés</h4>
+                    <h4 class="mb-4">{{ __('Enlaces de interés') }}</h4>
 
                     <ul>
-                        <li class="p-1">Políticas de Privacidad</li>
-                        <li class="p-1">Términos y Condiciones</li>
+                        <li class="p-1"><a class="hover:font-semibold" href="{{ route($lang . '.privacy', ['locale' => $lang]) }}">{{ __('mainmenu.privacy') }}</a></li>
+                        <li class="p-1"><a class="hover:font-semibold" href="{{ route($lang . '.terms', ['locale' => $lang]) }}">{{ __('mainmenu.terms') }}</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="mb-4">Redes Sociales</h4>
+                    <h4 class="mb-4">{{ __('Redes Sociales') }}</h4>
 
                     <ul>
-                        <li class="p-1">Facebook</li>
-                        <li class="p-1">Instagram</li>
-                        <li class="p-1">Youtube</li>
+                        <li class="p-1"><a class="hover:font-semibold" href="https://www.facebook.com/ninacodemx">Facebook</a></li>
+                        <li class="p-1"><a class="hover:font-semibold" href="https://www.instagram.com/ninacodemx/">Instagram</a></li>
+                        <li class="p-1"><a class="hover:font-semibold" href="https://www.youtube.com/channel/UCoaWaOoAMzyf99D192HyMBQ">Youtube</a></li>
                     </ul>
                 </div>
             </div>

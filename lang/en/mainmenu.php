@@ -19,5 +19,7 @@ return [
     'services' => 'Services',
     'pricing' => 'Pricing',
     'contact' => 'Contact',
+    'privacy' => 'Privacy Policy',
+    'terms' => 'Terms and Conditions',
 
 ];

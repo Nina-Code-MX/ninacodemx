@@ -26,6 +26,8 @@ $pagesTranslates = [
 		'pricing' => 'pricing',
 		'contact' => 'contact-us',
 		'signin' => 'signin',
+		'terms' => 'terms-and-conditions',
+		'privacy' => 'privacy-policy',
 	],
 	'es' => [
 		'aboutus' => 'nosotros',
@@ -34,6 +36,8 @@ $pagesTranslates = [
 		'pricing' => 'precios',
 		'contact' => 'contacto',
 		'signin' => 'iniciar-sesion',
+		'terms' => 'terminos-y-condiciones',
+		'privacy' => 'aviso-de-privacidad',
 	],
 ];
 
@@ -73,13 +77,20 @@ Route::prefix('{locale}')->where(['locale' => '[a-z]{2}'])->group(function ($rou
 });
 
 foreach ($pagesTranslates AS $lang => $page) {
-	Route::prefix('{locale}')->where(['locale' => '[a-z]{2}'])->group(function ($router) use ($lang, $pagesTranslates) {
+	Route::prefix('{locale}')->where(['locale' => '[a-z]{2}'])->group(function () use ($lang, $pagesTranslates) {
 		Route::get('/' . ($pagesTranslates[$lang]['aboutus']), App\Http\Livewire\Public\AboutUs::class)->name($lang . '.aboutus');
 		Route::get('/' . ($pagesTranslates[$lang]['portfolio']), App\Http\Livewire\Public\Portfolio::class)->name($lang . '.portfolio');
-		Route::get('/' . ($pagesTranslates[$lang]['services']), App\Http\Livewire\Public\Services::class)->name($lang . '.services');
+
+		Route::prefix('/' . ($pagesTranslates[$lang]['services']))->group(function () use ($lang, $pagesTranslates) {
+			Route::get('/', App\Http\Livewire\Public\Services::class)->name($lang . '.services');
+			Route::get('/{slug}', App\Http\Livewire\Public\Services::class)->name($lang . '.services.slug');
+		});
+
 		Route::get('/' . ($pagesTranslates[$lang]['pricing']), App\Http\Livewire\Public\Pricing::class)->name($lang . '.pricing');
 		Route::get('/' . ($pagesTranslates[$lang]['contact']), App\Http\Livewire\Public\Contact::class)->name($lang . '.contact');
 		Route::get('/' . ($pagesTranslates[$lang]['signin']), App\Http\Livewire\Auth\Signin::class)->name($lang . '.signin');
+		Route::get('/' . ($pagesTranslates[$lang]['terms']), App\Http\Livewire\Public\Terms::class)->name($lang . '.terms');
+		Route::get('/' . ($pagesTranslates[$lang]['privacy']), App\Http\Livewire\Public\Privacy::class)->name($lang . '.privacy');
 	});
 }
 
@@ -94,5 +105,13 @@ Route::get('/portafolio', function() use ($superLang) {
 Route::get('/contacto', function() use ($superLang) {
 	return redirect()->route($superLang . '.contact', ['locale' => $superLang], 301);
 })->name('old.contact');
+
+Route::get('/terminos-y-condiciones', function() use ($superLang) {
+	return redirect()->route($superLang . '.terms', ['locale' => $superLang], 301);
+})->name('old.terms');
+
+Route::get('/politica-de-privacidad', function() use ($superLang) {
+	return redirect()->route($superLang . '.privacy', ['locale' => $superLang], 301);
+})->name('old.privacy');
 
 Route::group(['as' => 'admin', 'middleware' => ['auth', 'verified'], 'prefix' => '/admin'], function () {});
