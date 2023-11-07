@@ -1,7 +1,7 @@
 <div>
     <div class="bg-neutral-100 mx-auto px-4 py-10">
         <div class="container mx-auto">
-            <h2 class="mb-4">{{ $pageTitle ?? '' }}</h2>
+            <h1 class="mb-4">{{ $pageTitle ?? '' }}</h1>
 
             @foreach (__('pages/portfolio.p') ?? [] AS $p) 
             <p class="mb-4">{!! $p !!}</p>
@@ -17,7 +17,7 @@
                     <img alt="Lim Media" class="object-cover h-full rounded" src="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
                 </div>
                 <div class="w-full">
-                    <h3 class="mb-4">{{ $portfolio['name'] }}</h3>
+                    <h2 class="mb-4">{{ $portfolio['name'] }}</h2>
 
                     <p class="mb-4">{{ $portfolio['description'] }}</p>
 
