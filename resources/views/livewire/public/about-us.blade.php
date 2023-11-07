@@ -17,7 +17,7 @@
 
     <div class="bg-neutral-100 mx-auto px-4 py-10">
         <div class="container mx-auto">
-            <h2>{{ __('pages/aboutus.mission_vision_values') }}</h2>
+            <h2 class="mb-4">{{ __('pages/aboutus.mission_vision_values') }}</h2>
         </div>
     </div>
 
