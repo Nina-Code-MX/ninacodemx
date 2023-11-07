@@ -54,8 +54,7 @@ class Service extends Model
         $translation = Translation::where('model_name', end($classPath))
             ->where('model_id', $model_id)
             ->where('lang', Cookie::get('lang') ?? 'es');
-        $translation2 = $translation->first();
-        \Log::info('translation: ' . print_r($translation2->toArray() ?? [], true));
+
         return $translation->first() ? $translation->first()->toArray() : [];
     }
 

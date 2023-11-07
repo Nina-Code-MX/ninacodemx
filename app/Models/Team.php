@@ -53,6 +53,7 @@ class Team extends Model
         $translation = Translation::where('model_name', end($classPath))
             ->where('model_id', $model_id)
             ->where('lang', Cookie::get('lang') ?? 'es');
+
         return $translation->first() ? $translation->first()->toArray() : [];
     }
 }
