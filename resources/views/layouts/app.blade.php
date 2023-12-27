@@ -17,29 +17,29 @@
 
     <body class="antialiased bg-neutral-200">
         <nav class="bg-navbar duration-500 ease-in-out fixed font-bold h-16 transition w-full z-50" id="mainNavBar">
-            <div class="container flex flex-wrap items-center justify-between mx-auto px-4 text-neutral-100">
-                <a class="flex gap-4 h-16 items-center w-16 p-1" href="{{ env('APP_URL', 'http://localhost') }}">
+            <div class="flex flex-wrap items-center justify-between lg:container mx-auto text-neutral-100">
+                <a class="flex gap-4 h-16 items-center ml-4 w-16 p-1" href="{{ env('APP_URL', 'http://localhost') }}">
                     <img src="{{ asset('images/logo-ninacode-mx-1024.png') }}" class="h-fit w-fit" alt="Nina Code" />
                     <span class="whitespace-nowrap">{{ env('APP_NAME', 'Laravel') }}</span>
                 </a>
 
-                <button aria-controls="mainNavBar-toggle" aria-expanded="false" class="hover:text-neutral-400 lg:hidden ring-2 ring-neutral-100 rounded" data-collapse-toggle="mainNavBar-toggle" type="button">
+                <button aria-controls="mainNavBar-toggle" aria-expanded="false" class="hover:text-neutral-400 lg:hidden mr-4 ring-2 ring-neutral-100 rounded" data-collapse-toggle="mainNavBar-toggle" type="button">
                     <span class="sr-only">Open main menu</span>
                     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                 </button>
 
-                <div class="bg-primary hidden lg:bg-transparent lg:block lg:w-auto w-full" id="mainNavBar-toggle">
+                <div class="bg-primary hidden lg:bg-transparent lg:block lg:mr-4 lg:w-auto w-full" id="mainNavBar-toggle">
                     @php $lang = \Cookie::get('lang') ?: config('app.locale'); @endphp 
                     @php $lang_available = config('app.locale_available') ?? ['es' => 'Español']; @endphp 
                     @php $lang_codes = config('app.locale_codes') ?? ['es' => 'mx']; @endphp 
                     <ul class="bg-primary border-white divide-y flex flex-col gap-2 items-center lg:bg-transparent lg:divide-y-0 lg:flex-row lg:gap-0 lg:p-0 lg:space-x-8 p-4">
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('home', ['locale' => $lang]) }}">{{ __('mainmenu.home') }}</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.aboutus', ['locale' => $lang]) }}">{{ __('mainmenu.aboutus') }}</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.portfolio', ['locale' => $lang]) }}">{{ __('mainmenu.portfolio') }}</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.services', ['locale' => $lang]) }}">{{ __('mainmenu.services') }}</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.pricing', ['locale' => $lang]) }}">{{ __('mainmenu.pricing') }}</a></li>
-                        <li class="lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.contact', ['locale' => $lang]) }}">{{ __('mainmenu.contact') }}</a></li>
-                        <li class="lg:w-auto pt-2 w-full">
+                        <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('home', ['locale' => $lang]) }}">{{ __('mainmenu.home') }}</a></li>
+                        <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.aboutus', ['locale' => $lang]) }}">{{ __('mainmenu.aboutus') }}</a></li>
+                        <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.portfolio', ['locale' => $lang]) }}">{{ __('mainmenu.portfolio') }}</a></li>
+                        <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.services', ['locale' => $lang]) }}">{{ __('mainmenu.services') }}</a></li>
+                        <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.pricing', ['locale' => $lang]) }}">{{ __('mainmenu.pricing') }}</a></li>
+                        <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.contact', ['locale' => $lang]) }}">{{ __('mainmenu.contact') }}</a></li>
+                        <li class="lg:pt-0 lg:w-auto pt-2 w-full">
                             <button class="hover:text-neutral-50 focus:outline-none focus:ring-0 gap-2 inline-flex items-center"
                                 data-dropdown-toggle="dropdownLangSwitcher"
                                 id="langSwitcher"
@@ -80,8 +80,8 @@
         </nav>
 
         @if(isset($heroData)) 
-        <div class="h-screen max-h-[563px] relative sm:max-h-[563px]">
-            <div class="absolute h-screen hero max-h-[563px] opacity-80 w-full -z-10">
+        <div class="md:h-screen md:max-h-[563px] relative">
+            <div class="absolute h-screen hero md:max-h-[563px] opacity-80 w-full -z-10">
             </div>
 
             <div class="container mx-auto z-10">
