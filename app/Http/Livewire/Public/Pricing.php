@@ -6,6 +6,7 @@ use App\Helpers\LocaleHelper;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Validation\Validator;
 use Livewire\Component;
 
 class Pricing extends Component
@@ -19,8 +20,11 @@ class Pricing extends Component
         'company' => '',
         'email' => '',
         'phone' => '',
+        'phoneCountry' => '',
+        'service' => '',
+        'reCaptcha' => ''
     ];
-    public $submit_message = 'No errors';
+    public $submit_message = '';
 
     public function mount(Request $request, $lang = null)
     {
@@ -41,6 +45,29 @@ class Pricing extends Component
 
     public function formDataProcess()
     {
+        $this->validate([
+            'formData.name' => 'required',
+            'formData.lastname' => 'required',
+            'formData.company' => 'required',
+            'formData.email' => 'required|email',
+            'formData.phone' => 'required',
+            'formData.phoneCountry' => 'required',
+            'formData.service' => 'required',
+            'formData.reCaptcha' => 'required',
+        ],
+        [],
+        [
+            'formData.name' => __('Nombre(s)'),
+            'formData.lastname' => __('Apellido(s)'),
+            'formData.company' => __('Company'),
+            'formData.email' => __('Email'),
+            'formData.phone' => __('Teléfono'),
+            'formData.phoneCountry' => __('País'),
+            'formData.service' => __('mainmenu.services'),
+            'formData.reCaptcha' => __('ReCaptcha'),
+        ]);
+
         $this->submit_message = 'Success';
+        sleep(5);
     }
 }

@@ -16,6 +16,7 @@
     "dependencies": {
         "flag-icons": "^6.6.6",
         "flowbite": "^1.6.4",
+        "intl-tel-input": "^18.3.3",
         "sweetalert2": "^11.7.3"
     }
 }
