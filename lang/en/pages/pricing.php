@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'hero' => [
+        'p' => 'Budgets tailored to your business.'
+    ],
     'h2' => 'Request a quote',
     'p' => [
         'At Nina Code we specialize in providing solutions tailored to each business, whether you need a website, a mobile application, or an enterprise management system, we help you achieve it.',

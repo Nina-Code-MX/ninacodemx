@@ -5,8 +5,6 @@ namespace App\Http\Livewire\Public;
 use App\Helpers\LocaleHelper;
 use App\Models\Service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Validation\Validator;
 use Livewire\Component;
 
 class Pricing extends Component
@@ -29,6 +27,11 @@ class Pricing extends Component
     public function mount(Request $request, $lang = null)
     {
         LocaleHelper::detectLocale($request, $this->pageId);
+
+        $this->heroData['h1'] = __('Precios');
+        $this->heroData['h2'] = __('pages/pricing.h2');
+        $this->heroData['p'] = __('pages/pricing.hero.p');
+
         $this->pageTitle = __('Precios');
     }
 
@@ -38,6 +41,7 @@ class Pricing extends Component
 
         return view('livewire.public.pricing', ['services' => $services])
             ->layout('layouts.app', [
+                'heroData' => $this->heroData,
                 'pageId' => $this->pageId,
                 'pageTitle' => $this->pageTitle
             ]);
@@ -45,15 +49,17 @@ class Pricing extends Component
 
     public function formDataProcess()
     {
+        $this->submit_message = '';
+
         $this->validate([
-            'formData.name' => 'required',
-            'formData.lastname' => 'required',
-            'formData.company' => 'required',
+            'formData.name' => 'required|min:2',
+            'formData.lastname' => 'required|min:2',
+            'formData.company' => 'required|min:2',
             'formData.email' => 'required|email',
-            'formData.phone' => 'required',
-            'formData.phoneCountry' => 'required',
-            'formData.service' => 'required',
-            'formData.reCaptcha' => 'required',
+            'formData.phone' => 'required|min:10',
+            'formData.phoneCountry' => 'required|min:2',
+            'formData.service' => 'required|exists:services,id',
+            'formData.reCaptcha' => 'required|min:1',
         ],
         [],
         [

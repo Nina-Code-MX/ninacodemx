@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'hero' => [
+        'p' => 'Presupuestos a la medida de tu negocio.'
+    ],
     'h2' => 'Solicita una cotización',
     'p' => [
         'En Nina Code nos especializamos en proveer soluciones a la medida para cada negocio, ya sea que necesites una página web, una aplicación móvil, o un sistema de gestión empresarial, nosotros te ayudamos a lograrlo.',
