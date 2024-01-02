@@ -26,12 +26,12 @@
                 @endif 
 
                 <div class="container-sm gap-4 grid grid-cols-1 items-start lg:grid-cols-2">
-                    <x-shared.input-text id="formDataFirstName" label="{{ __('Nombre(s)') }}*" name="formData.first_name" placeholder="{{ __('Nombre(s)') }}*" required="true" />
-                    <x-shared.input-text id="formDataLastName" label="{{ __('Apellido(s)') }}*" name="formData.last_name" placeholder="{{ __('Apellido(s)') }}*" required="true" />
-                    <x-shared.input-text class="col-span-2" id="formDataCompany" label="{{ __('Empresa') }}*" name="formData.company" placeholder="{{ __('Company') }}*" required="true" />
-                    <x-shared.input-text id="formDataEmail" label="{{ __('Email') }}*" name="formData.email" placeholder="{{ __('Email') }}*" required="true" />
+                    <x-shared.input-text class="col-span-1 lg:col-span-1" id="formDataFirstName" label="{{ __('Nombre(s)') }}*" name="formData.first_name" placeholder="{{ __('Nombre(s)') }}*" required="true" />
+                    <x-shared.input-text class="col-span-1 lg:col-span-1" id="formDataLastName" label="{{ __('Apellido(s)') }}*" name="formData.last_name" placeholder="{{ __('Apellido(s)') }}*" required="true" />
+                    <x-shared.input-text class="col-span-1 lg:col-span-2" id="formDataCompany" label="{{ __('Empresa') }}*" name="formData.company" placeholder="{{ __('Company') }}*" required="true" />
+                    <x-shared.input-text class="col-span-1 lg:col-span-1" id="formDataEmail" label="{{ __('Email') }}*" name="formData.email" placeholder="{{ __('Email') }}*" required="true" />
 
-                    <div class="" id="formDataPhoneContainer">
+                    <div class="col-span-1 lg:col-span-1" id="formDataPhoneContainer">
                         <label class="font-semibold sr-only">{{ __('Teléfono') }}</label>
                         <div wire:ignore>
                             <input class="border-gray-300 px-2 py-1 rounded w-full" id="formDataPhone" name="formDataPhone" placeholder="{{ __('Teléfono') }}*" required type="tel" wire:defer="formData.phone" wire:key="formDataPhone" />
@@ -42,17 +42,17 @@
                         </span>
                     </div>
 
-                    <x-shared.select class="lg:col-span-2" :data="$services->map(fn($d) => ['id' => $d['id'], 'value' => $d['name']])->toArray()" id="formDataService" label="{{ __('mainmenu.services') }}" name="formData.message" placeholder="{{ __('Seleccione un servicio') }}" required="true" />
-                    <x-shared.text-area class="lg:col-span-2" id="formDataMessage" label="{{ __('Mensaje') }}*" name="formData.message" placeholder="{{ __('Mensaje') }}*" required="true" rows="10" />
+                    <x-shared.select class="col-span-1 lg:col-span-2" :data="$services->map(fn($d) => ['id' => $d['id'], 'value' => $d['name']])->toArray()" id="formDataService" label="{{ __('mainmenu.services') }}" name="formData.message" placeholder="{{ __('Seleccione un servicio') }}" required="true" />
+                    <x-shared.text-area class="col-span-1 lg:col-span-2" id="formDataMessage" label="{{ __('Mensaje') }}*" name="formData.message" placeholder="{{ __('Mensaje') }}*" required="true" rows="10" />
                     
-                    <div class="flex items-center justify-end lg:col-span-2" id="formDataSubmitContainer">
+                    <div class="col-span-1 flex items-center justify-end lg:col-span-2" id="formDataSubmitContainer">
                         <button class="button-primary border disabled:bg-gray-400 disabled:cursor-progress font-bold inline-block min-w-[100px] ml-auto mr-0 px-4 py-2 rounded text-center text-slate-100"
                             id="formDataSubmit"
                             wire:loading.attr="disabled"
                             wwwwire:click="formDataProcess">{{ __('pages/pricing.form.submit') }}</button>
                     </div>
 
-                    <div class="lg:col-span-2">
+                    <div class="col-span-1 lg:col-span-2">
                         <p class="italic text-sm text-justify">{{ __('Nota: Los campos marcados con un * son requeridos.') }}</p>
                         <p class="italic text-sm text-justify">{!! __('pages/pricing.form.info', ['privacy' => route($lang . '.privacy', ['locale' => $lang]), 'terms' => route($lang . '.terms', ['locale' => $lang])]) !!}</p>
                     </div>
