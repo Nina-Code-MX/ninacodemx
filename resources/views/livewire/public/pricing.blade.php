@@ -11,14 +11,24 @@
 
                 <x-shared.spinner />
 
+                @if (session('success')) 
+                <div class="bg-green-50 border border-green-500 flex font-semibold items-center mb-4 p-2 rounded shadow text-sm">
+                    <div class="text-green-500 w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg></div>
+                    <div class="border-l border-green-500 px-2 w-full">{{ session('success') }}.</div>
+                </div>
+                @endif 
+
                 @if ($submit_message) 
-                <p class="p-4 w-full">{{ $submit_message }}</p>
+                <div class="bg-red-50 border border-red-500 flex font-semibold items-center mb-4 p-2 rounded shadow text-sm">
+                    <div class="text-red-500 w-8"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg></div>
+                    <div class="border-l border-red-500 px-2 w-full">{{ $submit_message }}.</div>
+                </div>
                 @endif 
 
                 <div class="container-sm gap-4 grid grid-cols-1 items-start lg:grid-cols-2">
-                    <x-shared.input-text id="formDataName" label="{{ __('Nombre(s)') }}*" name="formData.name" placeholder="{{ __('Nombre(s)') }}*" required="true" />
-                    <x-shared.input-text id="formDataLastname" label="{{ __('Apellido(s)') }}*" name="formData.lastname" placeholder="{{ __('Apellido(s)') }}*" required="true" />
-                    <x-shared.input-text class="col-span-2" id="formDataCompany" label="{{ __('Empresa') }}*" name="formData.company" placeholder="{{ __('Company') }}" required="true" />
+                    <x-shared.input-text id="formDataFirstName" label="{{ __('Nombre(s)') }}*" name="formData.first_name" placeholder="{{ __('Nombre(s)') }}*" required="true" />
+                    <x-shared.input-text id="formDataLastName" label="{{ __('Apellido(s)') }}*" name="formData.last_name" placeholder="{{ __('Apellido(s)') }}*" required="true" />
+                    <x-shared.input-text class="col-span-2" id="formDataCompany" label="{{ __('Empresa') }}*" name="formData.company" placeholder="{{ __('Company') }}*" required="true" />
                     <x-shared.input-text id="formDataEmail" label="{{ __('Email') }}*" name="formData.email" placeholder="{{ __('Email') }}*" required="true" />
 
                     <div class="" id="formDataPhoneContainer">
@@ -33,7 +43,7 @@
                     </div>
 
                     <x-shared.select class="lg:col-span-2" :data="$services->map(fn($d) => ['id' => $d['id'], 'value' => $d['name']])->toArray()" id="formDataService" label="{{ __('mainmenu.services') }}" name="formData.message" placeholder="{{ __('Seleccione un servicio') }}" required="true" />
-                    <x-shared.text-area class="lg:col-span-2" id="formDataMessage" label="{{ __('Mensaje') }}" name="formData.message" placeholder="{{ __('Mensaje') }}" rows="10" />
+                    <x-shared.text-area class="lg:col-span-2" id="formDataMessage" label="{{ __('Mensaje') }}*" name="formData.message" placeholder="{{ __('Mensaje') }}*" required="true" rows="10" />
                     
                     <div class="flex items-center justify-end lg:col-span-2" id="formDataSubmitContainer">
                         <button class="button-primary border disabled:bg-gray-400 disabled:cursor-progress font-bold inline-block min-w-[100px] ml-auto mr-0 px-4 py-2 rounded text-center text-slate-100"
@@ -43,7 +53,8 @@
                     </div>
 
                     <div class="lg:col-span-2">
-                        <p class="italic text-xs text-justify">{!! __('pages/pricing.form.info', ['privacy' => route($lang . '.privacy', ['locale' => $lang]), 'terms' => route($lang . '.terms', ['locale' => $lang])]) !!}</p>
+                        <p class="italic text-sm text-justify">{{ __('Nota: Los campos marcados con un * son requeridos.') }}</p>
+                        <p class="italic text-sm text-justify">{!! __('pages/pricing.form.info', ['privacy' => route($lang . '.privacy', ['locale' => $lang]), 'terms' => route($lang . '.terms', ['locale' => $lang])]) !!}</p>
                     </div>
                 </div>
             </form>
@@ -51,7 +62,7 @@
     </div>
 </div>
 
-@push('styles')
+@push('styles') 
 <style>
     .iti { width: 100%; }
 </style>
@@ -59,34 +70,35 @@
 @push('scripts')
 @vite('resources/js/public/pricing.js') 
 <script>
-    document.addEventListener('livewire:load', () => {
+    document.addEventListener('livewire:load', async () => {
+        const userIp = await fetch('https://ipgeolocation.abstractapi.com/v1/?api_key=' + window.VITE_ABSTRACTAIP_API_KEY)
+            .then(res => res.json());
         const input = document.querySelector("#formDataPhone");
         const iti = window.intlTelInput(input, {
             preferredCountries: ['mx', 'us', 'ca'],
         });
 
         let phoneCountry = '+52';
-
-        @this.set('formData.phoneCountry', '+52');
+        let country = 'México';
 
         input.addEventListener("countrychange", () => {
-            let dialCode = iti.getSelectedCountryData()?.dialCode;
+            const countryData = iti.getSelectedCountryData();
 
-            if (!dialCode) {
-                dialCode = '+52';
+            if (!countryData?.dialCode) {
+                phoneCountry = '+52';
             } else {
-                dialCode = '+' + dialCode;
+                phoneCountry = '+' + countryData?.dialCode;
             }
 
-            phoneCountry = dialCode;
-
-            // @this.set('formData.phoneCountry', dialCode);
+            if (!countryData?.name) {
+                country = 'México';
+            } else {
+                country = countryData?.name;
+            }
         });
-
 
         input.addEventListener('change', (e) => {
             let phone = e.target.value.replace(/[^0-9]/g, '');
-            // @this.set('formData.phone', phone);
         });
 
         window.submitQuote = () => {
@@ -95,8 +107,8 @@
                     const submit = document.querySelector('#formDataSubmit');
                     const nameContainer = document.querySelector('#formDataNameContainer');
 
-                    let name = document.querySelector("#formDataName").value;
-                    let lastname = document.querySelector("#formDataLastname").value;
+                    let first_name = document.querySelector("#formDataFirstName").value;
+                    let last_name = document.querySelector("#formDataLastName").value;
                     let company = document.querySelector("#formDataCompany").value;
                     let email = document.querySelector("#formDataEmail").value;
                     let phone = document.querySelector("#formDataPhone").value.replace(/[^0-9]/g, '');
@@ -104,15 +116,17 @@
                     let message = document.querySelector("#formDataMessage").value;
 
                     @this.set('formData', {
-                        name: name,
-                        lastname: lastname,
+                        first_name: first_name,
+                        last_name: last_name,
                         company: company,
                         email: email,
                         phone: phone,
                         phoneCountry: phoneCountry,
+                        country: country,
                         service: service,
                         message: message,
-                        reCaptcha: token
+                        reCaptcha: token,
+                        ip: userIp?.ip_address || '127.0.0.1'
                     });
 
                     @this.call('formDataProcess');
