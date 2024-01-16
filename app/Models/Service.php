@@ -13,7 +13,7 @@ class Service extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'description', 'slug', 'image', 'order'];
+    protected $fillable = ['name', 'excerpt', 'description', 'slug', 'image', 'order'];
 
     /**
      * Mutators
@@ -23,6 +23,13 @@ class Service extends Model
     {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'])['value']['name'] ?? $attributes['name']
+        );
+    }
+
+    protected function excerpt(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'])['value']['excerpt'] ?? $attributes['excerpt']
         );
     }
 

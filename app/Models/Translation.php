@@ -23,8 +23,8 @@ class Translation extends Model
     protected function lang(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => mb_convert_case($this->enabledLangs[$attributes['lang']] ?? 'Español', MB_CASE_TITLE, 'UTF-8'),
-            set: fn (mixed $value, array $attributes) => strtolower(isset($this->enabledLangs[$attributes['lang']]) ? $this->enabledLangs[$attributes['lang']] : 'es')
+            get: fn (mixed $value, array $attributes) => mb_convert_case($this->enabledLangs[$value] ?? 'Español', MB_CASE_TITLE, 'UTF-8'),
+            set: fn (mixed $value, array $attributes) => strtolower(isset($this->enabledLangs[$value]) ? $value : 'es')
         );
     }
 

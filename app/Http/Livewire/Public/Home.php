@@ -20,16 +20,22 @@ class Home extends Component
         $this->heroData['h2'] = __('pages/home.hero.h2');
         $this->heroData['p'] = __('pages/home.hero.p');
         $this->heroData['action'] = ['label' => __('Contactenos'), 'route' => route(app()->getLocale() . '.contact', ['locale' => app()->getLocale()])];
-        $this->pageTitle = env('APP_NAME');
+        $this->pageTitle = __('pages/home.hero.h1');
     }
 
     public function render()
     {
-        return view('livewire.public.home', ['teams' => \App\Models\Team::with(['teamSocials'])->orderBy('order')->get()->toArray()])
-            ->layout('layouts.app', [
-                'heroData' => $this->heroData,
-                'pageId' => $this->pageId,
-                'pageTitle' => $this->pageTitle
-            ]);
+        return view(
+            'livewire.public.home', 
+            [
+                'services' => \App\Models\Service::orderBy('order')->get()->toArray(),
+                'teams' => \App\Models\Team::with(['teamSocials'])->orderBy('order')->get()->toArray(),
+            ]
+        )
+        ->layout('layouts.app', [
+            'heroData' => $this->heroData,
+            'pageId' => $this->pageId,
+            'pageTitle' => $this->pageTitle
+        ]);
     }
 }

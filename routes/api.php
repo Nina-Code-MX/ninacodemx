@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ServiceControllerV1;
+use App\Http\Middleware\CustomAuthApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +24,19 @@ Route::group(['as' => 'api.v1.', 'prefix' => '/v1'], function () {
     Route::post('/mailchimp/newsltetter', [\App\Http\Controllers\Api\V1\Mailchimp\NewsletterController::class, 'index'])
         ->middleware('selfapi')
         ->name('mailchimp.newsltetter');
+
+    Route::post('/login', [\App\Http\Controllers\Api\LoginControllerV1::class, 'login'])
+        ->name('login.login');
+
+    Route::middleware(['customauthapi'])->name('service.')->prefix('/services')->group(function () {
+        Route::post('/', [ServiceControllerV1::class, 'create'])
+            ->name('create');
+
+        Route::patch('/{service_id}', [ServiceControllerV1::class, 'update'])
+            ->name('update');
+
+        Route::post('/{service_id}/translate/{lang}', [\App\Http\Controllers\Api\ServiceControllerV1::class, 'translate'])
+            ->where(['lang' => '[a-z]{2}'])
+            ->name('translate');
+    });
 });

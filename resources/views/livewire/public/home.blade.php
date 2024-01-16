@@ -7,66 +7,32 @@
             @foreach (__('pages/home.what_we_do.p') ?? [] AS $p) 
             <p class="mb-4">{!! $p !!}</p>
             @endforeach 
+
+            <hr class="mb-4 " />
+
+            <h4 class="mb-4">{{ __('pages/home.commitment.h4') }}</h4>
+
+            @foreach (__('pages/home.commitment.p') ?? [] AS $p) 
+            <p class="mb-4">{!! $p !!}</p>
+            @endforeach 
         </div>
     </div>
 
     <div class="px-4 py-10">
         <div class="container gap-6 grid grid-cols-1 mx-auto sm:grid-cols-2">
+            @foreach ($services as $service) 
             <div class="bg-neutral-100 border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
                 <div class="border border-neutral-300 h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded shadow">
-                    <img alt="{{ __('pages/home.services.cloud.h3') }}" class="object-none h-full rounded w-full" src="{{ asset('images/ninacode-infraestructura-en-la-nube.jpg') }}" title="{{ __('pages/home.services.cloud.h3') }}" />
+                    <img alt="{{ $service['name'] }}" class="object-cover object-top h-full rounded w-full" src="{{ asset(\Storage::url($service['image'])) }}" title="{{ $service['name'] }}" />
                 </div>
 
                 <div class="lg:w-2/3">
-                    <h3 class="mb-2">{{ __('pages/home.services.cloud.h3') }}</h3>
+                    <h3 class="mb-2 text-center lg:text-left">{{ $service['name'] }}</h3>
 
-                    @foreach (__('pages/home.services.cloud.p') ?? [] AS $p) 
-                    <p class="mb-4">{!! $p !!}</p>
-                    @endforeach 
+                    <p class="mb-4 text-justify">{{ $service['excerpt'] }}</p>
                 </div>
             </div>
-
-            <div class="bg-neutral-100 border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
-                <div class="border border-neutral-300 h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded shadow">
-                    <img alt="{{ __('pages/home.services.design.h3') }}" class="object-none h-full rounded w-full" src="{{ asset('images/ninacode-diseno.jpg') }}" title="{{ __('pages/home.services.design.h3') }}" />
-                </div>
-
-                <div class="lg:w-2/3">
-                    <h3 class="mb-2">{{ __('pages/home.services.design.h3') }}</h3>
-
-                    @foreach (__('pages/home.services.design.p') ?? [] AS $p) 
-                    <p class="mb-4">{!! $p !!}</p>
-                    @endforeach 
-                </div>
-            </div>
-
-            <div class="bg-neutral-100 border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
-                <div class="border border-neutral-300 h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded shadow">
-                    <img alt="{{ __('pages/home.services.development.h3') }}" class="object-none h-full rounded w-full" src="{{ asset('images/ninacode-desarrollo.png') }}" title="{{ __('pages/home.services.development.h3') }}" />
-                </div>
-
-                <div class="lg:w-2/3">
-                    <h3 class="mb-2">{{ __('pages/home.services.development.h3') }}</h3>
-
-                    @foreach (__('pages/home.services.development.p') ?? [] AS $p) 
-                    <p class="mb-4">{!! $p !!}</p>
-                    @endforeach 
-                </div>
-            </div>
-
-            <div class="bg-neutral-100 border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
-                <div class="border border-neutral-300 h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded shadow">
-                    <img alt="{{ __('pages/home.services.socials.h3') }}" class="object-none h-full rounded w-full" src="{{ asset('images/ninacode-social-media.jpg') }}" title="{{ __('pages/home.services.socials.h3') }}" />
-                </div>
-
-                <div class="lg:w-2/3">
-                    <h3 class="mb-2">{{ __('pages/home.services.socials.h3') }}</h3>
-
-                    @foreach (__('pages/home.services.socials.p') ?? [] AS $p) 
-                    <p class="mb-4">{!! $p !!}</p>
-                    @endforeach 
-                </div>
-            </div>
+            @endforeach 
         </div>
     </div>
 
