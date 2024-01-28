@@ -68,7 +68,7 @@ jobs:
   remove-ip-from-sg:
     if: always()
     runs-on: ubuntu-latest
-    needs: [deploy]
+    needs: [retrieve-public-ip, deploy]
     env:
       PUBLIC_IP: ${{ needs.retrieve-public-ip.outputs.PUBLIC_IP }}
     steps:

@@ -79,7 +79,7 @@
                                     <a href="https://wa.me/523339025911?text=Hola!%20Vi%20su%20sitio%20en%20internet,%20estoy%20interesado%20en%20sus%20servicios.%20Porfavor%20contacten%20me." target="_blank"><img src="{{ asset('images/icons/whatsapp.png') }}" width="20" alt="WhatsApp" /></a>
                                 </li>
                                 <li style="display:inline-block;margin-right:10px">
-                                    <a href="https://www.facebook.com/ninacodemx/" target="_blank"><img src="'{{ asset('images/icons/facebook.png') }}" width="20" alt="Facebook" /></a>
+                                    <a href="https://www.facebook.com/ninacodemx/" target="_blank"><img src="{{ asset('images/icons/facebook.png') }}" width="20" alt="Facebook" /></a>
                                 </li>
                                 <li style="display:inline-block;margin-right:10px">
                                     <a href="https://twitter.com/ninacodemx/" target="_blank"><img src="{{ asset('images/icons/x.png') }}" width="20" alt="X" /></a>
@@ -127,17 +127,17 @@
         </table>
         <p>&nbsp;</p>
         <div style="margin:0px auto;max-width:620px;width:100%">
-            <div style="color:rgb(51,51,51);font-size:0.75rem;padding:0px 0.70rem;text-align:left;">
+            <div style="color:rgb(51,51,51);font-size:0.75rem;padding:0px 0.70rem;text-align:justify;">
                 {!! __('pages/contact.mail.communication_notice') !!}
             </div>
         </div>
         <div style="margin:0px auto;max-width:620px;width:100%">
-            <div style="color:rgb(51,51,51);font-size:0.75rem;padding:0px 0.70rem;text-align:left;">
+            <div style="color:rgb(51,51,51);font-size:0.75rem;padding:0px 0.70rem;text-align:justify;">
                 <br>
             </div>
         </div>
         <div style="margin:0px auto;max-width:620px;width:100%">
-            <div style="color:rgb(51,51,51);font-size:0.75rem;padding:0px 0.70rem;text-align:left;">
+            <div style="color:rgb(51,51,51);font-size:0.75rem;padding:0px 0.70rem;text-align:justify;">
                 {!! __('pages/contact.mail.confidentiality') !!}
             </div>
         </div>

@@ -149,7 +149,7 @@ class Pricing extends Component
                     'code_short' => 'SLCTD',
                     'code_long' => __('Cotización'),
                     'subject' => __('pages/pricing.mail.subject', ['service' => $service->name ?? 'Desconocido']),
-                    'welcome' => __('pages/pricing.mail.welcome', ['name' => $contactData['first_name'] . ' ' . $contactData['last_name']]),
+                    'welcome' => __('pages/pricing.mail.welcome', ['full_name' => $contactData['first_name'] . ' ' . $contactData['last_name']]),
                     'message' => __('pages/pricing.mail.message', ['service' => $service->name ?? 'Desconocido']) . ' <p style="font-family: courier;background: #f0f0f0; border: 1px solid #cccccc; font-size: .75rem; font-style: italic; padding: 0.5rem; text-align: center;">' . $contactData['message']
                 ]
             )->render();
