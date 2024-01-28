@@ -15,9 +15,9 @@ class LocaleHelper
 	 * 
 	 * @param Request $request
 	 * 
-	 * @return Redirector|true
+	 * @return Redirector|bool
 	 */
-	public static function detectLocale(Request $request, string $pageId = 'home'): Redirector|true
+	public static function detectLocale(Request $request, string $pageId = 'home'): Redirector|bool
 	{
 		$locale = $request->segment(1);
 

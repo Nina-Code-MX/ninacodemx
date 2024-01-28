@@ -114,8 +114,8 @@ Route::get('/politica-de-privacidad', function() use ($superLang) {
 	return redirect()->route($superLang . '.privacy', ['locale' => $superLang], 301);
 })->name('old.privacy');
 
-Route::get('', function(Request $request) {
+/*Route::get('', function(Request $request) {
 	return response()->json(['message' => 'Whats going on'], 200);
-})->name('login');
+})->name('login');*/
 
 Route::group(['as' => 'admin', 'middleware' => ['auth', 'verified'], 'prefix' => '/admin'], function () {});

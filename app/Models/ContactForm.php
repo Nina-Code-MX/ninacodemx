@@ -10,5 +10,5 @@ class ContactForm extends Model
 {
     use HasFactory, Uuids;
 
-    protected $fillable = ['ip_address', 'first_name', 'last_name', 'company', 'phone', 'email', 'message'];
+    protected $fillable = ['page', 'service', 'ip_address', 'first_name', 'last_name', 'company', 'phone', 'email', 'message'];
 }

@@ -51,6 +51,12 @@ class Service extends Model
      * Relationships
      */
 
+    public function translations(): HasMany
+    {
+        $classPath = explode('\\', self::class);
+        return $this->hasMany(Translation::class, 'model_id', 'id')->where('model_name', end($classPath));
+    }
+
     /**
      * Translation
      */

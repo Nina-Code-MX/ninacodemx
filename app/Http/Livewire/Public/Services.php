@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Public;
 
 use App\Helpers\LocaleHelper;
+use App\Models\Service;
+use App\Models\Translation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
@@ -39,9 +41,12 @@ class Services extends Component
 
         if ($this->slug) {
             unset($layoutSet['heroData']);
-            try {
-                $Services = \App\Models\Service::orderBy('order')->where('slug', $this->slug)->first()->toArray();
-            } catch (\Error $e) {
+
+            $Services = $this->getSlugTranslation();
+
+            if ($Services) {
+                $Services = $Services->toArray();
+            } else {
                 abort(404);
             }
         } else {
@@ -50,5 +55,30 @@ class Services extends Component
         
         return view('livewire.public.services' . ($this->slug ? '_slug' : ''), ['services' => $Services])
             ->layout('layouts.app', $layoutSet);
+    }
+
+    /**
+     * Get slug translation
+     * @return Service
+     */
+    private function getSlugTranslation(): Service
+    {
+        if (app()->getLocale() === 'es') {
+            return Service::where('slug', $this->slug)->get()->first();
+        }
+
+        $Translation = Translation::where('model_name', 'Service')->whereJsonContains('value->slug', $this->slug)->get()->first();
+
+        if (!$Translation) {
+            return Service::where('slug', $this->slug)->get()->first();
+        }
+
+        $Service = Service::find($Translation->model_id);
+
+        if (!$Service) {
+            return Service::where('slug', $this->slug)->get()->first();
+        }
+
+        return $Service;
     }
 }

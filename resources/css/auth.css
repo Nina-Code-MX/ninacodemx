@@ -33,3 +33,7 @@ body {
   font-weight: 300;
   min-height: 100vh;
 }
+
+body p {
+  color: rgb(0, 0, 26);
+}

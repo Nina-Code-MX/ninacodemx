@@ -3,13 +3,14 @@
 namespace App\Http\Livewire\Public;
 
 use App\Helpers\LocaleHelper;
+use App\Models\ContactForm;
 use App\Models\Service;
+use App\Models\Translation;
 use App\Traits\ReCaptchaV3;
 use App\Traits\SendGridTrait;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 use Livewire\Component;
-use SendGrid\Mail\Mail as SendGridMail;
 use SendGrid;
 use Illuminate\Support\Facades\Cookie;
 
@@ -29,6 +30,7 @@ class Pricing extends Component
         'phoneCountry' => '',
         'country' => '',
         'service' => '',
+        'message' => '',
         'reCaptcha' => '',
         'ip' => ''
     ];
@@ -48,10 +50,12 @@ class Pricing extends Component
         $this->heroData['h1'] = __('Precios');
         $this->heroData['h2'] = __('pages/pricing.h2');
         $this->heroData['p'] = __('pages/pricing.hero.p');
-
         $this->pageTitle = __('Precios');
-
         $this->sendgrid = new SendGrid(env('SENDGRID_API_KEY', ''));
+
+        if ($request->has('service')) {
+            $this->formData['service'] = $this->getSlugTranslation($request->get('service'));
+        }
     }
 
     /**
@@ -119,17 +123,41 @@ class Pricing extends Component
         $service = Service::find($this->formData['service']);
 
         $contactData = array_merge($this->formData, ['lang' => Cookie::get('lang') ?: config('app.locale'), 'service_name' => $service->name ?? 'Desconocido']);
-        $createContact = $this->createContact($contactData);
+        $createContact = $this->createContact(env('SENDGRID_LIST_PRICING', ''), $contactData);
+
+        try {
+            ContactForm::create([
+                'page' => url()->current(),
+                'service' => $service->name,
+                'ip_address' => $contactData['ip'],
+                'first_name' => $contactData['first_name'],
+                'last_name' => $contactData['last_name'],
+                'company' => $contactData['company'],
+                'phone' => $contactData['phoneCountry'] . $contactData['phone'],
+                'email' => $contactData['email'],
+                'message' => $contactData['message']
+            ]);
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+        }
 
         if (isset($createContact['status']) && $createContact['status'] == 202) {
+            $template = view(
+                'emails.generic',
+                [
+                    'lang' => app()->getLocale(),
+                    'code_short' => 'SLCTD',
+                    'code_long' => __('Cotización'),
+                    'subject' => __('pages/pricing.mail.subject', ['service' => $service->name ?? 'Desconocido']),
+                    'welcome' => __('pages/pricing.mail.welcome', ['name' => $contactData['first_name'] . ' ' . $contactData['last_name']]),
+                    'message' => __('pages/pricing.mail.message', ['service' => $service->name ?? 'Desconocido']) . ' <p style="font-family: courier;background: #f0f0f0; border: 1px solid #cccccc; font-size: .75rem; font-style: italic; padding: 0.5rem; text-align: center;">' . $contactData['message']
+                ]
+            )->render();
+
             $sendEmail = $this->mailSend(
                 __('pages/pricing.mail.subject', ['service' => $service->name ?? 'Desconocido']),
                 'text/html',
-                __('pages/pricing.mail.content', [
-                    'full_name' => $this->formData['first_name'] . ' ' . $this->formData['last_name'],
-                    'message' => $this->formData['message'],
-                    'service' => $service->name ?? 'Desconocido'
-                ]),
+                $template,
                 ['services'],
                 $contactData
             );
@@ -140,5 +168,30 @@ class Pricing extends Component
         }
 
         $this->submit_message = __('Hubo un error al procesar la petición');
+    }
+
+    /**
+     * Get slug translation
+     * @return int
+     */
+    private function getSlugTranslation(string $slug): int
+    {
+        if (app()->getLocale() === 'es') {
+            return Service::where('slug', $slug)->get()->first()->id ?? '';
+        }
+
+        $Translation = Translation::where('model_name', 'Service')->whereJsonContains('value->slug', $slug)->get()->first();
+
+        if (!$Translation) {
+            return Service::where('slug', $slug)->get()->first()->id ?? '';
+        }
+
+        $Service = Service::find($Translation->model_id);
+
+        if (!$Service) {
+            return Service::where('slug', $slug)->get()->first()->id ?? '';
+        }
+
+        return $Service->id;
     }
 }

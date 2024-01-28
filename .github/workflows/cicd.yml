@@ -1,0 +1,85 @@
+---
+name: Auto Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  retrieve-public-ip:
+    name: Get Public IP
+    runs-on: ubuntu-latest
+    steps:
+      - id: retrieve
+        name: Get Public IP
+        run: |
+          PUBLIC_IP=$(curl -s https://api.ipify.org)
+          echo "PUBLIC_IP=${PUBLIC_IP}" >> "${GITHUB_OUTPUT}"
+    outputs:
+      PUBLIC_IP: ${{ steps.retrieve.outputs.PUBLIC_IP }}
+  
+  add-ip-to-sg:
+    runs-on: ubuntu-latest
+    needs: [retrieve-public-ip]
+    env:
+      PUBLIC_IP: ${{ needs.retrieve-public-ip.outputs.PUBLIC_IP }}
+    steps:
+      - id: add-ip-to-sg
+        name: Add IP to Security Group
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Add IP to Security Group
+        run: |
+          aws ec2 authorize-security-group-ingress \
+            --group-id ${{ secrets.AWS_SECURITY_GROUP_ID }} \
+            --protocol tcp \
+            --port ${{ secrets.AWS_EC2_PORT }} \
+            --cidr ${{ env.PUBLIC_IP }}/32
+
+  deploy:
+    name: Deploy
+    needs: [add-ip-to-sg]
+    uses: appleboy/ssh-action@v1.0.3
+    with:
+      host: ${{ secrets.AWS_EC2_HOST }}
+      username: ${{ secrets.AWS_EC2_USERNAME }}
+      key: ${{ secrets.AWS_EC2_KEY }}
+      port: ${{ secrets.AWS_EC2_PORT }}
+      script: |
+        cd /var/www/ninacode.mx
+        eval $(ssh-agent -s)
+        ssh-add ~/.ssh/ninacodemx_deploy
+        git restore .
+        git pull origin main
+        php artisan migrate --force
+        php artisan route:cache
+        php artisan view:cache
+        php artisan config:cache
+        php artisan config:clear
+        npm run build
+
+  remove-ip-from-sg:
+    if: always()
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    env:
+      PUBLIC_IP: ${{ needs.retrieve-public-ip.outputs.PUBLIC_IP }}
+    steps:
+      - id: remove-ip-from-sg
+        name: Remove IP from Security Group
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Remove IP from Security Group
+        run: |
+          aws ec2 revoke-security-group-ingress \
+            --group-id ${{ secrets.AWS_SECURITY_GROUP_ID }} \
+            --protocol tcp \
+            --port ${{ secrets.AWS_EC2_PORT }} \
+            --cidr ${{ env.PUBLIC_IP }}/32

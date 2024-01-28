@@ -19,10 +19,10 @@ trait SendGridTrait {
      * SendGrid init
      * @return void
      */
-    private function sendGridInit()
+    private function sendGridInit(string $list_id = null)
     {
         $this->sendGrid = new SendGrid(env('SENDGRID_API_KEY', ''));
-        $this->sendGridListPricing = env('SENDGRID_LIST_PRICING', '');
+        $this->sendGridListPricing = $list_id ?? env('SENDGRID_LIST_PRICING', '');
     }
 
     /**
@@ -30,12 +30,12 @@ trait SendGridTrait {
      * @param array $contactData
      * @return array
      */
-    public function createContact(array $contactData = []): array
+    public function createContact(string $list_id = null, array $contactData = []): array
     {
-        $this->sendGridInit();
+        $this->sendGridInit($list_id ?? env('SENDGRID_LIST_CONTACT', ''));
 
         $contactObj = [
-            'list_ids' => [env('SENDGRID_LIST_PRICING', '')],
+            'list_ids' => [$this->sendGridListPricing],
             'contacts' => [
                 [
                     'address_line_1' => Str::substr($contactData['address_line_1'] ?? '', 0, 100),
@@ -133,7 +133,6 @@ trait SendGridTrait {
 
         try {
             $response = $this->sendGrid->client->mail()->send()->post($mailObject);
-            Log::debug('xGNGCx:sendMail' . print_r($response, true));
             return ['body' => $response->body(), 'message' => __('Mensaje envíado.'), 'status' => $response->statusCode()];
         } catch (\Exception $e) {
             Log::error(__CLASS__ . '\\' . __FUNCTION__ . ':' . __LINE__, ['context' => $e->getMessage()]);

@@ -7,6 +7,7 @@
             @endforeach 
 
             <form action="{{ route($lang . '.pricing', ['locale' => $lang]) }}" method="POST" onsubmit="return window.submitQuote();">
+                @csrf
                 <h3 class="mb-4">{{ __('pages/pricing.form.title') }}</h3>
 
                 <x-shared.spinner />
@@ -26,15 +27,15 @@
                 @endif 
 
                 <div class="container-sm gap-4 grid grid-cols-1 items-start lg:grid-cols-2">
-                    <x-shared.input-text class="col-span-1 lg:col-span-1" id="formDataFirstName" label="{{ __('Nombre(s)') }}*" name="formData.first_name" placeholder="{{ __('Nombre(s)') }}*" required="true" />
-                    <x-shared.input-text class="col-span-1 lg:col-span-1" id="formDataLastName" label="{{ __('Apellido(s)') }}*" name="formData.last_name" placeholder="{{ __('Apellido(s)') }}*" required="true" />
-                    <x-shared.input-text class="col-span-1 lg:col-span-2" id="formDataCompany" label="{{ __('Empresa') }}*" name="formData.company" placeholder="{{ __('Company') }}*" required="true" />
-                    <x-shared.input-text class="col-span-1 lg:col-span-1" id="formDataEmail" label="{{ __('Email') }}*" name="formData.email" placeholder="{{ __('Email') }}*" required="true" />
+                    <x-shared.input-text class="col-span-1 lg:col-span-1" id="formDataFirstName" label="{{ __('Nombre(s)') }}*" name="formData.first_name" placeholder="{{ __('Nombre(s)') }}*" required="true" :selected="$formData['first_name']" />
+                    <x-shared.input-text class="col-span-1 lg:col-span-1" id="formDataLastName" label="{{ __('Apellido(s)') }}*" name="formData.last_name" placeholder="{{ __('Apellido(s)') }}*" required="true" :selected="$formData['last_name']" />
+                    <x-shared.input-text class="col-span-1 lg:col-span-2" id="formDataCompany" label="{{ __('Empresa') }}*" name="formData.company" placeholder="{{ __('Company') }}*" required="true" :selected="$formData['company']" />
+                    <x-shared.input-text class="col-span-1 lg:col-span-1" id="formDataEmail" label="{{ __('Email') }}*" name="formData.email" placeholder="{{ __('Email') }}*" required="true" :selected="$formData['email']" />
 
                     <div class="col-span-1 lg:col-span-1" id="formDataPhoneContainer">
                         <label class="font-semibold sr-only">{{ __('Teléfono') }}</label>
                         <div wire:ignore>
-                            <input class="border-gray-300 px-2 py-1 rounded w-full" id="formDataPhone" name="formDataPhone" placeholder="{{ __('Teléfono') }}*" required type="tel" wire:defer="formData.phone" wire:key="formDataPhone" />
+                            <input class="border-gray-300 px-2 py-1 rounded w-full" id="formDataPhone" name="formDataPhone" placeholder="{{ __('Teléfono') }}*" required type="tel" value="{!! $formData['phone'] !!}" wire:defer="formData.phone" wire:key="formDataPhone" />
                         </div>
                         <span class="bold text-xs text-red-500">
                             @if($errors->has('formData.phone')){{ $errors->first('formData.phone') }}@endif 
@@ -42,8 +43,8 @@
                         </span>
                     </div>
 
-                    <x-shared.select class="col-span-1 lg:col-span-2" :data="$services->map(fn($d) => ['id' => $d['id'], 'value' => $d['name']])->toArray()" id="formDataService" label="{{ __('mainmenu.services') }}" name="formData.message" placeholder="{{ __('Seleccione un servicio') }}" required="true" />
-                    <x-shared.text-area class="col-span-1 lg:col-span-2" id="formDataMessage" label="{{ __('Mensaje') }}*" name="formData.message" placeholder="{{ __('Mensaje') }}*" required="true" rows="10" />
+                    <x-shared.select class="col-span-1 lg:col-span-2" :data="$services->map(fn($d) => ['id' => $d['id'], 'value' => $d['name']])->toArray()" id="formDataService" label="{{ __('mainmenu.services') }}" name="formData.service" placeholder="{{ __('Seleccione un servicio') }}" required="true" :selected="$formData['service']" />
+                    <x-shared.text-area class="col-span-1 lg:col-span-2" id="formDataMessage" label="{{ __('Mensaje') }}*" name="formData.message" placeholder="{{ __('Mensaje') }}*" required="true" :selected="$formData['message']" rows="10" />
                     
                     <div class="col-span-1 flex items-center justify-end lg:col-span-2" id="formDataSubmitContainer">
                         <button class="button-primary border disabled:bg-gray-400 disabled:cursor-progress font-bold inline-block min-w-[100px] ml-auto mr-0 px-4 py-2 rounded text-center text-slate-100"

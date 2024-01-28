@@ -18,6 +18,7 @@
   --color-secondary: 238 123 44;
   --color-tertiary: 239 60 62;
   --color-fourth: 110 152 50;
+  --color-cancel: 212 212 212;
   --text-color-primary: 31 41 55;
 }
 
@@ -34,6 +35,10 @@ body {
   font-size: 1rem;
   font-weight: 300;
   min-height: 100vh;
+}
+
+body p {
+  color: rgb(0, 0, 26);
 }
 
 .hero {
@@ -164,6 +169,15 @@ h4 {
 .button-secondary:hover {
   --color-opacity: 0.8;
   background-color: rgb(var(--color-secondary) / var(--color-opacity));
+}
+
+.button-cancel {
+  background-color: rgb(var(--color-cancel) / var(--color-opacity));
+  color: rgb(115, 115, 115);
+}
+
+.button-cancel:hover {
+  color: rgba(115, 115, 115, 0.8);
 }
 
 @media (min-width: 640px) {}

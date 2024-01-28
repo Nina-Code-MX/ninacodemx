@@ -29,14 +29,11 @@ Route::group(['as' => 'api.v1.', 'prefix' => '/v1'], function () {
         ->name('login.login');
 
     Route::middleware(['customauthapi'])->name('service.')->prefix('/services')->group(function () {
-        Route::post('/', [ServiceControllerV1::class, 'create'])
-            ->name('create');
-
-        Route::patch('/{service_id}', [ServiceControllerV1::class, 'update'])
-            ->name('update');
-
-        Route::post('/{service_id}/translate/{lang}', [\App\Http\Controllers\Api\ServiceControllerV1::class, 'translate'])
-            ->where(['lang' => '[a-z]{2}'])
-            ->name('translate');
+        Route::get('/', [ServiceControllerV1::class, 'getAll'])->name('getall');
+        Route::post('/', [ServiceControllerV1::class, 'create'])->name('create');
+        Route::get('/{service_id}', [ServiceControllerV1::class, 'get'])->name('get');
+        Route::patch('/{service_id}', [ServiceControllerV1::class, 'update'])->name('update');
+        Route::post('/{service_id}/translate/{lang}', [ServiceControllerV1::class, 'translate'])->where(['lang' => '[a-z]{2}'])->name('translate');
+        Route::delete('/{service_id}', [ServiceControllerV1::class, 'delete'])->name('delete');
     });
 });
