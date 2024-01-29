@@ -23,8 +23,8 @@ class LoginControllerV1 extends Controller
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
-        // $token = $user->tokens->where('name', 'api-token')->first();
-        $token = $user->createToken('api-token', ['portfolios:*', 'services:*', 'teams:*', 'users:*']);
+        $token = $user->tokens->where('name', 'api-token')->first();
+        // $token = $user->createToken('api-token', ['portfolios:*', 'services:*', 'teams:*', 'users:*']);
         
         return response()->json(['message' => 'Successfully logged in.', 'token' => $token->plainTextToken], 200);
     }

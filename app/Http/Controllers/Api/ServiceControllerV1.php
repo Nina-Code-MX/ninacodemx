@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\Translation;
+use App\Http\Resources\ServiceResource;
+use App\Http\Resources\TranslationResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Js;
 
@@ -33,6 +37,7 @@ class ServiceControllerV1 extends Controller
     {
         try {
             $services = Service::with('translations')->simplePaginate($perPage = $this->perPage, $columns = $this->columns, $pageName = 'page', $page = $this->page);
+            ServiceResource::collection($services);
 
             return Response::json(
                 $services
@@ -103,7 +108,7 @@ class ServiceControllerV1 extends Controller
 
             return Response::json([
                 'success' => true,
-                'data' => $service
+                'data' => new ServiceResource($service)
             ]);
         } catch (ModelNotFoundException $e) {
             return Response::json([
@@ -156,7 +161,7 @@ class ServiceControllerV1 extends Controller
 
         return Response::json([
             'success' => true,
-            'data' => $service
+            'data' => new ServiceResource($service)
         ]);
     }
 
@@ -198,7 +203,7 @@ class ServiceControllerV1 extends Controller
 
             return Response::json([
                 'success' => true,
-                'data' => $service
+                'data' => new TranslationResource($service)
             ]);
         } catch (ModelNotFoundException $e) {
             return Response::json([
@@ -244,10 +249,23 @@ class ServiceControllerV1 extends Controller
         }
     }
 
+    /**
+     * Check params
+     *   Check params
+     * @param Request $request
+     */
     private function checkParams(Request $request)
     {
         $this->page = $request->has('page') ? $request->get('page') : $this->page;
         $this->perPage = $request->has('perPage') ? $request->get('perPage') : $this->perPage;
+
+        if ($request->has('lang') && in_array($request->get('lang'), array_keys(config('app.locale_available')))) {
+            App::setLocale($request->get('lang'));
+        }
+
+        if ($request->has('getTranslations') && $request->get('getTranslations') === 'true') {
+            App::setLocale('es');
+        }
     }
 
     /**

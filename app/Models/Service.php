@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
 
 class Service extends Model
@@ -66,7 +67,7 @@ class Service extends Model
         $classPath = explode('\\', self::class);
         $translation = Translation::where('model_name', end($classPath))
             ->where('model_id', $model_id)
-            ->where('lang', Cookie::get('lang') ?? 'es');
+            ->where('lang', App::getLocale() ?? 'es');
 
         return $translation->first() ? $translation->first()->toArray() : [];
     }

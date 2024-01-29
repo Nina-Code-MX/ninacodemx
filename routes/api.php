@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\LoginControllerV1;
 use App\Http\Controllers\Api\ServiceControllerV1;
 use App\Http\Middleware\CustomAuthApi;
 
@@ -25,7 +26,7 @@ Route::group(['as' => 'api.v1.', 'prefix' => '/v1'], function () {
         ->middleware('selfapi')
         ->name('mailchimp.newsltetter');
 
-    Route::post('/login', [\App\Http\Controllers\Api\LoginControllerV1::class, 'login'])
+    Route::post('/login', [LoginControllerV1::class, 'login'])
         ->name('login.login');
 
     Route::middleware(['customauthapi'])->name('service.')->prefix('/services')->group(function () {

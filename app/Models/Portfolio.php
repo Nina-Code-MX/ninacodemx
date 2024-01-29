@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
 
 class Portfolio extends Model
@@ -54,7 +55,7 @@ class Portfolio extends Model
         $classPath = explode('\\', self::class);
         $translation = Translation::where('model_name', end($classPath))
             ->where('model_id', $model_id)
-            ->where('lang', Cookie::get('lang'));
+            ->where('lang', App::getLocale() ?? 'es');
         return $translation->first() ? $translation->first()->toArray() : [];
     }
 }
