@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class LoginControllerV1 extends Controller
 {
@@ -23,9 +24,9 @@ class LoginControllerV1 extends Controller
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
-        $token = $user->tokens->where('name', 'api-token')->first();
-        // $token = $user->createToken('api-token', ['portfolios:*', 'services:*', 'teams:*', 'users:*']);
+        $token = PersonalAccessToken::where('tokenable_id', $user->id)->where('name', 'api-token')->delete();
+        $token = $user->createToken('api-token', ['portfolios:*', 'services:*', 'teams:*', 'users:*']);
         
-        return response()->json(['message' => 'Successfully logged in.', 'token' => $token->toArray()], 200);
+        return response()->json(['message' => 'Successfully logged in.', 'token' => $token->plainTextToken], 200);
     }
 }

@@ -35,6 +35,12 @@ class ServiceControllerV1 extends Controller
      */
     public function getAll(Request $request): JsonResponse
     {
+        if (!$this->checkPermissions($request)) {
+            return Response::json([
+                'message' => 'Unauthorized'
+            ], 403);
+        }
+
         try {
             $services = Service::with('translations')->simplePaginate($perPage = $this->perPage, $columns = $this->columns, $pageName = 'page', $page = $this->page);
             ServiceResource::collection($services);
@@ -103,6 +109,12 @@ class ServiceControllerV1 extends Controller
      */
     public function get(Request $request, int $service_id): JsonResponse
     {
+        if (!$this->checkPermissions($request)) {
+            return Response::json([
+                'message' => 'Unauthorized'
+            ], 403);
+        }
+
         try {
             $service = Service::with('translations')->findOrFail($service_id);
 
@@ -275,7 +287,7 @@ class ServiceControllerV1 extends Controller
      */
     private function checkPermissions(Request $request): bool
     {
-        $token = $request->user()->tokens()->where('token', $request->user()->activeToken)->first();
+        $token = $request->user()->tokens()->where('token', $request->user()->currentAccessToken())->first();
 
         if (!$token) {
             return false;

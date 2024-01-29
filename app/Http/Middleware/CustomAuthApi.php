@@ -23,14 +23,19 @@ class CustomAuthApi
         }
 
         $token = explode(' ', $request->header('Authorization'));
-
+        
         if ($token[0] != 'NinaCode') {
             return response()->json(['message' => 'Invalid token'], 401);
         }
 
+        $token = explode('|', $token[1]);
+        $token_id = $token[0];
+        $token_hash = hash('sha256', $token[1]);
+
         $user = User::select('users.id')
             ->join("personal_access_tokens", "personal_access_tokens.tokenable_id", "=", "users.id")
-            ->whereRaw(DB::raw("`personal_access_tokens`.`token` = '" . $token['1'] . "'"))
+            ->whereRaw(DB::raw("`personal_access_tokens`.`id` = '" . $token_id . "'"))
+            ->whereRaw(DB::raw("`personal_access_tokens`.`token` = '" . $token_hash . "'"))
             ->first();
 
         if (!$user) {
@@ -38,7 +43,7 @@ class CustomAuthApi
         }
 
         Auth::loginUsingId($user->id);
-        $request->user()->activeToken = $token['1'];
+        $request->user()->withAccessToken($token_hash);
 
         return $next($request);
     }
