@@ -16,7 +16,7 @@ return [
         'title' => 'Un proyecto a un botón de distancia',
     ],
     'mail' => [
-        'welcome' => 'Hola :name,',
+        'welcome' => 'Hola :full_name,',
         'subject' => 'Solicitud de cotización: :service',
         'message' => 'Gracias por su interés en "<b>:service</b>", recibimos su solicitud y pronto nos comunicaremos con usted.'
     ]
