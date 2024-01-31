@@ -19,7 +19,7 @@ class ServiceResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'excerpt' => $this->excerpt,
-            'description' => $this->excerpt,
+            'description' => $this->description,
             'slug' => route(app()->getLocale() . '.services.slug', ['locale' => app()->getLocale(), 'slug' => $this->slug]),
             'lang' => app()->getLocale()
         ];
