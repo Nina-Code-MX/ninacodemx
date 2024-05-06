@@ -1,6 +1,24 @@
 <?php
 
 return [
+	'meta' => [
+		'description' => 'Nina Code is your technological partner committed to providing quality services and competitive budgets. Since 2016, we strive to bring companies of all sizes closer to the latest technological tools in the cloud. With values such as responsibility, transparency and collaboration, we work so that your business achieves its objectives effectively.',
+		'og:title' => 'Nina Code | Software Development and Staff Augmentation',
+		'og:description' => 'Nina Code is your technological partner committed to providing quality services and competitive budgets. Since 2016, we strive to bring companies of all sizes closer to the latest technological tools in the cloud. With values such as responsibility, transparency and collaboration, we work so that your business achieves its objectives effectively.',
+		'og:image' => 'https://nina-code.com/images/og-image.jpg',
+		'og:url' => 'https://nina-code.com',
+		'og:type' => 'website',
+		'og:locale' => 'en_US',
+		'og:site_name' => 'Nina Code',
+		'og:image:width' => '1200',
+		'og:image:height' => '630',
+		'twitter:card' => 'summary_large_image',
+		'twitter:site' => '@nina_code',
+		'twitter:creator' => '@nina_code',
+		'twitter:title' => 'Nina Code | Software Development and Staff Augmentation',
+		'twitter:description' => 'Nina Code is your technological partner committed to providing quality services and competitive budgets. Since 2016, we strive to bring companies of all sizes closer to the latest technological tools in the cloud. With values such as responsibility, transparency and collaboration, we work so that your business achieves its objectives effectively.',
+		'twitter:image' => 'https://nina-code.com/images/og-image.jpg'
+	],
 	'hero' => [
 		'h1' => '',
 		'h2' => '',

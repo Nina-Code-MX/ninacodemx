@@ -1,6 +1,24 @@
 <?php
 
 return [
+	'meta' => [
+		'description' => 'Con un grupo de especialsitas listo para ayudarte, no esperes mas y contactanos.',
+		'og:title' => 'Nina Code | Contacto',
+		'og:description' => 'Con un grupo de especialsitas listo para ayudarte, no esperes mas y contactanos.',
+		'og:image' => 'https://nina-code.com/images/og-image.jpg',
+		'og:url' => 'https://nina-code.com',
+		'og:type' => 'website',
+		'og:locale' => 'es_MX',
+		'og:site_name' => 'Nina Code',
+		'og:image:width' => '1200',
+		'og:image:height' => '630',
+		'twitter:card' => 'summary_large_image',
+		'twitter:site' => '@nina_code',
+		'twitter:creator' => '@nina_code',
+		'twitter:title' => 'Nina Code | Contacto',
+		'twitter:description' => 'Con un grupo de especialsitas listo para ayudarte, no esperes mas y contactanos.',
+		'twitter:image' => 'https://nina-code.com/images/og-image.jpg'
+	],
 	'hero' => [
 		'h1' => 'Contactenos',
 		'h2' => 'Estas a un paso de alcanzar tus metas',

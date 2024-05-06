@@ -1,6 +1,24 @@
 <?php
 
 return [
+	'meta' => [
+		'description' => 'Nina Code es tu socio tecnológico comprometido con brindar servicios de calidad y presupuestos competitivos. Desde 2016, nos esforzamos por acercar a empresas de todos los tamaños a las últimas herramientas tecnológicas en la nube. Con valores como responsabilidad, transparencia y colaboración, trabajamos para que tu negocio alcance sus objetivos de manera efectiva.',
+		'og:title' => 'Nina Code | Desarrollo de software y aumento de personal',
+		'og:description' => 'Nina Code es tu socio tecnológico comprometido con brindar servicios de calidad y presupuestos competitivos. Desde 2016, nos esforzamos por acercar a empresas de todos los tamaños a las últimas herramientas tecnológicas en la nube. Con valores como responsabilidad, transparencia y colaboración, trabajamos para que tu negocio alcance sus objetivos de manera efectiva.',
+		'og:image' => 'https://nina-code.com/images/og-image.jpg',
+		'og:url' => 'https://nina-code.com',
+		'og:type' => 'website',
+		'og:locale' => 'es_MX',
+		'og:site_name' => 'Nina Code',
+		'og:image:width' => '1200',
+		'og:image:height' => '630',
+		'twitter:card' => 'summary_large_image',
+		'twitter:site' => '@nina_code',
+		'twitter:creator' => '@nina_code',
+		'twitter:title' => 'Nina Code | Desarrollo de software y aumento de personal',
+		'twitter:description' => 'Nina Code es tu socio tecnológico comprometido con brindar servicios de calidad y presupuestos competitivos. Desde 2016, nos esforzamos por acercar a empresas de todos los tamaños a las últimas herramientas tecnológicas en la nube. Con valores como responsabilidad, transparencia y colaboración, trabajamos para que tu negocio alcance sus objetivos de manera efectiva.',
+		'twitter:image' => 'https://nina-code.com/images/og-image.jpg'
+	],
 	'hero' => [
 		'h1' => '',
 		'h2' => '',

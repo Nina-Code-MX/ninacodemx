@@ -2,6 +2,24 @@
 \Carbon\Carbon::setLocale('en');
 
 return [
+    'meta' => [
+        'description' => 'Budgets tailored to your business. At Nina Code we specialize in providing solutions tailored to each business, whether you need a website, a mobile application, or an enterprise management system, we help you achieve it. Contact us today.',
+        'og:title' => 'Nina Code | Pricing',
+        'og:description' => 'Budgets tailored to your business. At Nina Code we specialize in providing solutions tailored to each business, whether you need a website, a mobile application, or an enterprise management system, we help you achieve it. Contact us today.',
+        'og:image' => 'https://nina-code.com/images/og-image.jpg',
+        'og:url' => 'https://nina-code.com',
+        'og:type' => 'website',
+        'og:locale' => 'en_US',
+        'og:site_name' => 'Nina Code',
+        'og:image:width' => '1200',
+        'og:image:height' => '630',
+        'twitter:card' => 'summary_large_image',
+        'twitter:site' => '@nina_code',
+        'twitter:creator' => '@nina_code',
+        'twitter:title' => 'Nina Code | Pricing',
+        'twitter:description' => 'Budgets tailored to your business. At Nina Code we specialize in providing solutions tailored to each business, whether you need a website, a mobile application, or an enterprise management system, we help you achieve it. Contact us today.',
+        'twitter:image' => 'https://nina-code.com/images/og-image.jpg'
+    ],
     'hero' => [
         'p' => 'Budgets tailored to your business.'
     ],

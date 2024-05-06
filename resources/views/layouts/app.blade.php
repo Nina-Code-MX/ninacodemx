@@ -7,6 +7,8 @@
         <meta name="csrf-token" content={{ csrf_token() }}>
         <title>{{ $pageTitle ?? __('Home') }} - {{ env('APP_NAME', 'Laravel') }}</title>
 
+        @stack('meta') 
+
         @vite('resources/css/app.css') 
         @livewireStyles 
         @stack('styles') 
@@ -19,7 +21,7 @@
         <nav class="bg-navbar duration-500 ease-in-out fixed font-bold h-16 transition w-full z-50" id="mainNavBar">
             <div class="flex flex-wrap items-center justify-between lg:container mx-auto text-neutral-100">
                 <a class="flex gap-4 h-16 items-center ml-4 w-16 p-1" href="{{ env('APP_URL', 'http://localhost') }}">
-                    <img src="{{ asset('images/logo-ninacode-mx-1024.png') }}" class="h-fit w-fit" alt="Nina Code" />
+                    <img src="{{ asset('images/logo-ninacode-mx-1024.png') }}" class="h-fit max-h-full w-fit" alt="Nina Code" />
                     <span class="whitespace-nowrap">{{ env('APP_NAME', 'Laravel') }}</span>
                 </a>
 

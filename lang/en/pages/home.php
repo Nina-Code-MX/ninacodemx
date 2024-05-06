@@ -1,6 +1,24 @@
 <?php
 
 return [
+    'meta' => [
+        'description' => 'We are your strategic partner in software development and staff augmentation. With cutting-edge solutions and a highly skilled team, we drive your business forward. Contact us today.',
+        'og:title' => 'Nina Code | Software Development and Staff Augmentation',
+        'og:description' => 'We are your strategic partner in software development and staff augmentation. With cutting-edge solutions and a highly skilled team, we drive your business forward. Contact us today.',
+        'og:image' => 'https://nina-code.com/images/og-image.jpg',
+        'og:url' => 'https://nina-code.com',
+        'og:type' => 'website',
+        'og:locale' => 'en_US',
+        'og:site_name' => 'Nina Code',
+        'og:image:width' => '1200',
+        'og:image:height' => '630',
+        'twitter:card' => 'summary_large_image',
+        'twitter:site' => '@nina_code',
+        'twitter:creator' => '@nina_code',
+        'twitter:title' => 'Nina Code | Software Development and Staff Augmentation',
+        'twitter:description' => 'We are your strategic partner in software development and staff augmentation. With cutting-edge solutions and a highly skilled team, we drive your business forward. Contact us today.',
+        'twitter:image' => 'https://nina-code.com/images/og-image.jpg'
+    ],
     'hero' => [
         'h1' => 'Software Development and Staff Augmentation',
         'h2' => 'Your Strategic Partner',
@@ -8,7 +26,7 @@ return [
         'action' => '#'
     ],
     'what_we_do' => [
-        'h2' => 'Welcome to Nina Code – Your Strategic Partner in Development and Staff Augmentation.',
+        'h2' => 'Your Strategic Partner in Development and Staff Augmentation.',
         'h3' => 'What we do and why choose us?',
         'p' => [
             'At Nina Code, we understand that the success of your business hinges on the quality of your software solutions and the expertise of your team. That\'s why we are here to be your trusted partner in development and staff augmentation.',

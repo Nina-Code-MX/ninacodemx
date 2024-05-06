@@ -1,6 +1,24 @@
 <?php
 
 return [
+    'meta' => [
+        'description' => 'Somos tu socio estratégico en desarrollo de software y aumento de personal. Con soluciones de vanguardia y un equipo altamente calificado, impulsamos tu negocio hacia adelante. Contáctanos hoy.',
+        'og:title' => 'Nina Code | Desarrollo de software y aumento de personal',
+        'og:description' => 'Somos tu socio estratégico en desarrollo de software y aumento de personal. Con soluciones de vanguardia y un equipo altamente calificado, impulsamos tu negocio hacia adelante. Contáctanos hoy.',
+        'og:image' => 'https://nina-code.com/images/og-image.jpg',
+        'og:url' => 'https://nina-code.com',
+        'og:type' => 'website',
+        'og:locale' => 'en_US',
+        'og:site_name' => 'Nina Code',
+        'og:image:width' => '1200',
+        'og:image:height' => '630',
+        'twitter:card' => 'summary_large_image',
+        'twitter:site' => '@nina_code',
+        'twitter:creator' => '@nina_code',
+        'twitter:title' => 'Nina Code | Desarrollo de software y aumento de personal',
+        'twitter:description' => 'Somos tu socio estratégico en desarrollo de software y aumento de personal. Con soluciones de vanguardia y un equipo altamente calificado, impulsamos tu negocio hacia adelante. Contáctanos hoy.',
+        'twitter:image' => 'https://nina-code.com/images/og-image.jpg'
+    ],
     'hero' => [
         'h1' => 'Desarrollo de software y aumento de personal',
         'h2' => 'Tu socio estratégico',

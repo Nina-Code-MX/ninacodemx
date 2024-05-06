@@ -1,6 +1,24 @@
 <?php
 
 return [
+	'meta' => [
+		'description' => 'With a group of specialists ready to help you, do not wait any longer and contact us.',
+		'og:title' => 'Nina Code | Contact Us',
+		'og:description' => 'With a group of specialists ready to help you, do not wait any longer and contact us.',
+		'og:image' => 'https://nina-code.com/images/og-image.jpg',
+		'og:url' => 'https://nina-code.com',
+		'og:type' => 'website',
+		'og:locale' => 'en_US',
+		'og:site_name' => 'Nina Code',
+		'og:image:width' => '1200',
+		'og:image:height' => '630',
+		'twitter:card' => 'summary_large_image',
+		'twitter:site' => '@nina_code',
+		'twitter:creator' => '@nina_code',
+		'twitter:title' => 'Nina Code | Contact Us',
+		'twitter:description' => 'With a group of specialists ready to help you, do not wait any longer and contact us.',
+		'twitter:image' => 'https://nina-code.com/images/og-image.jpg'
+	],
 	'hero' => [
 		'h1' => 'Contact Us',
 		'h2' => 'You are one step away from achieving your goals',

@@ -1,6 +1,24 @@
 <?php
 
 return [
+    'meta' => [
+        'description' => 'At Nina Code we are committed to the security of your data. This Privacy Policy establishes the terms in which Nina Code uses and protects the information that is provided by its users when using its website. Contact us today.',
+        'og:title' => 'Nina Code | Privacy Policy',
+        'og:description' => 'At Nina Code we are committed to the security of your data. This Privacy Policy establishes the terms in which Nina Code uses and protects the information that is provided by its users when using its website. Contact us today.',
+        'og:image' => 'https://nina-code.com/images/og-image.jpg',
+        'og:url' => 'https://nina-code.com',
+        'og:type' => 'website',
+        'og:locale' => 'en_US',
+        'og:site_name' => 'Nina Code',
+        'og:image:width' => '1200',
+        'og:image:height' => '630',
+        'twitter:card' => 'summary_large_image',
+        'twitter:site' => '@nina_code',
+        'twitter:creator' => '@nina_code',
+        'twitter:title' => 'Nina Code | Privacy Policy',
+        'twitter:description' => 'At Nina Code we are committed to the security of your data. This Privacy Policy establishes the terms in which Nina Code uses and protects the information that is provided by its users when using its website. Contact us today.',
+        'twitter:image' => 'https://nina-code.com/images/og-image.jpg'
+    ],
     'date' => 'Last update: Jan 25, 2019',
     'intro' => 'This Privacy Policy establishes the terms in which Nina Code uses and protects the information that is provided by its users when using its website. This company is committed to the security of its users\' data. When we ask you to fill out personal information fields with which you can be identified, we do so ensuring that it will only be used in accordance with the terms of this document. However, this Privacy Policy may change over time or be updated, so we recommend and emphasize that you continually review this page to ensure that you agree with such changes.',
     'info' => [

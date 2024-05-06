@@ -49,6 +49,9 @@ class Services extends Component
             } else {
                 abort(404);
             }
+
+            $layoutSet['pageTitle'] = $Services['name'];
+            $this->pageTitle = $Services['name'];
         } else {
             $Services = \App\Models\Service::orderBy('order')->get()->toArray();
         }

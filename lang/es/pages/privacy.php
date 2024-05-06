@@ -1,6 +1,24 @@
 <?php
 
 return [
+    'meta' => [
+        'description' => 'En Nina Code consideramos cada proyecto como una oportunidad para demostrar nuestro compromiso con la excelencia y nuestra capacidad para proporcionar soluciones innovadoras. Aunque muchos de nuestros clientes prefieren mantener la confidencialidad de sus proyectos, nos complace compartir algunos de los productos y servicios que hemos desarrollado para aquellos que han optado por la visibilidad pública.',
+        'og:title' => 'Nina Code | Proyectos',
+        'og:description' => 'En Nina Code consideramos cada proyecto como una oportunidad para demostrar nuestro compromiso con la excelencia y nuestra capacidad para proporcionar soluciones innovadoras. Aunque muchos de nuestros clientes prefieren mantener la confidencialidad de sus proyectos, nos complace compartir algunos de los productos y servicios que hemos desarrollado para aquellos que han optado por la visibilidad pública.',
+        'og:image' => 'https://nina-code.com/images/og-image.jpg',
+        'og:url' => 'https://nina-code.com',
+        'og:type' => 'website',
+        'og:locale' => 'es_MX',
+        'og:site_name' => 'Nina Code',
+        'og:image:width' => '1200',
+        'og:image:height' => '630',
+        'twitter:card' => 'summary_large_image',
+        'twitter:site' => '@nina_code',
+        'twitter:creator' => '@nina_code',
+        'twitter:title' => 'Nina Code | Proyectos',
+        'twitter:description' => 'En Nina Code consideramos cada proyecto como una oportunidad para demostrar nuestro compromiso con la excelencia y nuestra capacidad para proporcionar soluciones innovadoras. Aunque muchos de nuestros clientes prefieren mantener la confidencialidad de sus proyectos, nos complace compartir algunos de los productos y servicios que hemos desarrollado para aquellos que han optado por la visibilidad pública.',
+        'twitter:image' => 'https://nina-code.com/images/og-image.jpg'
+    ],
     'date' => 'Ultima actualización: 25 de Enero 2019',
     'intro' => 'El presente Política de Privacidad establece los términos en que Nina Code usa y protege la información que es proporcionada por sus usuarios al momento de utilizar su sitio web. Esta compañía está comprometida con la seguridad de los datos de sus usuarios. Cuando le pedimos llenar los campos de información personal con la cual usted pueda ser identificado, lo hacemos asegurando que sólo se empleará de acuerdo con los términos de este documento. Sin embargo esta Política de Privacidad puede cambiar con el tiempo o ser actualizada por lo que le recomendamos y enfatizamos revisar continuamente esta página para asegurarse que está de acuerdo con dichos cambios.',
     'info' => [

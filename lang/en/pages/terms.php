@@ -1,6 +1,24 @@
 <?php
 
 return [
+    'meta' => [
+        'description' => 'Terms and conditions of use of the Nina Code website.',
+        'og:title' => 'Nina Code | Terms and Conditions',
+        'og:description' => 'Terms and conditions of use of the Nina Code website.',
+        'og:image' => 'https://nina-code.com/images/og-image.jpg',
+        'og:url' => 'https://nina-code.com',
+        'og:type' => 'website',
+        'og:locale' => 'en_US',
+        'og:site_name' => 'Nina Code',
+        'og:image:width' => '1200',
+        'og:image:height' => '630',
+        'twitter:card' => 'summary_large_image',
+        'twitter:site' => '@nina_code',
+        'twitter:creator' => '@nina_code',
+        'twitter:title' => 'Nina Code | Terms and Conditions',
+        'twitter:description' => 'Terms and conditions of use of the Nina Code website.',
+        'twitter:image' => 'https://nina-code.com/images/og-image.jpg'
+    ],
     'info_relevance' => [
         'h2' => 'Relevant Information',
         'p' => [

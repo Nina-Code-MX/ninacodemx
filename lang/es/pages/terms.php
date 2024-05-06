@@ -1,6 +1,24 @@
 <?php
 
 return [
+    'meta' => [
+        'description' => 'Términos y condiciones de uso de www.ninacode.mx. En este documento se detallan las condiciones de uso de este sitio web. Al acceder a este sitio web, aceptas estos términos y condiciones en su totalidad. No uses este sitio web si no estás de acuerdo con todos los términos y condiciones establecidos en esta página.',
+        'og:title' => 'Nina Code | Términos y Condiciones',
+        'og:description' => 'Términos y condiciones de uso de www.ninacode.mx. En este documento se detallan las condiciones de uso de este sitio web. Al acceder a este sitio web, aceptas estos términos y condiciones en su totalidad. No uses este sitio web si no estás de acuerdo con todos los términos y condiciones establecidos en esta página.',
+        'og:image' => 'https://nina-code.com/images/og-image.jpg',
+        'og:url' => 'https://nina-code.com',
+        'og:type' => 'website',
+        'og:locale' => 'es_MX',
+        'og:site_name' => 'Nina Code',
+        'og:image:width' => '1200',
+        'og:image:height' => '630',
+        'twitter:card' => 'summary_large_image',
+        'twitter:site' => '@nina_code',
+        'twitter:creator' => '@nina_code',
+        'twitter:title' => 'Nina Code | Términos y Condiciones',
+        'twitter:description' => 'Términos y condiciones de uso de www.ninacode.mx. En este documento se detallan las condiciones de uso de este sitio web. Al acceder a este sitio web, aceptas estos términos y condiciones en su totalidad. No uses este sitio web si no estás de acuerdo con todos los términos y condiciones establecidos en esta página.',
+        'twitter:image' => 'https://nina-code.com/images/og-image.jpg'
+    ],
     'info_relevance' => [
         'h2' => 'Información Relevante',
         'p' => [
