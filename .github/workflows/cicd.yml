@@ -58,11 +58,12 @@ jobs:
             ssh-add ~/.ssh/ninacodemx_deploy
             git restore .
             git pull origin main
-            php artisan migrate --force
-            php artisan route:cache
-            php artisan view:cache
-            php artisan config:cache
+            php artisan route:clear
+            php artisan view:clear
             php artisan config:clear
+            php artisan migrate --force
+            composer install --no-dev
+            npm install
             npm run build
 
   remove-ip-from-sg:
