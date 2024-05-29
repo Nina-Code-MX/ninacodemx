@@ -124,6 +124,10 @@ Route::post('/logout', App\Livewire\Login::class)->name('logout');
 Route::group(['as' => 'admin', 'middleware' => ['auth', 'verified'], 'prefix' => '/admin'], function () {
 	Route::get('/', App\Livewire\Admin\Dashboard::class)->name('.dashboard');
 
+	Route::group(['as' => '.contact', 'prefix' => '/contact'], function () {
+		Route::get('/', App\Livewire\Admin\ContactListing::class)->name('.listing');
+	});
+
 	Route::group(['as' => '.portfolio', 'prefix' => '/portfolio'], function () {
 		Route::get('/', App\Livewire\Admin\PortfolioListing::class)->name('.listing');
 		Route::get('/create', App\Livewire\Admin\PortfolioCreate::class)->name('.create');

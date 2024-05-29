@@ -35,7 +35,9 @@
                                 <td class="whitespace-nowrap px-6 py-4 hidden lg:table-cell">
                                     <button class="btn-action relative z-0"><span class="material-symbols-outlined">more_vert</span></button>
                                     <div class="absolute action-menu bg-white hidden mt-2 py-0 rounded shadow-md w-48 z-10">
+                                        @isset($editRoute)
                                         <a href="{{ route($editRoute, ['model' => $dd['id']]) }}" class="flex gap-4 hover:bg-gray-200 items-center px-4 py-2 text-gray-800"><span class="material-symbols-outlined">edit</span><span>Edit</span></a>
+                                        @endisset 
                                         <a href="javascript:void(0)" class="flex gap-4 hover:bg-gray-200 items-center px-4 py-2 text-red-600" wire:click="delete('{{ $dd['id'] }}')" wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE"><span class="material-symbols-outlined">delete</span><span>Delete</span></a>
                                     </div>            
                                 </td>
@@ -67,7 +69,9 @@
                                             <span class="block italic lg:hidden text-xs">{{ $dd['created_at'] ?? '-' }}</span>
                                         </span>
                                         <a class="border-r border-l border-neutral-200 lg:hidden px-4 py-2 text-red-600" href="javascript:void(0)" wire:click="delete('{{ $dd['id'] }}')" wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE"><span class="material-symbols-outlined">delete</span></a>
+                                        @if (isset($editRoute))
                                         <a class="border-r border-l border-neutral-200 lg:hidden px-4 py-2" href="{{ route($editRoute, ['model' => $dd['id']]) }}"><span class="material-symbols-outlined">arrow_forward_ios</span></a>
+                                        @endisset 
                                     </div>
                                             @endif 
                                         @endif 
