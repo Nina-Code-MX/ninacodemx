@@ -40,7 +40,7 @@ class TeamForm extends Form
         $this->last_name = $team->last_name;
         $this->title = $team->title;
         $this->image = $team->image;
-        $this->image = $team->image;
+        $this->order = $team->order;
         $this->image_upload = null;
     }
 }
