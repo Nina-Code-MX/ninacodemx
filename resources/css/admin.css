@@ -60,6 +60,17 @@ input:read-only {
   background-color: rgb(229 229 229 / var(--tw-bg-opacity));
 }
 
+.tiptap.ProseMirror {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-radius: 0.125rem;
+  border-color: rgb(82 82 82 / var(--tw-border-opacity));
+  border-width: 1px;
+  height: 16rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
 @media (min-width: 768px) {
   .md\:.h-screen-admin {
     height: calc(100vh - 3.5rem);
