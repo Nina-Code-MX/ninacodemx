@@ -53,7 +53,7 @@ jobs:
           key: ${{ secrets.AWS_EC2_KEY }}
           port: ${{ secrets.AWS_EC2_PORT }}
           script: |
-            cd /var/www/ninacode.mx
+            cd /var/www/Nina-Code-MX/ninacodemx
             eval $(ssh-agent -s)
             ssh-add ~/.ssh/ninacodemx_deploy
             git restore .
