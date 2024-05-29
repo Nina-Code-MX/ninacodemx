@@ -73,24 +73,24 @@ Route::post('/lang-switcher', function(Request $request) {
 });
 
 Route::prefix('{locale}')->where(['locale' => '[a-z]{2}'])->group(function ($router) {
-	Route::get('/', App\Http\Livewire\Public\Home::class)->name('home');
+	Route::get('/', App\Livewire\Public\Home::class)->name('home');
 });
 
 foreach ($pagesTranslates AS $lang => $page) {
 	Route::prefix('{locale}')->where(['locale' => '[a-z]{2}'])->group(function () use ($lang, $pagesTranslates) {
-		Route::get('/' . ($pagesTranslates[$lang]['aboutus']), App\Http\Livewire\Public\AboutUs::class)->name($lang . '.aboutus');
-		Route::get('/' . ($pagesTranslates[$lang]['portfolio']), App\Http\Livewire\Public\Portfolio::class)->name($lang . '.portfolio');
+		Route::get('/' . ($pagesTranslates[$lang]['aboutus']), App\Livewire\Public\AboutUs::class)->name($lang . '.aboutus');
+		Route::get('/' . ($pagesTranslates[$lang]['portfolio']), App\Livewire\Public\Portfolio::class)->name($lang . '.portfolio');
 
 		Route::prefix('/' . ($pagesTranslates[$lang]['services']))->group(function () use ($lang, $pagesTranslates) {
-			Route::get('/', App\Http\Livewire\Public\Services::class)->name($lang . '.services');
-			Route::get('/{slug}', App\Http\Livewire\Public\Services::class)->name($lang . '.services.slug');
+			Route::get('/', App\Livewire\Public\Services::class)->name($lang . '.services');
+			Route::get('/{slug}', App\Livewire\Public\Services::class)->name($lang . '.services.slug');
 		});
 
-		Route::get('/' . ($pagesTranslates[$lang]['pricing']), App\Http\Livewire\Public\Pricing::class)->name($lang . '.pricing');
-		Route::get('/' . ($pagesTranslates[$lang]['contact']), App\Http\Livewire\Public\Contact::class)->name($lang . '.contact');
-		Route::get('/' . ($pagesTranslates[$lang]['signin']), App\Http\Livewire\Auth\Signin::class)->name($lang . '.signin');
-		Route::get('/' . ($pagesTranslates[$lang]['terms']), App\Http\Livewire\Public\Terms::class)->name($lang . '.terms');
-		Route::get('/' . ($pagesTranslates[$lang]['privacy']), App\Http\Livewire\Public\Privacy::class)->name($lang . '.privacy');
+		Route::get('/' . ($pagesTranslates[$lang]['pricing']), App\Livewire\Public\Pricing::class)->name($lang . '.pricing');
+		Route::get('/' . ($pagesTranslates[$lang]['contact']), App\Livewire\Public\Contact::class)->name($lang . '.contact');
+		// Route::get('/' . ($pagesTranslates[$lang]['signin']), App\Livewire\Auth\Signin::class)->name($lang . '.signin');
+		Route::get('/' . ($pagesTranslates[$lang]['terms']), App\Livewire\Public\Terms::class)->name($lang . '.terms');
+		Route::get('/' . ($pagesTranslates[$lang]['privacy']), App\Livewire\Public\Privacy::class)->name($lang . '.privacy');
 	});
 }
 
@@ -118,4 +118,27 @@ Route::get('/politica-de-privacidad', function() use ($superLang) {
 	return response()->json(['message' => 'Whats going on'], 200);
 })->name('login');*/
 
-Route::group(['as' => 'admin', 'middleware' => ['auth', 'verified'], 'prefix' => '/admin'], function () {});
+Route::get('/login', App\Livewire\Login::class)->name('login');
+Route::post('/logout', App\Livewire\Login::class)->name('logout');
+
+Route::group(['as' => 'admin', 'middleware' => ['auth', 'verified'], 'prefix' => '/admin'], function () {
+	Route::get('/', App\Livewire\Admin\Dashboard::class)->name('.dashboard');
+
+	Route::group(['as' => '.portfolio', 'prefix' => '/portfolio'], function () {
+		Route::get('/', App\Livewire\Admin\PortfolioListing::class)->name('.listing');
+		Route::get('/create', App\Livewire\Admin\PortfolioCreate::class)->name('.create');
+		Route::get('/edit/{model}', App\Livewire\Admin\PortfolioEdit::class)->name('.edit');
+	});
+
+	Route::group(['as' => '.team', 'prefix' => '/team'], function () {
+		Route::get('/', App\Livewire\Admin\TeamListing::class)->name('.listing');
+		Route::get('/creaet', App\Livewire\Admin\TeamCreate::class)->name('.create');
+		Route::get('/edit/{model}', App\Livewire\Admin\TeamEdit::class)->name('.edit');
+	});
+
+	Route::group(['as' => '.service', 'prefix' => '/service'], function () {
+		Route::get('/', App\Livewire\Admin\ServiceListing::class)->name('.listing');
+		Route::get('/creaet', App\Livewire\Admin\ServiceCreate::class)->name('.create');
+		Route::get('/edit/{model}', App\Livewire\Admin\ServiceEdit::class)->name('.edit');
+	});
+});

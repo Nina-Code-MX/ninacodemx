@@ -6,13 +6,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "doctrine/dbal": "^3.0",
         "guzzlehttp/guzzle": "^7.0",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^2.12",
+        "league/flysystem-aws-s3-v3": "^3.0",
+        "livewire/livewire": "^3.0",
         "mailchimp/marketing": "^3.0",
         "mailchimp/transactional": "^1.0",
+        "nesbot/carbon": "^2.72",
         "ramsey/uuid": "^4.7",
         "sendgrid/sendgrid": "^8.1"
     },

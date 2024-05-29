@@ -15,22 +15,31 @@ class Team extends Model
 
     protected $appends = ['full_name'];
     protected $fillable = ['first_name', 'last_name', 'title', 'image', 'order'];
+    public static $headers = ['id' => 'Id', 'first_name' => 'First name', 'last_name' => 'Last name', 'title' => 'Title', 'image' => 'Image', 'order' => 'Order', 'created_at' => 'Created at', 'updated_at' => 'Updated at', 'deleted_at' => 'Deleted at'];
 
     /**
      * Mutators
      */
 
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $value ? json_decode($value, true) : null,
+            set: fn (mixed $value) => json_encode($value)
+        );
+    }
+
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => ucfirst($attributes['first_name'] . ' ' . $attributes['last_name'])
+            get: fn (mixed $value, array $attributes) => ucfirst(($attributes['first_name'] ?? '') . ' ' . ($attributes['last_name'] ?? ''))
         );
     }
 
     protected function title(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'])['value']['title'] ?? $attributes['title']
+            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'] ?? null)['value']['title'] ?? $attributes['title'] ?? ''
         );
     }
 

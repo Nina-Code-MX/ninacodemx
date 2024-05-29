@@ -65,7 +65,7 @@
 @push('scripts')
 @vite('resources/js/public/pricing.js') 
 <script>
-    document.addEventListener('livewire:load', async () => {
+    document.addEventListener('livewire:init', async () => {
         const userIp = await fetch('https://ipgeolocation.abstractapi.com/v1/?api_key=' + window.VITE_ABSTRACTAIP_API_KEY)
             .then(res => res.json());
         const input = document.querySelector("#formDataPhone");

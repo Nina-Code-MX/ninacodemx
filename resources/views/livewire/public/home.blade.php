@@ -70,7 +70,15 @@
                 <div class="bg-neutral-50 border p-4 place-self-stretch rounded">
                     <div class="flex flex-col gap-2 h-[100%]">
                         <div class="bg-neutral-100 border h-36 w-full mb-2 rounded">
-                            <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ asset($team['image'] ?? 'images/logo-ninacode-mx-1024.png') }}" />
+                            @php $image = asset('images/logo-ninacode-mx-1024.png'); @endphp 
+
+                            @isset($team['image']['key']) 
+                                @if (\Storage::disk('s3')->exists($team['image']['key'])) 
+                                    @php $image = \Storage::disk('s3')->temporaryUrl($team['image']['key'], \Carbon\Carbon::now()->addMinutes(5)); @endphp
+                                @endif 
+                            @endisset 
+
+                            <img alt="Desarrollo" class="object-cover h-full rounded w-full" src="{{ $image }}" />
                         </div>
                         <h4 class="text-center">{{ $team['full_name'] }}</h4>
                         <p class="h-full place-self-stretch text-center text-sm">{{ $team['title'] }}</p>

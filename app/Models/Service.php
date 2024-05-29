@@ -15,6 +15,7 @@ class Service extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ['name', 'excerpt', 'description', 'slug', 'image', 'order'];
+    public static $headers = ['id' => 'Id', 'name' => 'Name', 'excerpt' => 'Excerpt', 'description' => 'Description', 'slug' => 'Slug', 'image' => 'Image', 'order' => 'Order', 'created_at' => 'Created at', 'updated_at' => 'Updated at', 'deleted_at' => 'Deleted at'];
 
     /**
      * Mutators
@@ -23,28 +24,36 @@ class Service extends Model
     protected function name(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'])['value']['name'] ?? $attributes['name']
+            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'] ?? null)['value']['name'] ?? $attributes['name'] ?? ''
         );
     }
 
     protected function excerpt(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'])['value']['excerpt'] ?? $attributes['excerpt']
+            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'] ?? null)['value']['excerpt'] ?? $attributes['excerpt'] ?? ''
         );
     }
 
     protected function description(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'])['value']['description'] ?? $attributes['description']
+            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'] ?? null)['value']['description'] ?? $attributes['description'] ?? ''
         );
     }
 
     protected function slug(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'])['value']['slug'] ?? $attributes['slug']
+            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'] ?? null)['value']['slug'] ?? $attributes['slug'] ?? ''
+        );
+    }
+
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $value ? json_decode($value, true) : null,
+            set: fn (mixed $value) => json_encode($value)
         );
     }
 

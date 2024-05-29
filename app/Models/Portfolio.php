@@ -13,10 +13,8 @@ class Portfolio extends Model
     use HasFactory;
 
     protected $appends = ['project_date_human'];
-    protected $casts = [
-        'tags' => 'array'
-    ];
     protected $fillable = ['name', 'description', 'url', 'project_date', 'tags'];
+    public static $headers = ['id' => 'Id', 'name' => 'Name', 'description' => 'Description', 'url' => 'Url', 'project_date' => 'Project Date', 'tags' => 'Tags', 'created_at' => 'Created at', 'updated_at' => 'Updated at'];
 
     /**
      * Mutators
@@ -30,15 +28,29 @@ class Portfolio extends Model
     protected function description(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'])['value']['description'] ?? $attributes['description']
+            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'] ?? null)['value']['description'] ?? $attributes['description'] ?? ''
+        );
+    }
+
+    protected function projectDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $value ? \Carbon\Carbon::parse($value)->format('Y-m-d') : null
         );
     }
 
     protected function projectDateHuman(): Attribute
     {
-
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => \Carbon\Carbon::parse($attributes['project_date'])->translatedFormat($this->formatDates[Cookie::get('lang') ?? 'es'])
+            get: fn (mixed $value, array $attributes) => \Carbon\Carbon::parse($attributes['project_date'] ?? null)->translatedFormat($this->formatDates[Cookie::get('lang') ?? 'es'])
+        );
+    }
+
+    protected function tags(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $value ? json_decode($value, true) : null,
+            set: fn (mixed $value) => json_encode($value)
         );
     }
 
