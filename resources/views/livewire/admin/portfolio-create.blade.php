@@ -53,7 +53,7 @@
 
                         @isset($portfolio_form->image['key']) 
                             @if (\Storage::disk('s3')->exists($portfolio_form->image['key'])) 
-                                @php $image = \Storage::disk('s3')->temporaryUrl($portfolio_form->image['key'], \Carbon\Carbon::now()->addMinutes(5)); @endphp
+                                @php $image = \Storage::disk('s3')->url($portfolio_form->image['key']); @endphp
                             @endif 
                         @endisset 
 

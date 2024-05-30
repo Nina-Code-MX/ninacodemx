@@ -25,7 +25,7 @@
 
                 @isset($service['image']['key']) 
                     @if (\Storage::disk('s3')->exists($service['image']['key'])) 
-                        @php $image = \Storage::disk('s3')->temporaryUrl($service['image']['key'], \Carbon\Carbon::now()->addMinutes(5)); @endphp
+                        @php $image = \Storage::disk('s3')->url($service['image']['key']); @endphp
                     @endif 
                 @endisset 
             <div class="bg-neutral-100 border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
@@ -74,7 +74,7 @@
 
                             @isset($team['image']['key']) 
                                 @if (\Storage::disk('s3')->exists($team['image']['key'])) 
-                                    @php $image = \Storage::disk('s3')->temporaryUrl($team['image']['key'], \Carbon\Carbon::now()->addMinutes(5)); @endphp
+                                    @php $image = \Storage::disk('s3')->url($team['image']['key']); @endphp
                                 @endif 
                             @endisset 
 

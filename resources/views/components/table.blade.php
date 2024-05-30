@@ -51,7 +51,7 @@
 
                                         @isset($data_info['key']) 
                                             @if (\Storage::disk('s3')->exists($data_info['key'])) 
-                                                @php $image = \Storage::disk('s3')->temporaryUrl($data_info['key'], \Carbon\Carbon::now()->addMinutes(5)); @endphp
+                                                @php $image = \Storage::disk('s3')->url($data_info['key']); @endphp
                                             @endif 
                                         @endisset 
 

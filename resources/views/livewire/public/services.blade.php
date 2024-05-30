@@ -7,7 +7,7 @@
 
                     @isset($service['image']['key']) 
                         @if (\Storage::disk('s3')->exists($service['image']['key'])) 
-                            @php $image = \Storage::disk('s3')->temporaryUrl($service['image']['key'], \Carbon\Carbon::now()->addMinutes(5)); @endphp
+                            @php $image = \Storage::disk('s3')->url($service['image']['key']); @endphp
                         @endif 
                     @endisset 
                 <div class="bg-neutral-100 flex gap-4 p-4 place-self-stretch rounded">

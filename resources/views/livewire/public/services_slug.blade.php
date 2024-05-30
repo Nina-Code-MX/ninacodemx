@@ -2,7 +2,7 @@
 
 @isset($service['image']['key']) 
     @if (\Storage::disk('s3')->exists($service['image']['key'])) 
-        @php $image = \Storage::disk('s3')->temporaryUrl($service['image']['key'], \Carbon\Carbon::now()->addMinutes(5)); @endphp
+        @php $image = \Storage::disk('s3')->url($service['image']['key']); @endphp
     @endif 
 @endisset 
 <div data-section-id="Service">
@@ -78,7 +78,7 @@
 <meta name="title" content="{{ ($pageTitle ?? '') . ' - ' . env('APP_NAME', 'Laravel') }}" />
 <meta property="og:title" content="{{ ($pageTitle ?? '') . ' - ' . env('APP_NAME', 'Laravel') }}" />
 <meta property="og:description" content="{{ __('pages/services.meta.description') }}" />
-<meta property="og:image" content="{{ asset($services['image'] ?? 'images/logo-ninacode-mx-1024.png') }}" />
+<meta property="og:image" content="{{ $image }}" />
 <meta property="og:url" content="{{ url()->current() }}" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="{{ \Cookie::get('lang') ?: config('app.locale') }}" />

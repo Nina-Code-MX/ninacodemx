@@ -52,7 +52,7 @@
 
                         @isset($team_form->image['key']) 
                             @if (\Storage::disk('s3')->exists($team_form->image['key'])) 
-                                @php $image = \Storage::disk('s3')->temporaryUrl($team_form->image['key'], \Carbon\Carbon::now()->addMinutes(5)); @endphp
+                                @php $image = \Storage::disk('s3')->url($team_form->image['key']); @endphp
                             @endif 
                         @endisset 
 
