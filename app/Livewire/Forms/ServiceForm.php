@@ -15,7 +15,7 @@ class ServiceForm extends Form
     #[Validate('max:255|min:1|required|string', as: 'admin/service.name', translate: true)]
     public $name = '';
 
-    #[Validate('max:255|min:1|required|string', as: 'admin/service.excerpt', translate: true)]
+    #[Validate('min:1|required|string', as: 'admin/service.excerpt', translate: true)]
     public $excerpt = '';
 
     #[Validate('min:1|required|string', as: 'admin/service.description', translate: true)]
