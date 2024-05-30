@@ -1,8 +1,8 @@
 @php $image = asset('images/logo-ninacode-mx-1024.png'); @endphp 
 
-@isset($service['image']['key']) 
-    @if (\Storage::disk('s3')->exists($service['image']['key'])) 
-        @php $image = \Storage::disk('s3')->url($service['image']['key']); @endphp
+@isset($services['image']['key']) 
+    @if (\Storage::disk('s3')->exists($services['image']['key'])) 
+        @php $image = \Storage::disk('s3')->url($services['image']['key']); @endphp
     @endif 
 @endisset 
 <div data-section-id="Service">
