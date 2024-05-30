@@ -90,7 +90,7 @@
 <meta property="twitter:creator" content="@ninacodemx" />
 <meta property="twitter:title" content="{{ ($pageTitle ?? '') . ' - ' . env('APP_NAME', 'Laravel') }}" />
 <meta property="twitter:description" content="{{ __('pages/services.meta.description') }}" />
-<meta property="twitter:image" content="{{ asset($services['image'] ?? 'images/logo-ninacode-mx-1024.png') }}" />
+<meta property="twitter:image" content="{{ $image }}" />
 <meta property="twitter:image:alt" content="{{ env('APP_NAME', 'Laravel') }}" />
 <meta property="twitter:card" content="summary_large_image" />
 @endpush 
