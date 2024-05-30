@@ -2,17 +2,17 @@
     <div class="mx-auto px-4 py-10">
         <div class="container mx-auto">
             <div class="gap-4 grid grid-cols-1 md:grid-cols-2">
-                @forelse ($services as $service)
-                @php
-                    if ($service['image']) {
-                        $service['image'] = \Storage::url($service['image']);
-                    } else {
-                        $service['image'] = 'images/logo-ninacode-mx-1024.png';
-                    }
-                @endphp
+                @forelse ($services as $service) 
+                    @php $image = asset('images/logo-ninacode-mx-1024.png'); @endphp 
+
+                    @isset($service['image']['key']) 
+                        @if (\Storage::disk('s3')->exists($service['image']['key'])) 
+                            @php $image = \Storage::disk('s3')->temporaryUrl($service['image']['key'], \Carbon\Carbon::now()->addMinutes(5)); @endphp
+                        @endif 
+                    @endisset 
                 <div class="bg-neutral-100 flex gap-4 p-4 place-self-stretch rounded">
                     <div class="h-32 w-52">
-                        <img alt="{{ $service['name'] }}" class="object-cover h-full rounded" src="{{ asset($service['image']) }}" title="{{ $service['name'] }}" />
+                        <img alt="{{ $service['name'] }}" class="object-cover h-full rounded" src="{{ $image }}" title="{{ $service['name'] }}" />
                     </div>
 
                     <div class="w-full">

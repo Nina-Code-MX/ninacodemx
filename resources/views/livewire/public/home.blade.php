@@ -21,16 +21,16 @@
     <div class="px-4 py-10">
         <div class="container gap-6 grid grid-cols-1 mx-auto sm:grid-cols-2">
             @foreach ($services as $service) 
-            @php
-                if ($service['image']) {
-                    $service['image'] = \Storage::url($service['image']);
-                } else {
-                    $service['image'] = 'images/logo-ninacode-mx-1024.png';
-                }
-            @endphp
+                @php $image = asset('images/logo-ninacode-mx-1024.png'); @endphp 
+
+                @isset($service['image']['key']) 
+                    @if (\Storage::disk('s3')->exists($service['image']['key'])) 
+                        @php $image = \Storage::disk('s3')->temporaryUrl($service['image']['key'], \Carbon\Carbon::now()->addMinutes(5)); @endphp
+                    @endif 
+                @endisset 
             <div class="bg-neutral-100 border border-neutral-300 gap-6 p-4 rounded-lg lg:flex">
                 <div class="border border-neutral-300 h-40 lg:h-full lg:mb-0 lg:w-1/3 mb-4 rounded shadow">
-                    <img alt="{{ $service['name'] }}" class="object-cover object-top h-full rounded w-full" src="{{ asset($service['image']) }}" title="{{ $service['name'] }}" />
+                    <img alt="{{ $service['name'] }}" class="object-cover object-top h-full rounded w-full" src="{{ $image }}" title="{{ $service['name'] }}" />
                 </div>
 
                 <div class="lg:w-2/3">

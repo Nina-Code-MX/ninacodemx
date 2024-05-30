@@ -1,17 +1,17 @@
-@php
-    if ($services['image']) {
-        $services['image'] = \Storage::url($services['image']);
-    } else {
-        $services['image'] = 'images/logo-ninacode-mx-1024.png';
-    }
-@endphp
+@php $image = asset('images/logo-ninacode-mx-1024.png'); @endphp 
+
+@isset($service['image']['key']) 
+    @if (\Storage::disk('s3')->exists($service['image']['key'])) 
+        @php $image = \Storage::disk('s3')->temporaryUrl($service['image']['key'], \Carbon\Carbon::now()->addMinutes(5)); @endphp
+    @endif 
+@endisset 
 <div data-section-id="Service">
     
     <div class="bg-neutral-100 mb-4 mx-auto px-4 py-10">
         <div class="container mx-auto">
             <div class="items-center gap-4 justify-between lg:flex">
                 <div class="border border-neutral-300 h-40 lg:mb-0 lg:w-1/3 mb-4 rounded shadow">
-                    <img alt="{{ $services['name'] }}" class="object-cover object-center h-full rounded w-full" src="{{ asset($services['image']) }}" title="{{ $services['name'] }}" />
+                    <img alt="{{ $services['name'] }}" class="object-cover object-center h-full rounded w-full" src="{{ $image }}" title="{{ $services['name'] }}" />
                 </div>
 
                 <h1>{{ $services['name'] }}</h1>
