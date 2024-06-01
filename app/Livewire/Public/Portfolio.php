@@ -16,11 +16,11 @@ class Portfolio extends Component
     public function mount(Request $request, $lang = null)
     {
         LocaleHelper::detectLocale($request, $this->pageId);
-        $localeDates = [
+        /*$localeDates = [
             'es' => 'es_MX',
             'en' => 'us_US'
         ];
-        setlocale(LC_ALL, $localeDates[Cookie::get('lang') ?? 'es']);
+        setlocale(LC_ALL, $localeDates[Cookie::get('lang') ?? 'es']);*/
         $this->pageTitle = __('Portafolio');
     }
 

@@ -11,7 +11,7 @@ class TeamSocial extends Model
 {
     use HasFactory;
 
-    protected $appends = ['logo'];
+    protected $appends = ['logo', 'select_value'];
     protected $fillable = ['team_id', 'type', 'link'];
     protected $icons = [
         'bitbucket' => 'fa-brands fa-bitbucket',
@@ -33,6 +33,13 @@ class TeamSocial extends Model
     {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => $this->icons[$attributes['type'] ?? 'dog']
+        );
+    }
+
+    protected function selectValue(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => ($attributes['team_id'] ?? '') . ': ' .ucfirst(($attributes['type'] ?? ''))
         );
     }
 

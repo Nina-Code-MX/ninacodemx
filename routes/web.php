@@ -42,6 +42,8 @@ $pagesTranslates = [
 ];
 
 Route::get('/', function() use ($superLang) {
+	$superLang = in_array($superLang, ['es', 'en']) ? $superLang : 'es';
+
 	return redirect()->route('home', ['locale' => $superLang], 301);
 })->name('home.default');
 
@@ -52,6 +54,8 @@ Route::post('/lang-switcher', function(Request $request) {
 	if (!in_array($lang, array_keys($lang_codes))) {
 		abort(400);
 	}
+
+	dd($lang);
 
 	Cookie::queue(Cookie::make('lang', $lang));
 
@@ -144,5 +148,11 @@ Route::group(['as' => 'admin', 'middleware' => ['auth', 'verified'], 'prefix' =>
 		Route::get('/', App\Livewire\Admin\ServiceListing::class)->name('.listing');
 		Route::get('/creaet', App\Livewire\Admin\ServiceCreate::class)->name('.create');
 		Route::get('/edit/{model}', App\Livewire\Admin\ServiceEdit::class)->name('.edit');
+	});
+
+	Route::group(['as' => '.translate', 'prefix' => '/translate'], function () {
+		Route::get('/', App\Livewire\Admin\TranslateListing::class)->name('.listing');
+		Route::get('/creaet', App\Livewire\Admin\TranslateCreate::class)->name('.create');
+		Route::get('/edit/{model}', App\Livewire\Admin\TranslateEdit::class)->name('.edit');
 	});
 });

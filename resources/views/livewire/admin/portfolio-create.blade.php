@@ -1,4 +1,6 @@
 <div>
+    <x-admin.loading />
+
     <h1 class="border-b border-neutral-300 font-semibold px-2 py-4 text-lg">{{ __('Portafolio') }} {{ __('Crear') }} <span class="font-normal">{{ __('Nuevo') }}</span></h1>
 
     <form wire:submit="save">

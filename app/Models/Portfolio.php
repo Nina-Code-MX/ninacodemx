@@ -12,7 +12,7 @@ class Portfolio extends Model
 {
     use HasFactory;
 
-    protected $appends = ['project_date_human'];
+    protected $appends = ['project_date_human', 'select_value'];
     protected $fillable = ['name', 'description', 'url', 'project_date', 'tags'];
     public static $headers = ['id' => 'Id', 'name' => 'Name', 'description' => 'Description', 'url' => 'Url', 'project_date' => 'Project Date', 'tags' => 'Tags', 'created_at' => 'Created at', 'updated_at' => 'Updated at'];
 
@@ -51,6 +51,13 @@ class Portfolio extends Model
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => $value ? json_decode($value, true) : null,
             set: fn (mixed $value) => json_encode($value)
+        );
+    }
+
+    protected function selectValue(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => ucfirst(($attributes['name'] ?? ''))
         );
     }
 

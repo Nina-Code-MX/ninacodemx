@@ -15,6 +15,7 @@ class Translation extends Model
         'value' => 'array'
     ];
     protected $fillable = ['model_id', 'model_name', 'lang', 'value'];
+    public static $headers = ['id' => 'Id', 'model_id' => 'Model ID', 'model_name' => 'Model name', 'lang' => 'Language', 'value' => 'Value', 'created_at' => 'Created at', 'updated_at' => 'Updated at'];
 
     /**
      * Mutators

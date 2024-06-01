@@ -33,6 +33,7 @@
                     <li class="w-full"><a class="border block px-4 py-2 w-full" href="{{ route('admin.portfolio.listing') }}">{{ __('Portafolio') }}</a></li>
                     <li class="w-full"><a class="border block px-4 py-2 w-full" href="{{ route('admin.team.listing') }}">{{ __('Equípo') }}</a></li>
                     <li class="w-full"><a class="border block px-4 py-2 w-full" href="{{ route('admin.service.listing') }}">{{ __('Servicio') }}</a></li>
+                    <li class="w-full"><a class="border block px-4 py-2 w-full" href="{{ route('admin.translate.listing') }}">{{ __('Traducir') }}</a></li>
                 </ol>
             </nav>
 

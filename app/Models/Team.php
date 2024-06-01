@@ -13,7 +13,7 @@ class Team extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $appends = ['full_name'];
+    protected $appends = ['full_name', 'select_value'];
     protected $fillable = ['first_name', 'last_name', 'title', 'image', 'order'];
     public static $headers = ['id' => 'Id', 'first_name' => 'First name', 'last_name' => 'Last name', 'title' => 'Title', 'image' => 'Image', 'order' => 'Order', 'created_at' => 'Created at', 'updated_at' => 'Updated at', 'deleted_at' => 'Deleted at'];
 
@@ -40,6 +40,13 @@ class Team extends Model
     {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'] ?? null)['value']['title'] ?? $attributes['title'] ?? ''
+        );
+    }
+
+    protected function selectValue(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => ucfirst(($attributes['first_name'] ?? '') . ' ' . ($attributes['last_name'] ?? ''))
         );
     }
 

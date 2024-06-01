@@ -1,6 +1,9 @@
 <div>
+    <x-admin.loading />
+
     <h1 class="border-b border-neutral-300 font-semibold px-2 py-4 text-lg">{{ __('Editar') }} <span class="font-normal">({{ $team_form->id ?? '0' }}) {{ $team_form->first_name ?? 'Unknown' }} {{ $team_form->last_name ?? 'Unknown' }}</span></h1>
 
+    <pre>{{ print_r($models, true) }}</pre>
     <form wire:submit="save">
         <div class="gap-4 grid md:grid-cols-4 w-full">
             @error('generic') 
