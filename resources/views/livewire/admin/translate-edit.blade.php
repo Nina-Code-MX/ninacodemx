@@ -17,7 +17,8 @@
             <x-admin.forms.input class="" id="translate_form_lang" :label="__('admin/translate.lang')" model="translate_form.lang" type="text" wire:model="translate_form.lang" />
             <x-admin.forms.textarea class="md:col-span-4 lg:col-span-4" id="translate_form_value" :label="__('admin/translate.value')" model="translate_form.value" rows="10" wire:model="translate_form.value" />
 
-            <div class="md:col-span-4 flex items-center justify-end lg:col-span-4 w-full">
+            <div class="md:col-span-4 flex gap-4 items-center justify-end lg:col-span-4 w-full">
+                <a class="bg-neutral-300 border font-bold inline-block mb-2 ml-full mr-0 px-4 py-2 rounded text-slate-400" href="{{ route('admin.translate.listing') }}">{{ __('Cancelar') }}</a>
                 <button class="button-primary border font-bold inline-block mb-2 ml-full mr-0 px-4 py-2 rounded text-slate-100" type="submit" wire:loading.attr="disabled">{{ __('Guardar') }}</button>
             </div>
         </div>

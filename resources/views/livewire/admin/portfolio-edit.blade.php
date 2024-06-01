@@ -11,41 +11,12 @@
             </div>
             @enderror 
 
-            <div class="md:col-span-4 w-full">
-                <label class="block pb-2" for="portfolio_form_id">{{ __('admin/portfolio.id') }}</label>
-                <input class="h-10 px-2 rounded-sm w-full" type="text" id="portfolio_form_id" readonly="readonly" wire:model="portfolio_form.id" />
-                @error('portfolio_form.id') <span class="error text-xs text-red-500" id="errorId">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="md:col-span-2 lg:col-span-2 w-full">
-                <label class="block pb-2" for="portfolio_form_name">{{ __('admin/portfolio.name') }}</label>
-                <input class="h-10 px-2 rounded-sm w-full" type="text" id="portfolio_form_name" wire:model="portfolio_form.name" />
-                @error('portfolio_form.name') <span class="error text-xs text-red-500" id="errortName">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="md:col-span-2 lg:col-span-1 w-full">
-                <label class="block pb-2" for="portfolio_form_url">{{ __('admin/portfolio.url') }}</label>
-                <input class="h-10 px-2 rounded-sm w-full" type="url" id="portfolio_form_url" wire:model="portfolio_form.url" />
-                @error('portfolio_form.url') <span class="error text-xs text-red-500" id="errorUrl">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="md:col-span-2 lg:col-span-1 w-full">
-                <label class="block pb-2" for="portfolio_form_project_date">{{ __('admin/portfolio.project_date') }}</label>
-                <input class="h-10 px-2 rounded-sm w-full" type="date" id="portfolio_form_project_date" wire:model="portfolio_form.project_date" />
-                @error('portfolio_form.project_date') <span class="error text-xs text-red-500" id="errorProjectDate">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="md:col-span-4 lg:col-span-4 w-full">
-                <label class="block pb-2" for="portfolio_form_description">{{ __('admin/portfolio.description') }}</label>
-                <input class="h-10 px-2 rounded-sm w-full" type="text" id="portfolio_form_description" wire:model="portfolio_form.description" />
-                @error('portfolio_form.description') <span class="error text-xs text-red-500" id="errorDescription">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="md:col-span-4 lg:col-span-4 w-full">
-                <label class="block pb-2" for="portfolio_form_tags">{{ __('admin/portfolio.tags') }}</label>
-                <input class="h-10 px-2 rounded-sm w-full" type="text" id="portfolio_form_tags" wire:model="portfolio_form.tags" />
-                @error('portfolio_form.tags') <span class="error text-xs text-red-500" id="errorTags">{{ $message }}</span> @enderror
-            </div>
+            <x-admin.forms.input class="md:col-span-4 lg:col-span-4" id="portfolio_form_id" :label="__('admin/portfolio.id')" model="portfolio_form.id" readonly="readonly" type="text" wire:model="portfolio_form.id" />
+            <x-admin.forms.input class="md:col-span-2 lg:col-span-2" id="portfolio_form_id" :label="__('admin/portfolio.name')" model="portfolio_form.name" type="text" wire:model="portfolio_form.name" />
+            <x-admin.forms.input class="md:col-span-2 lg:col-span-2" id="portfolio_form_url" :label="__('admin/portfolio.url')" model="portfolio_form.url" type="url" wire:model="portfolio_form.url" />
+            <x-admin.forms.input class="md:col-span-2 lg:col-span-2" id="portfolio_form_project_date" :label="__('admin/portfolio.project_date')" model="portfolio_form.project_date" type="date" wire:model="portfolio_form.project_date" />
+            <x-admin.forms.textarea class="md:col-span-2 lg:col-span-2" id="portfolio_form_project_description" :label="__('admin/portfolio.description')" model="portfolio_form.description" rows="10" wire:model="portfolio_form.description" />
+            <x-admin.forms.input class="md:col-span-2 lg:col-span-2" id="portfolio_form_tags" :label="__('admin/portfolio.tags')" model="portfolio_form.tags" type="text" wire:model="portfolio_form.tags" />
 
             {{--
             <div class="md:col-span-4 w-full">
@@ -72,7 +43,8 @@
             </div>
             --}}
 
-            <div class="md:col-span-4 flex items-center justify-end w-full">
+            <div class="md:col-span-4 flex gap-4 items-center justify-end w-full">
+                <a class="bg-neutral-300 border font-bold inline-block mb-2 ml-full mr-0 px-4 py-2 rounded text-slate-400" href="{{ route('admin.portfolio.listing') }}">{{ __('Cancelar') }}</a>
                 <button class="button-primary border font-bold inline-block mb-2 ml-full mr-0 px-4 py-2 rounded text-slate-100" type="submit" wire:loading.attr="disabled">{{ __('Guardar') }}</button>
             </div>
         </div>

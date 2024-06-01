@@ -11,44 +11,15 @@
             </div>
             @enderror 
 
-            <div class="md:col-span-4 lg:col-span-4 w-full">
-                <label class="block pb-2" for="service_form_id">{{ __('admin/service.id') }}</label>
-                <input class="h-10 px-2 rounded-sm w-full" type="text" id="service_form_id" readonly="readonly" wire:model="service_form.id" />
-                @error('service_form.id') <span class="error text-xs text-red-500" id="errorId">{{ $message }}</span> @enderror
-            </div>
+            <x-admin.forms.input class="md:col-span-4 lg:col-span-4" id="service_form_id" :label="__('admin/service.id')" model="service_form.id" readonly="readonly" type="text" wire:model="service_form.id" />
+            <x-admin.forms.input class="md:col-span-2 lg:col-span-1" id="service_form_name" :label="__('admin/service.name')" model="service_form.name" type="text" wire:model="service_form.name" />
+            <x-admin.forms.input class="md:col-span-2 lg:col-span-1" id="service_form_slug" :label="__('admin/service.slug')" model="service_form.slug" type="text" wire:model="service_form.slug" />
+            <x-admin.forms.input class="md:col-span-2 lg:col-span-1" id="service_form_order" :label="__('admin/service.order')" model="service_form.order" type="number" wire:model="service_form.order" />
+            <x-admin.forms.textarea class="md:col-span-4 lg:col-span-4" id="service_form_excerpt" :label="__('admin/service.excerpt')" model="service_form.excerpt" rows="10" wire:model="service_form.excerpt" />
+            <x-admin.forms.textarea class="md:col-span-4 lg:col-span-4" id="service_form_description" :label="__('admin/service.description')" model="service_form.description" rows="10" wire:model="service_form.description" />
 
-            <div class="md:col-span-2 lg:col-span-1 w-full">
-                <label class="block pb-2" for="service_form_name">{{ __('admin/service.name') }}</label>
-                <input class="h-10 px-2 rounded-sm w-full" type="text" id="service_form_name" wire:model="service_form.name" />
-                @error('service_form.name') <span class="error text-xs text-red-500" id="errorName">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="md:col-span-2 lg:col-span-1 w-full">
-                <label class="block pb-2" for="service_form_excerpt">{{ __('admin/service.excerpt') }}</label>
-                <input class="h-10 px-2 rounded-sm w-full" type="text" id="service_form_excerpt" wire:model="service_form.excerpt" />
-                @error('service_form.excerpt') <span class="error text-xs text-red-500" id="errorExcerpt">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="md:col-span-2 lg:col-span-1 w-full">
-                <label class="block pb-2" for="service_form_slug">{{ __('admin/service.slug') }}</label>
-                <input class="h-10 px-2 rounded-sm w-full" type="text" id="service_form_slug" wire:model="service_form.slug" />
-                @error('service_form.slug') <span class="error text-xs text-red-500" id="errorSlug">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="md:col-span-2 lg:col-span-1 w-full">
-                <label class="block pb-2" for="service_form_order">{{ __('admin/service.order') }}</label>
-                <input class="h-10 px-2 rounded-sm w-full" type="number" id="service_form_order" wire:model="service_form.order" />
-                @error('service_form.order') <span class="error text-xs text-red-500" id="errorOrder">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="md:col-span-4 lg:col-span-4 w-full">
-                <label class="block pb-2" for="service_form_description">{{ __('admin/service.description') }}</label>
-                <textarea class="px-2 rounded-sm w-full" id="service_form_description" rows="5" wire:model="service_form.description"></textarea>
-                @error('service_form.description') <span class="error text-xs text-red-500" id="errorDescription">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="md:col-span-4 lg:col-span-4 w-full">
-                <div class="md:flex md:gap-4 md:items-center w-full">
+            <div class="mb-10 md:col-span-4 lg:col-span-4 w-full">
+                <div class="flex gap-4 items-center justify-between md:justify-start w-full">
                     <div>
                         @php $image = asset('images/logo-ninacode-mx-1024.png'); @endphp 
 
@@ -70,7 +41,8 @@
                 </div>
             </div>
 
-            <div class="md:col-span-4 flex items-center justify-end lg:col-span-4 w-full">
+            <div class="md:col-span-4 flex gap-4 items-center justify-end lg:col-span-4 w-full">
+                <a class="bg-neutral-300 border font-bold inline-block mb-2 ml-full mr-0 px-4 py-2 rounded text-slate-400" href="{{ route('admin.service.listing') }}">{{ __('Cancelar') }}</a>
                 <button class="button-primary border font-bold inline-block mb-2 ml-full mr-0 px-4 py-2 rounded text-slate-100" type="submit" wire:loading.attr="disabled">{{ __('Guardar') }}</button>
             </div>
         </div>

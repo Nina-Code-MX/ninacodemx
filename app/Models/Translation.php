@@ -11,15 +11,27 @@ class Translation extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $casts = [
-        'value' => 'array'
-    ];
+    protected $casts = ['value' => 'array'];
     protected $fillable = ['model_id', 'model_name', 'lang', 'value'];
-    public static $headers = ['id' => 'Id', 'model_id' => 'Model ID', 'model_name' => 'Model name', 'lang' => 'Language', 'value' => 'Value', 'created_at' => 'Created at', 'updated_at' => 'Updated at'];
+    public static $headers = ['id' => 'Id', 'model_id' => 'Model ID', 'model_name' => 'Model name', 'lang' => 'Language', 'value' => 'Value', 'created_at' => 'Created at', 'updated_at' => 'Updated at', 'select_value' => 'Name'];
 
     /**
      * Mutators
      */
+
+    protected function selectValue(): Attribute
+    {
+        return Attribute::make(
+            get: function(mixed $value, array $attributes) {
+                if (isset($attributes['model_name']) && $attributes['model_name']) {
+                    $model = 'App\Models\\' .  $attributes['model_name'];
+                    return $attributes['model_name'] . ': '. ($model::find($attributes['model_id'])->select_value ?? 'Unknown');
+                } else {
+                    return '-';
+                }
+            }
+        );
+    }
 
     /*protected function lang(): Attribute
     {

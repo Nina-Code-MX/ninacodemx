@@ -13,9 +13,9 @@ class Team extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $appends = ['full_name', 'select_value'];
+    // protected $appends = ['full_name', 'select_value'];
     protected $fillable = ['first_name', 'last_name', 'title', 'image', 'order'];
-    public static $headers = ['id' => 'Id', 'first_name' => 'First name', 'last_name' => 'Last name', 'title' => 'Title', 'image' => 'Image', 'order' => 'Order', 'created_at' => 'Created at', 'updated_at' => 'Updated at', 'deleted_at' => 'Deleted at'];
+    public static $headers = ['id' => 'Id', 'first_name' => 'First name', 'last_name' => 'Last name', 'title' => 'Title', 'image' => 'Image', 'order' => 'Order', 'created_at' => 'Created at', 'updated_at' => 'Updated at', 'deleted_at' => 'Deleted at', 'select_value' => 'Name'];
 
     /**
      * Mutators

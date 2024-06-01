@@ -12,9 +12,9 @@ class Portfolio extends Model
 {
     use HasFactory;
 
-    protected $appends = ['project_date_human', 'select_value'];
+    // protected $appends = ['project_date_human', 'select_value'];
     protected $fillable = ['name', 'description', 'url', 'project_date', 'tags'];
-    public static $headers = ['id' => 'Id', 'name' => 'Name', 'description' => 'Description', 'url' => 'Url', 'project_date' => 'Project Date', 'tags' => 'Tags', 'created_at' => 'Created at', 'updated_at' => 'Updated at'];
+    public static $headers = ['id' => 'Id', 'name' => 'Name', 'description' => 'Description', 'url' => 'Url', 'project_date' => 'Project Date', 'tags' => 'Tags', 'created_at' => 'Created at', 'updated_at' => 'Updated at', 'select_value' => 'Name'];
 
     /**
      * Mutators

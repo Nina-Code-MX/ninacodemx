@@ -14,9 +14,9 @@ class Service extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $appends = ['select_value'];
+    // protected $appends = ['select_value'];
     protected $fillable = ['name', 'excerpt', 'description', 'slug', 'image', 'order'];
-    public static $headers = ['id' => 'Id', 'name' => 'Name', 'excerpt' => 'Excerpt', 'description' => 'Description', 'slug' => 'Slug', 'image' => 'Image', 'order' => 'Order', 'created_at' => 'Created at', 'updated_at' => 'Updated at', 'deleted_at' => 'Deleted at'];
+    public static $headers = ['id' => 'Id', 'name' => 'Name', 'excerpt' => 'Excerpt', 'description' => 'Description', 'slug' => 'Slug', 'image' => 'Image', 'order' => 'Order', 'created_at' => 'Created at', 'updated_at' => 'Updated at', 'deleted_at' => 'Deleted at', 'select_value' => 'Name'];
 
     /**
      * Mutators

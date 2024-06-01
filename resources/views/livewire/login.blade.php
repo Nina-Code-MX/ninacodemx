@@ -2,6 +2,8 @@
 @php $lang_available = config('app.locale_available') ?? ['es' => 'Español']; @endphp 
 @php $lang_codes = config('app.locale_codes') ?? ['es' => 'mx']; @endphp 
 <div>
+    <x-admin.loading />
+
     <section class="grid md:p-16 min-h-screen place-items-center p-2">
         <div class="w-72 rounded-md p-4 pt-0 bg-white shadow-lg">
             <header class="flex h-16 items-center justify-between font-bold">

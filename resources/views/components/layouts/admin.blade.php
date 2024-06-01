@@ -26,14 +26,36 @@
                     <button id="mainNavBurger" class="border border-neutral-500 flex items-center lg:hidden rounded text-neutral-500"><span class="material-symbols-outlined">menu</span></button>
                 </div>
 
-                <ol class="bg-neutral-50 hidden lg:block lg:w-64 w-screen toggle-show">
-                    <li class="w-full"><a class="border block px-4 py-2 w-full" href="{{ route('home', ['locale' => $lang]) }}">Public site</a></li>
-                    <li class="w-full"><a class="border block px-4 py-2 w-full" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li class="w-full"><a class="border block px-4 py-2 w-full" href="{{ route('admin.contact.listing') }}">{{ __('Contacto') }}</a></li>
-                    <li class="w-full"><a class="border block px-4 py-2 w-full" href="{{ route('admin.portfolio.listing') }}">{{ __('Portafolio') }}</a></li>
-                    <li class="w-full"><a class="border block px-4 py-2 w-full" href="{{ route('admin.team.listing') }}">{{ __('Equípo') }}</a></li>
-                    <li class="w-full"><a class="border block px-4 py-2 w-full" href="{{ route('admin.service.listing') }}">{{ __('Servicio') }}</a></li>
-                    <li class="w-full"><a class="border block px-4 py-2 w-full" href="{{ route('admin.translate.listing') }}">{{ __('Traducir') }}</a></li>
+                <ol class="bg-neutral-50 hidden lg:block lg:pt-10 lg:w-64 w-screen toggle-show">
+                    @php
+                        $menuItems = [
+                            ['icon' => 'public',          'name' => __('Ver Sitio'),  'route' => route('home', ['locale' => $lang])],
+                            ['icon' => 'empty_dashboard', 'name' => __('Dashboard'),  'route' => route('admin.dashboard')],
+                            ['icon' => 'contact_support', 'name' => __('Contacto'),   'route' => route('admin.contact.listing')],
+                            ['icon' => 'auto_stories',    'name' => __('Portafolio'), 'route' => route('admin.portfolio.listing')],
+                            ['icon' => 'groups',          'name' => __('Equípo'),     'route' => route('admin.team.listing')],
+                            ['icon' => 'devices',         'name' => __('Servicio'),   'route' => route('admin.service.listing')],
+                            ['icon' => 'translate',       'name' => __('Traducir'),   'route' => route('admin.translate.listing')]
+                        ];
+                    @endphp 
+                    @foreach ($menuItems as $item)
+                    <li class="border border-b-0 w-full">
+                        <a class="block flex gap-4 hover:bg-neutral-200 items-center justify-between px-4 py-2 w-full" href="{{ $item['route'] }}">
+                            <span>{{ $item['name'] }}</span>
+                            <span class="material-symbols-outlined">{{ $item['icon'] }}</span>
+                        </a>
+                    </li>
+                    @endforeach 
+
+                    <li class="border w-full">
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button class="flex gap-4 hover:bg-neutral-200 items-center justify-between px-4 py-2 text-left w-full" type="submit">
+                                <span>{{ __('Cerrar sesión') }}</span>
+                                <span class="material-symbols-outlined">logout</span>
+                            </button>
+                        </form>
+                    </li>
                 </ol>
             </nav>
 

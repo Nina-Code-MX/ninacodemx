@@ -15,4 +15,19 @@ class ServiceListing extends Component
         return view('livewire.admin.service-listing', ['service' => $service])
             ->layout('components.layouts.admin', []);
     }
+
+    public function delete($service_id)
+    {
+        $errguid = \Str::uuid();
+
+        try {
+            ServiceModel::findOrFail($service_id)->delete();
+        } catch (ModelNotFoundException $e) {
+            \Log::error('TeamListing', ['line' => __LINE__, 'error' => $e->getMessage(), 'service_id' => $service_id, 'guid' => $errguid]);
+            $this->addError('generic', 'The record does not exist.');
+        } catch (\Exception $e) {
+            \Log::error('TeamListing', ['line' => __LINE__, 'error' => $e->getMessage(), 'service_id' => $service_id, 'guid' => $errguid]);
+            $this->addError('generic', 'Unable to delete the record, if the problem persists please contact the administrator. Error guid: ' . $errguid);
+        }
+    }
 }
