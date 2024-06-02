@@ -28,8 +28,8 @@ class Home extends Component
         return view(
             'livewire.public.home', 
             [
-                'services' => \App\Models\Service::orderBy('order')->get()->toArray(),
-                'teams' => \App\Models\Team::with(['teamSocials'])->orderBy('order')->get()->toArray(),
+                'services' => \App\Models\Service::orderBy('order')->get(),
+                'teams' => \App\Models\Team::with(['teamSocials'])->orderBy('order')->get(),
             ]
         )
         ->layout('components.layouts.app', [

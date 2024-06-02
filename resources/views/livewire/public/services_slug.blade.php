@@ -25,11 +25,11 @@
                 {!! $services['description'] !!}
 
                 <div class="flex items-center justify-end gap-4">
-                    <a class="button-cancel border font-bold inline-block lg:max-w-40 lg:w-auto mb-2 mr-0 px-4 py-2 rounded text-center text-slate-100 w-full"
+                    <a class="button-cancel border font-bold inline-block mb-2 mr-0 px-4 py-2 rounded text-center text-slate-100 w-auto"
                         href="{{ route(app()->getLocale() . '.services', ['locale' => app()->getLocale()]) }}">{{ __('Volver') }}</a>
 
-                    <a class="button-secondary border font-bold inline-block lg:max-w-40 lg:w-auto mb-2 mr-0 px-4 py-2 rounded text-center text-slate-100 w-full"
-                    href="{{ route(app()->getLocale() . '.pricing', ['locale' => app()->getLocale(), 'service' => $services['slug']]) }}">{{ __('Solicitar cotización') }}</a>
+                    <a class="button-secondary border font-bold inline-block mb-2 mr-0 px-4 py-2 rounded text-center text-slate-100 w-auto"
+                        href="{{ route(app()->getLocale() . '.pricing', ['locale' => app()->getLocale(), 'service' => $services['slug']]) }}">{{ __('Solicitar cotización') }}</a>
                 </div>
             </div>
         </div>

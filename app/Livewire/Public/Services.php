@@ -45,7 +45,7 @@ class Services extends Component
             $Services = $this->getSlugTranslation();
 
             if ($Services) {
-                $Services = $Services->toArray();
+                $Services = $Services;
             } else {
                 abort(404);
             }
@@ -53,7 +53,7 @@ class Services extends Component
             $layoutSet['pageTitle'] = $Services['name'];
             $this->pageTitle = $Services['name'];
         } else {
-            $Services = \App\Models\Service::orderBy('order')->get()->toArray();
+            $Services = \App\Models\Service::orderBy('order')->get();
         }
         
         return view('livewire.public.services' . ($this->slug ? '_slug' : ''), ['services' => $Services])

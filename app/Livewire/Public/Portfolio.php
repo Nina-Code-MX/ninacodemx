@@ -16,17 +16,15 @@ class Portfolio extends Component
     public function mount(Request $request, $lang = null)
     {
         LocaleHelper::detectLocale($request, $this->pageId);
-        /*$localeDates = [
-            'es' => 'es_MX',
-            'en' => 'us_US'
-        ];
-        setlocale(LC_ALL, $localeDates[Cookie::get('lang') ?? 'es']);*/
+
         $this->pageTitle = __('Portafolio');
     }
 
     public function render()
     {
-        return view('livewire.public.portfolio', ['portfolios' => \App\Models\Portfolio::orderBy('project_date', 'desc')->get()->toArray()])
+        return view('livewire.public.portfolio', [
+            'portfolios' => \App\Models\Portfolio::orderBy('project_date', 'desc')->get()
+        ])
             ->layout('components.layouts.app', [
                 'pageId' => $this->pageId,
                 'pageTitle' => $this->pageTitle
