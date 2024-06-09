@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes as EloquentSoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Article extends Model
 {
-    use HasFactory, EloquentSoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
 
