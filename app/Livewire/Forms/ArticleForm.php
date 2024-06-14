@@ -12,7 +12,7 @@ class ArticleForm extends Form
 
     public $id = null;
 
-    #[Validate('max:255|min:2|requiered|string', as: 'admin/article.name', translate: true)]
+    #[Validate('max:255|min:2|required|string', as: 'admin/article.name', translate: true)]
     public $title = '';
 
     #[Validate('max:255|required|string', as: 'admin/article.slug', translate: true)]
@@ -30,9 +30,11 @@ class ArticleForm extends Form
     #[Validate('required|exists:users,id', as: 'admin/article.user_id', translate: true)]
     public $user_id;
 
+    #[Validate('image|max:10240|nullable', as: 'admin/article.image', translate: true)]
+    public $image_upload = null;
+
     public function setArticle(ArticleModel $article)
     {
-
         $this->article = $article;
         $this->id = $article->id;
         $this->title = $article->title;
@@ -41,7 +43,6 @@ class ArticleForm extends Form
         $this->content = $article->content;
         $this->image = $article->image;
         $this->user_id = $article->user_id;
-
+        $this->image_upload = null;
     }
-
 }

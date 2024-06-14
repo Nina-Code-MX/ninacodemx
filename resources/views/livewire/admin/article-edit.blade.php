@@ -11,11 +11,11 @@
             </div>
             @enderror 
 
-            <x-admin.forms.input class="md:col-span-4 lg:col-span-4" id="article_form_id" :label="__('admin/article.id')" model="article_form.id" readonly="readonly" type="text" wire:model="article_form.id" />
-            <x-admin.forms.input class="md:col-span-2 lg:col-span-1" id="article_form_title" :label="__('admin/article.title')" model="article_form.title" type="text" wire:model="article_form.title" />
-            <x-admin.forms.input class="md:col-span-2 lg:col-span-1" id="article_form_slug" :label="__('admin/article.slug')" model="article_form.slug" type="text" wire:model="article_form.slug" />
-            <x-admin.forms.textarea class="md:col-span-4 lg:col-span-4" id="article_form_excerpt" :label="__('admin/article.excerpt')" model="article_form.excerpt" rows="10" wire:model="article_form.excerpt" />
-            <x-admin.forms.textarea class="md:col-span-4 lg:col-span-4" id="article_form_content" :label="__('admin/article.content')" model="article_form.content" rows="10" wire:model="article_form.content" />
+            <x-admin.forms.input class="md:col-span-4 lg:col-span-4" id="article_form_id" :label="__('admin/article.id')" readonly="readonly" type="text" wire:model="article_form.id" />
+            <x-admin.forms.input class="md:col-span-2 lg:col-span-2" id="article_form_title" :label="__('admin/article.title')" type="text" wire:model="article_form.title" />
+            <x-admin.forms.input class="md:col-span-2 lg:col-span-2" id="article_form_slug" :label="__('admin/article.slug')" type="text" wire:model="article_form.slug" />
+            <x-admin.forms.textarea class="md:col-span-4 lg:col-span-4" id="article_form_excerpt" :label="__('admin/article.excerpt')" rows="10" wire:model="article_form.excerpt" />
+            <x-admin.forms.textarea class="md:col-span-4 lg:col-span-4" id="article_form_content" :label="__('admin/article.content')" rows="10" wire:model="article_form.content" />
 
             <div class="mb-10 md:col-span-4 lg:col-span-4 w-full">
                 <div class="flex gap-4 items-center justify-between md:justify-start w-full">

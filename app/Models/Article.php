@@ -40,5 +40,10 @@ class Article extends Model
         );
     }
 
-
+    protected function selectValue(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => ucfirst(($attributes['title'] ?? ''))
+        );
+    }
 }
