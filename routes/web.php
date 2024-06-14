@@ -155,4 +155,11 @@ Route::group(['as' => 'admin', 'middleware' => ['auth', 'verified'], 'prefix' =>
 		Route::get('/creaet', App\Livewire\Admin\TranslateCreate::class)->name('.create');
 		Route::get('/edit/{model}', App\Livewire\Admin\TranslateEdit::class)->name('.edit');
 	});
+
+	Route::group(['as' => '.article', 'prefix' => '/article'], function () {
+		Route::get('/', App\Livewire\Admin\ArticleListing::class)->name('.listing');
+		Route::get('/create', App\Livewire\Admin\ArticleCreate::class)->name('.create');
+		Route::get('/edit/{model}', App\Livewire\Admin\ArticleEdit::class)->name('.edit');
+	});
+
 });
