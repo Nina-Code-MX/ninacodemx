@@ -35,6 +35,7 @@
                         $menuItems = [
                             ['icon' => 'public',          'name' => __('Ver Sitio'),  'route' => route('home', ['locale' => $lang])],
                             ['icon' => 'empty_dashboard', 'name' => __('Dashboard'),  'route' => route('admin.dashboard')],
+                            ['icon' => 'pages',           'name' => __('Articulo'),   'route' => route('admin.article.listing')],
                             ['icon' => 'contact_support', 'name' => __('Contacto'),   'route' => route('admin.contact.listing')],
                             ['icon' => 'auto_stories',    'name' => __('Portafolio'), 'route' => route('admin.portfolio.listing')],
                             ['icon' => 'groups',          'name' => __('Equípo'),     'route' => route('admin.team.listing')],

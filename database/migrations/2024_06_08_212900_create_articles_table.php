@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug')->unique();
-            $table->text('excerpt');
-            $table->text('content');
+            $table->string('slug');
+            $table->string('excerpt');
+            $table->string('content');
             $table->string('image')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();//Agregar las columnas created_at y update_at
