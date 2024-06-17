@@ -1,4 +1,9 @@
-
+@php
+    $lang_available = config('app.locale_available') ?? ['es' => 'Español'];
+    $lang_codes = config('app.locale_codes') ?? ['es' => 'mx'];
+    $lang = \Cookie::get('lang') ?: config('app.locale') ?: 'es';
+    $lang = in_array($lang, array_keys($lang_available)) ? $lang : 'es';
+@endphp 
 <div>
     <div class="bg-neutral-100 mx-auto px-4 py-10">
         <div class="container mx-auto">
@@ -182,7 +187,7 @@
     <div class="px-4 py-10">
         <div class="container mx-auto text-center">
             <h2 class="mb-4">{{ __('pages/home.contact.h2') }}</h2>
-            <a class="button-primary border font-bold inline-block mb-2 ml-auto mr-0 px-4 py-2 rounded text-slate-100" href="{{ route((\Cookie::get('lang') ?: config('app.locale') ?: 'es') . '.contact', ['locale' => \Cookie::get('lang') ?: config('app.locale') ?: 'es']) }}">{{ __('pages/home.contact.label') }}</a>
+            <a class="button-primary border font-bold inline-block mb-2 ml-auto mr-0 px-4 py-2 rounded text-slate-100" href="{{ route($lang . '.contact', ['locale' => $lang]) }}">{{ __('pages/home.contact.label') }}</a>
         </div>
     </div>
 
@@ -214,7 +219,7 @@
 <meta property="og:image" content="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
 <meta property="og:url" content="{{ url()->current() }}" />
 <meta property="og:type" content="website" />
-<meta property="og:locale" content="{{ \Cookie::get('lang') ?: config('app.locale') }}" />
+<meta property="og:locale" content="{{ $lang }}" />
 <meta property="og:site_name" content="{{ env('APP_NAME', 'Laravel') }}" />
 <meta property="og:image:width" content="1024" />
 <meta property="og:image:height" content="1024" />

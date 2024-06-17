@@ -1,6 +1,10 @@
-@php $lang = \Cookie::get('lang') ?: config('app.locale'); @endphp 
-@php $lang_available = config('app.locale_available') ?? ['es' => 'Español']; @endphp 
-@php $lang_codes = config('app.locale_codes') ?? ['es' => 'mx']; @endphp 
+@php
+    $lang_available = config('app.locale_available') ?? ['es' => 'Español'];
+    $lang_codes = config('app.locale_codes') ?? ['es' => 'mx'];
+    $lang = \Cookie::get('lang') ?: config('app.locale') ?: 'es';
+    $lang = in_array($lang, array_keys($lang_available)) ? $lang : 'es';
+    app()->setLocale($lang);
+@endphp 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>

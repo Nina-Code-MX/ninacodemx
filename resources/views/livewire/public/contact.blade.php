@@ -1,5 +1,10 @@
+@php
+    $lang_available = config('app.locale_available') ?? ['es' => 'Español'];
+    $lang_codes = config('app.locale_codes') ?? ['es' => 'mx'];
+    $lang = \Cookie::get('lang') ?: config('app.locale') ?: 'es';
+    $lang = in_array($lang, array_keys($lang_available)) ? $lang : 'es';
+@endphp 
 <div>
-    @php $lang = \Cookie::get('lang') ?: config('app.locale'); @endphp 
     <div class="mx-auto px-4 py-10">
         <div class="container mx-auto">
             <form action="{{ route($lang . '.pricing', ['locale' => $lang]) }}" method="POST" onsubmit="return window.submitQuote();">
