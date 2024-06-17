@@ -21,11 +21,11 @@
 
                     <div class="bg-neutral-100 lg:flex gap-4 p-4 place-self-stretch rounded">
                         <div class="h-32 mx-auto w-52">
-                            <img alt="{{ $articles['name'] }}" class="object-cover h-full mx-auto rounded" src="{{ $image }}" title="{{ $articles['name'] }}" />
+                            <img alt="{{ $articles['title'] }}" class="object-cover h-full mx-auto rounded" src="{{ $image }}" title="{{ $articles['title'] }}" />
                         </div>
 
                         <div class="w-full">
-                            <h3 class="mb-4 lg:text-left text-center">{{ $articles['name'] }}</h3>
+                            <h3 class="mb-4 lg:text-left text-center">{{ $articles['title'] }}</h3>
 
                             <p class="mb-4 place-self-stretch text-justify">{{ \Illuminate\Support\Str::of($articles['excerpt'])->words('50', '...') }}</p>
 
