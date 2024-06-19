@@ -28,7 +28,7 @@ $pagesTranslates = [
 		'signin' => 'signin',
 		'terms' => 'terms-and-conditions',
 		'privacy' => 'privacy-policy',
-		'article' => 'articles'
+		'articles' => 'articles'
 	],
 	'es' => [
 		'aboutus' => 'nosotros',
@@ -39,7 +39,7 @@ $pagesTranslates = [
 		'signin' => 'iniciar-sesion',
 		'terms' => 'terminos-y-condiciones',
 		'privacy' => 'aviso-de-privacidad',
-		'article' => 'articulos'
+		'articles' => 'articulos'
 	],
 ];
 
@@ -92,9 +92,9 @@ foreach ($pagesTranslates AS $lang => $page) {
 			Route::get('/{slug}', App\Livewire\Public\Services::class)->name($lang . '.services.slug');
 		});
 
-		Route::prefix('/' . ($pagesTranslates[$lang]['article']))->group(function () use ($lang, $pagesTranslates) {
-			Route::get('/', App\Livewire\Public\Articles::class)->name($lang . '.article');
-			Route::get('/{slug}', App\Livewire\Public\Articles::class)->name($lang . '.article.slug');
+		Route::prefix('/' . ($pagesTranslates[$lang]['articles']))->group(function () use ($lang, $pagesTranslates) {
+			Route::get('/', App\Livewire\Public\Articles::class)->name($lang . '.articles');
+			Route::get('/{slug}', App\Livewire\Public\Articles::class)->name($lang . '.articles.slug');
 		});
 
 		Route::get('/' . ($pagesTranslates[$lang]['pricing']), App\Livewire\Public\Pricing::class)->name($lang . '.pricing');
