@@ -57,8 +57,6 @@ Route::post('/lang-switcher', function(Request $request) {
 		abort(400);
 	}
 
-	dd($lang);
-
 	Cookie::queue(Cookie::make('lang', $lang));
 
 	try {
