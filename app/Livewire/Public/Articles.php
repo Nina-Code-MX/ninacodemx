@@ -55,10 +55,10 @@ class Articles extends Component
             $layoutSet['pageTitle'] = $Articles['name'];
             $this->pageTitle = $Articles['name'];
         }else{
-            $Article = \App\Models\Article::orderBy('title')->get();
+            $Articles = \App\Models\Article::orderBy('title')->get();
         }
 
-        return view('livewire.public.articles' . ($this->slug ? '_slug' : ''), ['articles' => $Article])
+        return view('livewire.public.articles' . ($this->slug ? '_slug' : ''), ['articles' => $Articles])
             ->layout('components.layouts.app', $layoutSet);
     }
 

@@ -18,7 +18,7 @@ class ArticleEdit extends Component
 
     public function mount(ArticleModel $model)
     {
-        $this->acticle_form->setArticle($model);
+        $this->article_form->setArticle($model);
     }
 
     public function render()
