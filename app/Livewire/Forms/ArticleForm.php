@@ -21,7 +21,7 @@ class ArticleForm extends Form
     #[Validate('min:1|min:1|string', as: 'admin/article.excerpt', translate: true)]
     public $excerpt = '';
 
-    #[Validate('max:255|required|string', as: 'admin/article.content', translate: true)]
+    #[Validate('required|string', as: 'admin/article.content', translate: true)]
     public $content = '';
 
     #[Validate('nullable|array', as: 'admin/article.image', translate: true)]
