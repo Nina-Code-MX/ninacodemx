@@ -42,6 +42,7 @@
                         <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route('home', ['locale' => $lang]) }}">{{ __('mainmenu.home') }}</a></li>
                         <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.aboutus', ['locale' => $lang]) }}">{{ __('mainmenu.aboutus') }}</a></li>
                         <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.portfolio', ['locale' => $lang]) }}">{{ __('mainmenu.portfolio') }}</a></li>
+                        <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.articles', ['locale' => $lang]) }}">{{ __('mainmenu.articles') }}</a></li>
                         <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.services', ['locale' => $lang]) }}">{{ __('mainmenu.services') }}</a></li>
                         <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.pricing', ['locale' => $lang]) }}">{{ __('mainmenu.pricing') }}</a></li>
                         <li class="lg:pt-0 lg:w-auto pt-2 w-full"><a class="hover:text-neutral-50" href="{{ route($lang . '.contact', ['locale' => $lang]) }}">{{ __('mainmenu.contact') }}</a></li>

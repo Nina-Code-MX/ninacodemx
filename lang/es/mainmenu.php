@@ -17,6 +17,7 @@ return [
     'aboutus' => 'Nosotros',
     'portfolio' => 'Portafolio',
     'services' => 'Servicios',
+    'articles' => 'Articulos',
     'pricing' => 'Precios',
     'contact' => 'Contacto',
     'privacy' => 'Aviso de Privacidad',
