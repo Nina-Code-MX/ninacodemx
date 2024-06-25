@@ -20,7 +20,7 @@
                             @foreach ($data as $d) 
                                 @php $dd = $d->append('select_value')->toArray(); @endphp
 
-                                <tr class="border-b border-neutral-200 duration-300 ease-in-out flex flex-col hover:bg-neutral-100 items-start lg:table-row transition ">
+                                <tr class="border-b border-neutral-200 duration-300 ease-in-out flex flex-col hover:bg-neutral-100 items-start md:table-row transition ">
                                     <td class="whitespace-nowrap px-6 py-4 hidden lg:table-cell">
                                         <button class="btn-action relative z-0"><span class="material-symbols-outlined">more_vert</span></button>
                                         <div class="absolute action-menu bg-white hidden mt-2 py-0 rounded shadow-md w-48 z-10">

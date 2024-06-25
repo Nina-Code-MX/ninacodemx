@@ -19,9 +19,8 @@ return new class extends Migration
             $table->string('content');
             $table->string('image')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->timestamps();//Agregar las columnas created_at y update_at
+            $table->timestamps(); //Agregar las columnas created_at y update_at
             $table->softDeletes(); //Agregar columna deleted_at
-
         });
     }
 
