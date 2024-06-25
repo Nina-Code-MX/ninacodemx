@@ -51,6 +51,28 @@ class Article extends Model
         );
     }
 
+    protected function excerpt(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'] ?? null)['value']['excerpt'] ?? $attributes['excerpt'] ?? ''
+        );
+    }
+
+    protected function slug(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'] ?? null)['value']['slug'] ?? $attributes['slug'] ?? ''
+        );
+    }
+
+    protected function content(): Attribute
+    {
+
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $this->getTranslation($attributes['id'] ?? null)['value']['content'] ?? $attributes['content'] ?? ''
+        );
+    }
+
     protected function selectValue(): Attribute
     {
         return Attribute::make(
