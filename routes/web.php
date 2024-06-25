@@ -28,6 +28,7 @@ $pagesTranslates = [
 		'signin' => 'signin',
 		'terms' => 'terms-and-conditions',
 		'privacy' => 'privacy-policy',
+		'articles' => 'articles'
 	],
 	'es' => [
 		'aboutus' => 'nosotros',
@@ -38,6 +39,7 @@ $pagesTranslates = [
 		'signin' => 'iniciar-sesion',
 		'terms' => 'terminos-y-condiciones',
 		'privacy' => 'aviso-de-privacidad',
+		'articles' => 'articulos'
 	],
 ];
 
@@ -54,8 +56,6 @@ Route::post('/lang-switcher', function(Request $request) {
 	if (!in_array($lang, array_keys($lang_codes))) {
 		abort(400);
 	}
-
-	dd($lang);
 
 	Cookie::queue(Cookie::make('lang', $lang));
 
@@ -88,6 +88,11 @@ foreach ($pagesTranslates AS $lang => $page) {
 		Route::prefix('/' . ($pagesTranslates[$lang]['services']))->group(function () use ($lang, $pagesTranslates) {
 			Route::get('/', App\Livewire\Public\Services::class)->name($lang . '.services');
 			Route::get('/{slug}', App\Livewire\Public\Services::class)->name($lang . '.services.slug');
+		});
+
+		Route::prefix('/' . ($pagesTranslates[$lang]['articles']))->group(function () use ($lang, $pagesTranslates) {
+			Route::get('/', App\Livewire\Public\Articles::class)->name($lang . '.articles');
+			Route::get('/{slug}', App\Livewire\Public\Articles::class)->name($lang . '.articles.slug');
 		});
 
 		Route::get('/' . ($pagesTranslates[$lang]['pricing']), App\Livewire\Public\Pricing::class)->name($lang . '.pricing');
@@ -155,4 +160,11 @@ Route::group(['as' => 'admin', 'middleware' => ['auth', 'verified'], 'prefix' =>
 		Route::get('/creaet', App\Livewire\Admin\TranslateCreate::class)->name('.create');
 		Route::get('/edit/{model}', App\Livewire\Admin\TranslateEdit::class)->name('.edit');
 	});
+
+	Route::group(['as' => '.article', 'prefix' => '/article'], function () {
+		Route::get('/', App\Livewire\Admin\ArticleListing::class)->name('.listing');
+		Route::get('/create', App\Livewire\Admin\ArticleCreate::class)->name('.create');
+		Route::get('/edit/{model}', App\Livewire\Admin\ArticleEdit::class)->name('.edit');
+	});
+
 });

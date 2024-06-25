@@ -6,5 +6,6 @@
         <option value="{{ $d['id'] }}">{{ $d['value'] }}</option>
         @endforeach
     </select>
-    @error($attributes->only(['model'])) <span class="error text-xs text-red-500" id="error{{ $attributes->only(['model']) }}">{{ $message }}</span> @enderror 
+    @php $model = str_replace('"', '', explode("=", $attributes->only(['wire:model']))[1] ?? ''); @endphp
+    @error($model) <span class="error text-xs text-red-500" id="error{{ $model }}">{{ $message }}</span> @enderror 
 </div>
