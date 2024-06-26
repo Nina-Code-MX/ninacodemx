@@ -2,9 +2,7 @@
 
 namespace App\Livewire\Public;
 
-use App\Helpers\LocaleHelper;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 
 class Privacy extends Component
@@ -15,7 +13,6 @@ class Privacy extends Component
 
     public function mount(Request $request, $lang = null)
     {
-        LocaleHelper::detectLocale($request, $this->pageId);
         $this->pageTitle = __('Aviso de Privacidad');
     }
 

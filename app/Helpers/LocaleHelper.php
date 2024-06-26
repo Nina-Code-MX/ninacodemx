@@ -19,8 +19,9 @@ class LocaleHelper
 	 */
 	public static function detectLocale(Request $request, string $pageId = 'home'): Redirector|bool
 	{
+		return true;
+
 		$locale = $request->segment(1);
-		\Log::debug('detectLocale', ['pageId' => $pageId, 'locale' => $locale]);
 
 		if (in_array($locale, ['en', 'es'])) {
 			App::setLocale($locale);

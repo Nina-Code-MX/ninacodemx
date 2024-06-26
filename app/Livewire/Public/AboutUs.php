@@ -2,9 +2,7 @@
 
 namespace App\Livewire\Public;
 
-use App\Helpers\LocaleHelper;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 
 class AboutUs extends Component
@@ -13,9 +11,8 @@ class AboutUs extends Component
     public $pageId = 'aboutus';
     public $pageTitle = 'Acerca de nosotros';
 
-    public function mount(Request $request, $lang = null)
+    public function mount(Request $request)
     {
-        LocaleHelper::detectLocale($request, $this->pageId);
         $this->pageTitle = __('Acerca de nosotros');
     }
 

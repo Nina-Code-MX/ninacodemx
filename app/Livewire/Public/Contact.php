@@ -2,15 +2,12 @@
 
 namespace App\Livewire\Public;
 
-use App\Helpers\LocaleHelper;
 use App\Models\ContactForm;
 use App\Traits\ReCaptchaV3;
 use App\Traits\SendGridTrait;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 use Livewire\Component;
-use SendGrid;
-use Illuminate\Support\Facades\Cookie;
 
 class Contact extends Component
 {
@@ -32,14 +29,11 @@ class Contact extends Component
         'ip' => ''
     ];
     public $submit_message = '';
-    private $sendgrid;
-
     public $contact = [];
+    private $sendgrid;
 
     public function mount(Request $request)
     {
-        LocaleHelper::detectLocale($request, $this->pageId);
-
         $this->heroData['h1'] = __('pages/contact.hero.h1');
         $this->heroData['h2'] = __('pages/contact.hero.h2');
         $this->heroData['p'] = __('pages/contact.hero.p');
@@ -101,7 +95,7 @@ class Contact extends Component
             'formData.ip' => __('IP')
         ]);
 
-        $contactData = array_merge($this->formData, ['lang' => Cookie::get('lang') ?: config('app.locale')]);
+        $contactData = array_merge($this->formData, ['lang' => app()->getLocale()]);
         $createContact = $this->createContact(env('SENDGRID_LIST_CONTACT', ''), $contactData);
 
         try {

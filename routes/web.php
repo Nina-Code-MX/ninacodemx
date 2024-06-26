@@ -17,7 +17,8 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 |
 */
 
-$superLang = Cookie::get('lang') ?: config('app.locale') ?: 'es';
+// $superLang = Cookie::get('lang') ?: config('app.locale') ?: 'es';
+$superLang = app()->getLocale();
 $pagesTranslates = [
 	'en' => [
 		'aboutus' => 'about-us',
@@ -56,8 +57,6 @@ Route::post('/lang-switcher', function(Request $request) {
 	if (!in_array($lang, array_keys($lang_codes))) {
 		abort(400);
 	}
-
-	Cookie::queue(Cookie::make('lang', $lang));
 
 	try {
 		$previousRequest = app('request')->create(app('url')->previous());

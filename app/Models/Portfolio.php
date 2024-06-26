@@ -42,7 +42,7 @@ class Portfolio extends Model
     protected function projectDateHuman(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => \Carbon\Carbon::parse($attributes['project_date'] ?? null)->translatedFormat($this->formatDates[Cookie::get('lang') ?? 'es'])
+            get: fn (mixed $value, array $attributes) => \Carbon\Carbon::parse($attributes['project_date'] ?? null)->translatedFormat($this->formatDates[app()->getLocale() ?? 'es'])
         );
     }
 

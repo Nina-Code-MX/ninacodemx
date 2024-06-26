@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Public;
 
-use App\Helpers\LocaleHelper;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
@@ -14,8 +13,6 @@ class Home extends Component
 
     public function mount(Request $request)
     {
-        LocaleHelper::detectLocale($request, $this->pageId);
-
         $this->heroData['h1'] = __('pages/home.hero.h1');
         $this->heroData['h2'] = __('pages/home.hero.h2');
         $this->heroData['p'] = __('pages/home.hero.p');

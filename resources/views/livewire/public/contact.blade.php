@@ -1,8 +1,5 @@
 @php
-    $lang_available = config('app.locale_available') ?? ['es' => 'Español'];
-    $lang_codes = config('app.locale_codes') ?? ['es' => 'mx'];
-    $lang = \Cookie::get('lang') ?: config('app.locale') ?: 'es';
-    $lang = in_array($lang, array_keys($lang_available)) ? $lang : 'es';
+    $lang = app()->getLocale();
 @endphp 
 <div>
     <div class="mx-auto px-4 py-10">
@@ -146,7 +143,7 @@
 <meta property="og:image" content="{{ asset('images/logo-ninacode-mx-1024.png') }}" />
 <meta property="og:url" content="{{ url()->current() }}" />
 <meta property="og:type" content="website" />
-<meta property="og:locale" content="{{ \Cookie::get('lang') ?: config('app.locale') }}" />
+<meta property="og:locale" content="{{ $lang }}" />
 <meta property="og:site_name" content="{{ env('APP_NAME', 'Laravel') }}" />
 <meta property="og:image:width" content="1024" />
 <meta property="og:image:height" content="1024" />

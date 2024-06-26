@@ -2,11 +2,9 @@
 
 namespace App\Livewire\Public;
 
-use App\Helpers\LocaleHelper;
 use App\Models\Service;
 use App\Models\Translation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 
 class Services extends Component
@@ -19,7 +17,6 @@ class Services extends Component
     public function mount(Request $request, $slug = null)
     {
         $this->slug = $slug;
-        LocaleHelper::detectLocale($request, $this->pageId);
 
         if (!$this->slug) {
             $this->heroData['h1'] = __('pages/services.hero.h1');

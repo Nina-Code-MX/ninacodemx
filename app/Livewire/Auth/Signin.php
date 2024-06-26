@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Auth;
 
-use App\Helpers\LocaleHelper;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
@@ -13,7 +12,6 @@ class Signin extends Component
 
     public function mount(Request $request)
     {
-        LocaleHelper::detectLocale($request, $this->pageId);
         $this->pageTitle = __('Sign In');
     }
 

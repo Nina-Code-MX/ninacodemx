@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Public;
 
-use App\Helpers\LocaleHelper;
 use App\Models\ContactForm;
 use App\Models\Service;
 use App\Models\Translation;
@@ -12,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 use Livewire\Component;
 use SendGrid;
-use Illuminate\Support\Facades\Cookie;
 
 class Pricing extends Component
 {
@@ -45,8 +43,6 @@ class Pricing extends Component
      */
     public function mount(Request $request, $lang = null)
     {
-        LocaleHelper::detectLocale($request, $this->pageId);
-
         $this->heroData['h1'] = __('Precios');
         $this->heroData['h2'] = __('pages/pricing.h2');
         $this->heroData['p'] = __('pages/pricing.hero.p');
@@ -122,7 +118,7 @@ class Pricing extends Component
 
         $service = Service::find($this->formData['service']);
 
-        $contactData = array_merge($this->formData, ['lang' => Cookie::get('lang') ?: config('app.locale'), 'service_name' => $service->name ?? 'Desconocido']);
+        $contactData = array_merge($this->formData, ['lang' => app()->getLocale(), 'service_name' => $service->name ?? 'Desconocido']);
         $createContact = $this->createContact(env('SENDGRID_LIST_PRICING', ''), $contactData);
 
         try {

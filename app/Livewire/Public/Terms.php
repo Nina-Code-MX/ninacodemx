@@ -2,9 +2,7 @@
 
 namespace App\Livewire\Public;
 
-use App\Helpers\LocaleHelper;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 
 class Terms extends Component
@@ -13,9 +11,8 @@ class Terms extends Component
     public $pageId = 'terms';
     public $pageTitle = 'Términos y Condiciones';
 
-    public function mount(Request $request, $lang = null)
+    public function mount(Request $request)
     {
-        LocaleHelper::detectLocale($request, $this->pageId);
         $this->pageTitle = __('Términos y Condiciones');
     }
 
