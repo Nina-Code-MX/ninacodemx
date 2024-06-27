@@ -21,7 +21,7 @@ return [
 	],
     'hero' => [
 		'h1' => 'Articulos',
-		'h2' => 'Ecneuntra información relevante para tu negocio.',
+		'h2' => 'Encuentra información relevante para tu negocio.',
 		'p' => 'Nuestros articulos te ayudarán a entender mejor el mundo de la tecnología y como puedes aplicarla en tu negocio.',
 		'action' => '#'
 	],
