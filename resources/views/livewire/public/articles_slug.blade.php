@@ -19,6 +19,7 @@
                 </div>
 
                 <h1>{{ $articles['title'] }}</h1>
+               
             </div>
         </div>
     </div>
@@ -26,8 +27,11 @@
     <div class="bg-neutral-50 container mx-auto rounded shadow">
         <div class="mx-auto px-4 py-10">
             <div class="container mx-auto">
+                <h4>{{ __('Autor')   }}: {{ $articles -> author -> name }}</h4> 
+                <h4>{{ __('Fecha')   }}:  {{ $articles ['created_at'] }}</h4> 
+                <p></p> 
                 {!! $articles['content'] !!}
-
+                <p></p>
                 <div class="flex items-center justify-end gap-4">
                     <a class="button-cancel border font-bold inline-block mb-2 mr-0 px-4 py-2 rounded text-center text-slate-100 w-auto"
                         href="{{ route(app()->getLocale() . '.articles', ['locale' => app()->getLocale()]) }}">{{ __('Volver') }}</a>

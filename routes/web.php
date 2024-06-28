@@ -91,7 +91,7 @@ foreach ($pagesTranslates AS $lang => $page) {
 
 		Route::prefix('/' . ($pagesTranslates[$lang]['articles']))->group(function () use ($lang, $pagesTranslates) {
 			Route::get('/', App\Livewire\Public\Articles::class)->name($lang . '.articles');
-			Route::get('/{slug}', App\Livewire\Public\Articles::class)->name($lang . '.articles.slug');
+			Route::get('/{year}/{month}/{slug}', App\Livewire\Public\Articles::class)->name($lang . '.articles.slug');
 		});
 
 		Route::get('/' . ($pagesTranslates[$lang]['pricing']), App\Livewire\Public\Pricing::class)->name($lang . '.pricing');
