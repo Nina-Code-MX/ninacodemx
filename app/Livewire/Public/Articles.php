@@ -15,7 +15,7 @@ class Articles extends Component
     public $pageTitle = 'Articulos';
     public $slug = null;
 
-    public function mount(Request $request, $slug = null)
+    public function mount(Request $request, string $year = null, string $month = null, string $slug = null)
     {
         $this->slug = $slug;
 
@@ -46,7 +46,7 @@ class Articles extends Component
             } else {
                 abort(404);
             }
-
+            
             $layoutSet['pageTitle'] = $Articles['name'];
             $this->pageTitle = $Articles['name'];
         } else {
