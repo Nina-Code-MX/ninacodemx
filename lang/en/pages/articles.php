@@ -21,8 +21,8 @@ return [
 	],
     'hero' => [
 		'h1' => 'Articles',
-		'h2' => 'Count on us to take your business to the next level',
-		'p' => 'Our services are focused on providing tailored solutions to each business, whether you need a website, a mobile application, or a business management system, we help you achieve it.',
+		'h2' => 'Find relevant information for your business.',
+		'p' => 'Our articles will help you better understand the world of technology and how you can apply it to your business.',
 		'action' => '#'
 	],
 ];

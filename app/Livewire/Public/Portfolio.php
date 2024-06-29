@@ -2,9 +2,7 @@
 
 namespace App\Livewire\Public;
 
-use App\Helpers\LocaleHelper;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 
 class Portfolio extends Component
@@ -15,8 +13,6 @@ class Portfolio extends Component
 
     public function mount(Request $request, $lang = null)
     {
-        LocaleHelper::detectLocale($request, $this->pageId);
-
         $this->pageTitle = __('Portafolio');
     }
 

@@ -17,7 +17,8 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 |
 */
 
-$superLang = Cookie::get('lang') ?: config('app.locale') ?: 'es';
+// $superLang = Cookie::get('lang') ?: config('app.locale') ?: 'es';
+$superLang = app()->getLocale();
 $pagesTranslates = [
 	'en' => [
 		'aboutus' => 'about-us',
@@ -57,8 +58,6 @@ Route::post('/lang-switcher', function(Request $request) {
 		abort(400);
 	}
 
-	Cookie::queue(Cookie::make('lang', $lang));
-
 	try {
 		$previousRequest = app('request')->create(app('url')->previous());
 		$routeName = app('router')->getRoutes()->match($previousRequest)->getName();
@@ -92,7 +91,7 @@ foreach ($pagesTranslates AS $lang => $page) {
 
 		Route::prefix('/' . ($pagesTranslates[$lang]['articles']))->group(function () use ($lang, $pagesTranslates) {
 			Route::get('/', App\Livewire\Public\Articles::class)->name($lang . '.articles');
-			Route::get('/{slug}', App\Livewire\Public\Articles::class)->name($lang . '.articles.slug');
+			Route::get('/{year}/{month}/{slug}', App\Livewire\Public\Articles::class)->name($lang . '.articles.slug');
 		});
 
 		Route::get('/' . ($pagesTranslates[$lang]['pricing']), App\Livewire\Public\Pricing::class)->name($lang . '.pricing');

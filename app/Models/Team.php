@@ -68,7 +68,7 @@ class Team extends Model
         $classPath = explode('\\', self::class);
         $translation = Translation::where('model_name', end($classPath))
             ->where('model_id', $model_id)
-            ->where('lang', Cookie::get('lang') ?? 'es');
+            ->where('lang', app()->getLocale() ?? 'es');
 
         return $translation->first() ? $translation->first()->toArray() : [];
     }
